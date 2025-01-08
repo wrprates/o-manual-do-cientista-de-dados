@@ -4,9 +4,9 @@
     "href": "index.html",
     "title": "O manual do Cientista de Dados",
     "section": "",
-    "text": "Preface\nThis is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books.\n\n1 + 1\n\n[1] 2",
+    "text": "Prefácio\nSeja Bem vindo (a) ao livro de Data Science da Mentoria de Ciência de Dados da Data Mundo.\nTo learn more about Quarto books visit https://quarto.org/docs/books.",
     "crumbs": [
-      "Preface"
+      "Prefácio"
     ]
   },
   {
