@@ -1,1 +1,0 @@
-# o-manual-do-cientista-de-dados
