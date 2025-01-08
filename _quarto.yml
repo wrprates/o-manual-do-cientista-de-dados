@@ -5,7 +5,7 @@ project:
 book:
   title: "O manual do Cientista de Dados"
   author: "Wlademir Prates"
-  date: "10/19/2024"
+  date: "08/01/2025"
   chapters:
     - index.qmd
     - intro.qmd
