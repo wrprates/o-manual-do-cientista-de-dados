@@ -9,7 +9,8 @@ book:
   chapters:
     - index.qmd
     - intro.qmd
-    - summary.qmd
+    - o_que_e_ds.qmd
+    - teste_de_hipoteses.qmd
     - references.qmd
 
 bibliography: references.bib
