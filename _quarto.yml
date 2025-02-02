@@ -9,7 +9,9 @@ book:
   chapters:
     - index.qmd
     - intro.qmd
-    - summary.qmd
+    - o_que_e_ds.qmd
+    - teste_de_hipoteses.qmd
+    - machine_learning.qmd
     - references.qmd
 
 bibliography: references.bib
@@ -17,8 +19,7 @@ bibliography: references.bib
 format:
   html:
     theme: cosmo
-  pdf:
-    documentclass: scrreprt
+    toc-depth: 3
 
 editor: visual
 
