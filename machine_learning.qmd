@@ -1,0 +1,1892 @@
+# *Machine Learning* para negócios
+
+```{r, echo=FALSE, message=FALSE}
+# library("bookdown")
+library("broom")
+library("caret") # métricas de ML
+# library("devtools")
+library("dplyr")
+library("DT")
+library("ggplot2")
+library("highcharter")
+library("neuralnet")
+library("ranger")
+library("readr") # leitura de arquivos
+library("rpart")
+library("rpart.plot")
+library("pROC")
+library("xtable")
+```
+
+# Introdução
+*Machine Learning*, ou Aprendizado de Máquina, é uma área muito ampla e bastante complexa. Contudo, é também um campo com infinitas possibilidades de uso. Nos negócios não é diferente, é possível aplicar machine learning de diversas maneiras.
+
+O objetivo desta apostila é **trazer os conceitos básicos para alguns dos principais modelos de aprendizado de máquina e na sequência mostrar como implementá-los**. Não é propósito deste material entrar a fundo nos detalhes de cada modelo, pois a proposta é focar na compreensão dos conceitos e dos casos de usos para rápida aplicação na área de negócios.
+
+# Clustering
+
+Modelos de *Clustering* referem-se a técnicas de **agrupamento**, dentro de **aprendizado não supervisionado**.
+
+> É uma abordagem para encontrar **perfis similares**, sem buscar a explicação para uma variável especificamente.
+
+**Exemplos de usos:**
+
+- Identificar **espécies** de plantas;
+- Identificar **áreas** de maior **criminalidade**;
+- **Segmentação de clientes** para encontrar características comuns em grupos de clientes. Pode auxiliar, por exemplo, na análise de *churn* (perfis de clientes que mais cancelam);
+- Detecção de **fraudes** (indivíduos *outliers*, cujas combinações de atributos não se enquadram nos *clusters*).
+
+Para exemplificar os métodos de *clustering* será utilizado o modelo K-means. 
+
+**Como funciona o K-means?**
+
+- Faz o particionamento de *n* observações em *k* clusters. 
+- Adiciona cada observação ao cluster cujo centróide esteja mais próximo (tecnicamente é a menor distância euclidiana).
+- Define os centróides por iterações que minimizam as distâncias.
+- É preciso escolher o número de *clusters*.
+
+
+
+## Aplicando *K-Means* a dados gerados aleatoriamente 
+
+
+Inicialmente criamos uma matriz com duas variáveis aleatórias. Ambas variáveis de dados aleatórios possuem desvio-padrão de 0,3. Porém uma delas possui média 0 e a outra média 1.
+
+```{r}
+# Definindo o seed
+set.seed(123)
+
+# Criando 100 linhas de dados aleatórios, com uma variável X e Y
+df_clustering <- dplyr::tibble(
+    x = rnorm(500, mean = 0, sd = 0.3),
+    y = rnorm(500, mean = 0, sd = 0.3)
+  ) |>
+  dplyr::bind_rows(
+    dplyr::tibble(
+      x = rnorm(500, mean = 1, sd = 0.3),
+      y = rnorm(500, mean = 1, sd = 0.3)
+    )
+  )
+
+# Plotando o scatter plot
+highcharter::hchart(
+  df_clustering,
+  name= "Dados aleatórios", 
+  type = "scatter",
+  hcaes(x = "x", y = "y"),
+  showInLegend = FALSE
+) %>% 
+  highcharter::hc_title(
+    text = "Dados aleatórios com variâncias diferentes"
+  ) %>% 
+  highcharter::hc_size(height = 400)
+
+```
+
+Então, aplicamos o K-Means com dois centróides, com o fim de dividir o conjunto de dados em dois *clusters*.
+
+```{r}
+# Aplicando o K-Means com dois centróides
+cl <- kmeans(
+  x = df_clustering,
+  centers = 2
+)
+
+# Unindo as colunas do dataset de variáveis aleatórias com os clusters
+df_clustering <- cbind(df_clustering, cl = cl$cluster) %>% 
+  mutate(cl = as.factor(cl))
+```
+
+Veja como ficou a quantidade de linhas de dados distribuídas nos dois cluster solicitados:
+
+```{r}
+df_clustering %>% dplyr::group_by(cl) %>% dplyr::tally()
+```
+
+Na sequência, o gráfico do tipo *scatter plot* identificando visualmente cada um dos dois *clusters* criados.
+
+```{r}
+# Criando scatter plot com identificação de cores para cada cluster
+highcharter::hchart(
+  df_clustering,
+  name = "Dados aleatórios", 
+  type = "scatter",
+  hcaes(x = "x", y = "y", group = "cl"),
+  showInLegend = FALSE
+) %>% 
+  highcharter::hc_title(
+    text = "Clustering (K-means) de dados aleatórios com variâncias diferentes"
+  ) %>% 
+  highcharter::hc_size(height = 400)
+
+```
+
+### Exercício {.unnumbered}
+
+1. Altere a quantidade de observações de 100 para 1000 e veja como o K-Means se comporta.
+2. Altere o desvio-padrão de 0,3 para 3 (mantendo 1000 observações) e veja como o K-Means se comporta.
+
+## Aplicando *K-Means* para o *Iris dataset*
+
+*Iris dataset* é um conjunto de dados de 150 medidas realizadas em 3 espécies diferentes de um tipo de flor (*Iris*). É um conjunto de dados muito usado para testes em algoritmos de reconhecimento de padrões. Um dos pontos que torna este conjunto de dados interessante é o fato de que uma espécie é linearmente separável das outras duas, mas as duas restantes não podem ser separadas de forma linear. [Veja mais](https://archive.ics.uci.edu/ml/datasets/iris).
+
+### Conhecendo o conjunto de dados
+
+Veja o resumo dos dados:
+
+```{r}
+summary(iris)
+```
+
+
+A seguir, seguem *scatter plots* comparando as 4 variáveis em questão de duas em duas para entender melhor os dados. Primeiro observe os gráficos sem classificá-los em grupos e na sequência classificados por grupos.
+
+
+::: {layout-ncol=2 .column-page}
+
+```{r}
+hchart(
+  iris,
+  name = "Iris",
+  type = "scatter",
+  hcaes(x = Petal.Length, y = Petal.Width),
+  showInLegend = FALSE
+) %>% 
+  highcharter::hc_size(height = 300)
+```
+
+```{r}
+hchart(
+  iris,
+  name = "Iris",
+  type = "scatter",
+  hcaes(x = Sepal.Length, y = Sepal.Width),
+  showInLegend = FALSE
+) %>%
+  highcharter::hc_size(height = 300) 
+```
+
+:::
+
+*Olhando apenas os gráficos acima, quantos grupos você chutaria que existem nestes dados?*
+
+Agora veja os mesmos dados, mas com a cor indicando os grupos de flores:
+
+::: {layout-ncol=2 .column-page}
+```{r}
+# Relacionando Sepal Length e Sepal Width
+hchart(
+  iris,
+  type = "scatter",
+  hcaes(
+    x = Petal.Length,
+    y = Petal.Width,
+    group = Species
+  ),
+  showInLegend = TRUE
+) %>%
+  highcharter::hc_size(height = 300)
+```
+
+```{r}
+# Relacionando Sepal Length e Sepal Width
+hchart(
+  iris,
+  type = "scatter",
+  hcaes(
+    x = Sepal.Length,
+    y = Sepal.Width,
+    group = Species
+  ),
+  showInLegend = TRUE
+) %>%
+  highcharter::hc_size(height = 300) 
+```
+:::
+
+### Pré-processamento: normalizando os dados
+
+```{r}
+# Separando a colunas de espécies das colunas numéricas
+iris.new <- iris |>
+  dplyr::select(
+    Sepal.Length,
+    Sepal.Width,
+    Petal.Length,
+    Petal.Width
+  )
+iris.class <- iris[,"Species"]
+head(iris.new)
+```
+
+Se for o caso de usar uma função para normalizar os dados, o código está comentado abaixo.
+
+```{r}
+# # Criando função de normalização, se for o caso.
+# normalize <- function(x){
+#   return ((x-min(x))/(max(x)-min(x)))
+# }
+# 
+# # Aplicando a função de normalização a todas as colunas, se for o caso.
+# iris.new <- iris.new %>% mutate_all(normalize)
+# 
+# head(iris.new)
+```
+
+### Aplicando o *K-means*
+
+Definindo o número de centróides o dado, já na função do kmeans:
+
+```{r}
+# Aplicar K-Means com 3 centróides
+result <- kmeans(
+  x = iris.new,
+  centers = 3
+) 
+```
+
+Veja os tamanhos de cada *cluster* final, lembrando que o tamanho real é de 50 observações para espécie.
+
+```{r}
+result$size 
+```
+
+Vejamos como ficaram os valores dos centróides para cada uma das 4 variáveis.
+
+```{r}
+result$centers # retorna o valor do ponto central de cada cluster (para 3 centróides, k=3)
+```
+
+Por fim, conseguimos também obter *clusters* definidos para cada linha de dado pelo algoritmo.
+
+```{r}
+result$cluster 
+```
+
+
+## Verificação dos resultados
+
+O código abaixo apenas cria os gráficos que seguem, comparando as classificações da clusterização pelo K-means com os rótulos reais da coluna "Species".
+
+```{r}
+# Concatenando coluna  de cluster criado 
+iris.new.cl <- cbind(
+  iris.new,   
+  "cl.kmeans" = result$cluster,
+  "Species" = iris.class
+) %>%
+  # Alterando nomes das Species para ficar com as mesmas cores nos gráficos de Cluster x Real
+  dplyr::mutate(
+    "Species" =
+      dplyr::case_when(
+        Species == "versicolor" ~ "1. versicolor",
+        Species == "virginica" ~ "2. virginica",
+        Species == "setosa" ~ "3. setosa"
+      )
+  )
+```
+
+::: {layout-ncol=2 .column-page}
+
+```{r}
+# Relacionando Sepal Length e Sepal Width - CLUSTER
+hchart(
+  iris.new.cl,
+  type = "scatter",
+  hcaes(
+    x = "Sepal.Length",
+    y = "Sepal.Width",
+    group = "cl.kmeans"
+  ),
+  showInLegend = TRUE
+) %>%
+  highcharter::hc_size(height = 300) %>%
+  hc_title(text = "Clusters")
+```
+
+```{r}
+# Relacionando Sepal Length e Sepal Width - REAL
+hchart(
+  iris.new.cl,
+  type = "scatter",
+  hcaes(
+    x = "Sepal.Length",
+    y = "Sepal.Width",
+    group = "Species"
+  ),
+  showInLegend = TRUE
+) %>%
+  highcharter::hc_size(height = 300) %>%
+  hc_title(text = "Real")
+```
+
+:::
+
+::: {layout-ncol=2 .column-page}
+
+```{r}
+# Relacionando Petal Length e Petal Width - CLUSTER
+hchart(
+  iris.new.cl,
+  type = "scatter",
+  hcaes(
+    x = "Petal.Length",
+    y = "Petal.Width",
+    group = "cl.kmeans"
+  ),
+  showInLegend = TRUE
+) %>%
+  highcharter::hc_size(height = 300) %>%
+  hc_title(text = "Clusters")
+```
+
+```{r}
+# Relacionando Petal Length e Petal Width - REAL
+hchart(
+  iris.new.cl,
+  type = "scatter",
+  hcaes(
+    x = "Petal.Length",
+    y = "Petal.Width",
+    group = "Species"
+  ),
+  showInLegend = TRUE
+) %>%
+  highcharter::hc_size(height = 300) %>%
+  hc_title(text = "Real")
+```
+:::
+
+O objetivo do aprendizado não supervisionado é encontrar grupos similares quando não se tem um rótulo. Contudo, como este é um **exemplo didático** e temos os "rótulos", ou seja, as espécies de cada flor (linha de dado), então podemos inferir as espécies a que cada *cluster* se refere se olharmos para a tabela de contigência a seguir:
+
+```{r}
+table(result$cluster,iris.class)
+```
+
+Os resultados foram:
+
+- Cluster 1 corresponde à espécie "Versicolor".
+- Cluster 2 corresponde à espécie "Virgínica".
+- Cluster 3 corresponde à espécie "Setosa".
+
+## Fontes
+
+1. http://rpubs.com/Nitika/kmeans_Iris
+2. https://rpubs.com/AnanyaDu/361293
+
+# *Principal Component Analysis* (PCA)
+
+Podemos comparar duas variáveis (colunas) de cada vez se usarmos diagramas de dispersão (*scatter plots*). Porém, veja a quantidade necessária de *scatter plots* dependendo da quantidade de variáveis a serem comparadas:
+
+- **2** variáveis (A,B) = **1** *scatter* = (AxB)
+- **3** variáveis (A,B,C) = **3** *scatters* = (AxB), (AxC), (BxC)
+- **4** variáveis (A,B,C,D) = **6** *scatters* = (AxB), (AxC), (AxD), (BxC), (BxD), (CxD)
+
+Além da enorme quantidade de *scatter plots* necessários, fica extremamente inviável conseguir analisar todos esses gráficos e tirar valor deles com análises visuais.
+
+O PCA, neste sentido, busca auxiliar neste problema, pois é capaz de **resumir as variáveis de um conjunto de dados em "componentes principais"** que **contém a maior parte da variância** das variáveis originais. 
+
+O `n` dos componentes principais é **igual ao número de variáveis originais**. Contudo, normalmente **em poucos componentes praticamente toda correlação das variáveis originais é "absorvida"** e 2 ou 3 componentes contemplam praticamente toda a variância do conjunto de dados.
+
+Os componentes principais (PC's) são classificados por ordem de explicação da variância. Sendo assim, o PC1 explica mais a variabilidade dos dados do que o PC2, e assim por diante. 
+
+Dessa forma, um procedimento que costuma-se fazer para visualizar melhor o impacto das variáveis com o auxílio do PCA é utilizar gráficos de dispersão entre 2 PC's de cada vez. Além disso, também é possível mostrar a direção para a qual cada variável original aponta no espaço 2D de cada *scatter plot*. Este tipo de gráfico é chamado de *biplot*.
+
+
+**Exemplos de usos:**
+
+- **Análise exploratória**, como identificar visualmente no *biplots* **como as variáveis se relacionam** dentro dos componentes.
+- **Redução de dimensionalidade**: reduz o tempo de processamento e pode melhorar os resultados de modelos preditivos ao usar PCA nos dados de treino e teste.
+- Compressão de imagens, entre outros.
+
+**Como funciona o PCA?**
+
+Partimos de um dataset com as variáveis originais e chegamos a um dataset reduzido a "**compontes principais**".
+
+- A grosso modo, procura encontrar "linhas retas" que melhor expressam as direções dos dados em multi-dimensões.
+- Não é recomendado para variáveis categóricas (apenas numéricas).
+- Se concentra nas direções que definem a maior parte da variância dos dados.
+  - **Autovetor** (*eigenvector*): é a direção (vertical ou 45 graus).
+  - **Autovalor** (*eigenvalue*): é um número que expressa o quanto há de variância naquela direção.
+  
+O autovetor com maior autovalor é o primeiro componente principal.
+
+[Veja mais](https://www.datacamp.com/community/tutorials/pca-analysis-r)
+
+## Aplicando PCA no conjunto de dados *mtcars*
+
+O conjunto de dados "*Motor Trend Car Road Tests*" foi extraído de uma revista automobilística de 1974 e contempla 10 variáveis que representam características ou métricas de desempenho dos veículos. Os dados são nativos do R, basta digitar `mtcars` no console. Pra informações, como dicionário de dados, basta digitar `? mtcars`, e accessar a documentação de ajuda.
+
+Veja o *head* dos dados:
+
+```{r}
+data <- mtcars %>% dplyr::select(-c("vs", "am"))
+
+data %>% head(5)
+```
+
+Aplicando a função `prcomp`, nativa do R Stats, a qual executa uma análise dos componentes principais. 
+
+```{r}
+mtcars.pca <- prcomp(data, center = TRUE, scale. = TRUE)
+```
+
+Cada análise de **PCA resulta em um número de componentes principais igual ao número de variáveis**. Porém, não pode-se dizer que um PCA é análogo a uma determinada variável.
+
+A seguir, é apresentado resumo da importância de cada um dos componentes principais identificados.
+
+```{r}
+summary(mtcars.pca)$importance 
+```
+
+Veja que os 4 primeiros componentes principais já são responsáveis por 95% da porporção da variância dos dados.
+
+Segue o `head` dos 4 primeiros componentes principais, em que cada linha é uma linha de dado (um carro) e cada coluna é substituída por um componente principal (que não mais representa nenhuma coluna especificamente, mas contém variância "misturada" das variáveis originais):
+
+```{r}
+mtcars.pca$x[,1:4] %>% head(10) 
+```
+
+
+## Visualizando graficamente os resultados do PCA
+
+É possível também criar um *biplot* para visualizar como cada variável impacta nas relações entre os componentes principais. Para isso vamos usar novamente o pacote de visualização `highcharter`.
+
+
+
+Agora, veja o gráfico `biplot` que compara o PC1 e PC2 e mostra como cada variável impactou na construção de cada componente. Cada ponto do gráfico corresponde a uma linha de dado (dataset com 32 linhas no total). 
+
+
+
+```{r}
+# Criando Biplot para PC1 e PC2
+highcharter::hchart(mtcars.pca, choices = 1:2) %>% 
+  highcharter::hc_title(text = "Biplot para PC1 e PC2") %>%
+  highcharter::hc_xAxis(title = list(text = "PC1")) %>% 
+  highcharter::hc_yAxis(title = list(text = "PC2"))
+```
+
+Por fim, segue gráfico `biplot` comparando PC2 e PC3.
+
+```{r}
+# Criando Biplot para PC2 e PC3
+highcharter::hchart(mtcars.pca, choices = 2:3) %>% 
+  highcharter::hc_title(text = "Biplot para PC2 e PC3") %>%
+  highcharter::hc_xAxis(title = list(text = "PC2")) %>% 
+  highcharter::hc_yAxis(title = list(text = "PC3"))
+```
+
+## Considerações
+
+O resultado de uma análise de componentes principais pode ser utilizado para estimar outros modelos. Veja, se você possui um *dataset* com um número muito grande de variáveis, o PCA viabiliza que haja uma redução de muitas variáveis para poucos componentes principais que expressem a maior parte da variância dos dados. A maior dificuldade desta abordagem é analisar os resultados depois, pois não há uma interpretação "real" para os valores dos componentes principais.
+
+
+# Regressão linear 
+
+Relaciona uma variável dependente (*target*, rótulo) com uma matriz de variáveis explicativas (independentes):
+
+$$y = \alpha + \beta_1 x_1 + \beta_2 x_2 + \dots \beta_n x_n + e$$
+
+
+Possui diversas **premissas** acerca dos dados, como:
+
+  - Relação linear entre as variáveis.
+  - Média e variância constantes (séries estacionárias).
+  - Sem tendências ou sazonalidades.
+  
+Algumas considerações adicionais são:  
+  
+  - Caso as premissas não sejam verdade na prática (normalmente não é), as **variáveis devem ser transformadas** (ln, diferença, por exemplo).
+  - As variáveis explicativas, se não forem numéricas, são transformadas em *dummy* (binarizadas).
+  - Modelos de regressão são muito utilizados em análises de **séries temporais**.
+
+**Exemplos de usos:**
+
+- Estimar peso ou altura em determinada idade.
+- Diversas aplicações em **econometria** em séries **econômicas e financeiras**.
+- Previsões em meteorologia.
+
+Obs.: Métodos de regressão linear possuem diversas variações, e é uma área de estudo com muitos métodos específicos. O exemplo dado acima é apenas o caso mais simples.
+
+
+## Exemplo: velocidade contra tempo para um carro parar (dados de 1920's)
+
+Veja um exemplo de dados que mostram a velocidade de um carro e o tempo que ele levava até parar completamente.
+
+Variáveis:
+
+- `speed`: velocidade em milhas por hora (1 mph = 1,61 km/h).
+- `dist`: distância que o carro levou para parar completamente, em pés (1 ft = 0,31 metros).
+
+`Head` dos dados:
+
+```{r}
+head(cars,5)
+```
+
+
+O modelo:
+
+$$dist = \alpha + \beta_1 speed + e$$
+
+Estimando o modelo:
+
+```{r}
+# Estimar o modelo
+reg_model <- lm(dist ~ speed, cars)
+```
+
+Criando gráfico de dispersão com a reta de melhor ajuste estimada pelo modelo:
+
+```{r}
+# Ajustar as informações do modelo para plotar no gráfico na sequência
+reg_model_df_chart <- 
+  augment(reg_model) %>% 
+  dplyr::mutate(.fitted = round(.fitted, 2))
+
+# Criando o gráfico
+highcharter::highchart() %>%
+  highcharter::hc_xAxis(title = list(text = "Speed (mph)")) %>% 
+  highcharter::hc_yAxis(title = list(text = "Dist (ft)")) %>% 
+  highcharter::hc_add_series(name = "Valores reais", 
+                data = reg_model_df_chart, 
+                type = "scatter", 
+                hcaes(x = speed, y = dist)
+                ) %>% 
+  highcharter::hc_add_series(name = "Predição", 
+                data = reg_model_df_chart, 
+                type = "line", 
+                hcaes(x = speed, y = .fitted)) %>% 
+  hc_title(text = "Valores reais vs Preditos pela regressão linear") %>% 
+  highcharter::hc_size(height = 400)
+```
+
+Para concluir, veja que o gráfico de dispersão acima só é possível de ser realizado porque este exemplo trata de uma **regressão simples**, ou seja, em que temos **apenas uma variável independente**. Se tivéssemos um caso de **regressão múltipla**, com duas até $N$ variáveis independentes, teríamos que fazer um gráfico de dimensão $N+1$ para exemplificar a regressão linear, o que é possível. Por isso, a visualização da reta de melhor ajuste ao longo de todas as variáveis de uma regressão fica impossível a medida que mais variáveis independentes são adicionadas.
+
+
+# Regressão Logística
+
+A regressão logística é um tipo de regressão que tem como variável resposta (dependente) uma **variável binária**, ou seja, os valores possíveis são **0 ou 1**, ocorrência ou não de um evento. O resultado do modelo é uma probabilidade, que pode ser transformado em *labels* de 0 e 1 ao levar em conta um ponto de corte na probabilidade estimada.
+
+> "O modelo de regressão logística é adequado para trabalhar com **dados qualitativos**. Serve para as situações nas quais a **variável dependente (Y) é binária** (assume os valores de 0 e 1) e o valor que **se busca é a probabilidade** ($\pi$) de que a Y seja 1 dado o valor de determinada variiável x, que poderá tanto ser binária, numérica ou dividida em categorias." (CHATTERJEE; HADI, 2006; RYAN, 2009). 
+
+
+## Exemplo: regressão logística com dados do naufrágio do Titanic
+
+Analisaremos um conjunto de dados dos passageiros do navio Titanic, que naufragou em 1912. Então aplicaremos um modelo de regressão logística para calcular o probabilidade de um passageiro, ao embarcar no navio, vir a sobreviver à tragédia ($y$, variável dependente).
+
+O dicionário dos dados, que mostra o significado de cada variável, é o seguinte:
+
+- `survived`: sobreviveu $= 1$; não sobreviveu $=0$; 
+- `pclass`: classe (1, 2 e 3, indicando primeira, segunda e terceira classe);
+- `sex`: masculino (*male*) e feminino (*female*);
+- `age`: idade do passageiro;
+- `sibsp`: número de irmãos e cônjuge (*siblings and spouse*) a bordo;
+- `parch`: número de pais e filhos (*parents and children*) a bordo;
+- `fare`: tarifa paga pelo passageiro.
+
+Veja como é o `head` dos dados (5 primeiras observações):
+
+```{r}
+# Download e pequeno tratamento dos dados
+df_titanic <- 
+  readr::read_csv("https://gitlab.com/dados/open/raw/master/titanic.csv") %>% 
+  dplyr::select(passengerid, survived, pclass, sex, age, sibsp, parch, fare) %>% 
+  dplyr::mutate_if(is.character, as.factor) %>% 
+  dplyr::mutate(survived = as.factor(survived)) %>% 
+  na.omit()
+
+head(df_titanic, 5)
+```
+
+## Dividindo o dataset em treino e teste
+
+Existem diversas formas de fazer esta divisão pela linguagem R. Não há jeito certo ou errado, neste caso o importante é chegar ao objetivo de dividir o *dataset*.
+
+```{r}
+# O seed é um número que garante que a geração "aleatória" do computador será sempre a mesma. 
+# Assim garanto que meu exemplo é reproduzível.
+set.seed(123)
+
+# Criar o subset de treino
+train <- df_titanic %>% dplyr::sample_frac(.70)
+
+# Criar o subset de teste com antijoin (pega tudo que não pertence)
+test  <- dplyr::anti_join(df_titanic, train, by = 'passengerid')
+```
+
+
+
+## Aplicando o modelo de regressão logística
+
+Vamos utilizar a função `glm()`, nativa do `R`. Apenas certifique-se de configurar o parâmetro `family` para `family = binomial(link = 'logit')`. No termo da equação, a variável *target* é precedida de `~`. Esta, inclusive, é uma terminologia padrão para a maior parte das funções de modelos supervisionados de *machine learning* no `R`.
+
+**Importante**: o modelo será aplicado no _dataset_ de **treino**, e não no dataset completo.
+
+```{r}
+# Rodando o modelo
+fit <- 
+  glm(
+    survived ~ pclass + sex + age + sibsp + parch + fare,
+    family = binomial(link = 'logit'),
+    data = train
+  )
+
+# Vendo como ficou o modelo
+fit
+```
+
+
+O resultado acima mostra os **coeficientes estimados** pelo modelo. Estes coeficientes compõem a equação da regressão logística.
+
+Cada coeficiente tem um *p-valor* associado, que mostra se o impacto da variável associada ao coeficiente foi significativo estatisticamente no modelo. Veja a seguir:
+
+```{r}
+broom::tidy(fit) %>% 
+  dplyr::mutate(p.value = round(p.value,4))
+```
+
+
+## Realizando as predições
+
+Usando a função `predict` do R para fazer as predições no *dataset* de teste com base no modelo que foi treinado.
+
+```{r}
+# Fazendo as predições
+pred <- predict(fit, newdata = test, type = "response")
+```
+
+Na sequência veja como fica a tabela unificando a coluna de predição com os valores reais da variável dependente.
+
+```{r}
+# Concatenando a coluna predita com o dataset de teste
+DT::datatable(
+  cbind("pred" = round(pred, 4), test)
+)
+```
+
+## Avaliação do modelo 
+
+A seguir, vamos criar a matriz confusão e calcular a acurácia "na mão", sem usar função específica para isso, a fim de entendermos o procedimento.
+
+Neste caso, vale ressaltar que o *threshold* (ponto de corte na probabilidade para definir se a saída será 0 ou 1) é definido de forma arbitrária. Porém, é possível aplicar métodos de otimização do *threshold*. Um exemplo de uso para otimização é a função `thresholder()` do pacote `caret`. [Veja mais](https://rdrr.io/cran/caret/man/thresholder.html). Esta função não foi aplicada neste exemplo porque todo o modelo deve ter sido rodado com funções do `caret` para que seja possível realizar esta otimização.
+
+Primeiro, a **matriz confusão**:
+
+```{r}
+# Definindo o ponto de corte (cut-off ou threshold)
+threshold <- .5
+
+# Transformando predições em binários
+pred_binario <- ifelse(pred > threshold,1,0)
+
+# Criando a matrix
+confusion_matrix <- table(data.frame(pred_binario, test$survived) )
+confusion_matrix
+```
+
+Agora, a **acurácia**:
+```{r}
+# Calculando acurácia
+acc <- sum(diag(confusion_matrix))/sum(confusion_matrix)
+
+# Arredondando e colocando em percentual
+acc <- round(acc*100, digits = 2)
+
+# Mostrar objeto
+acc
+```
+
+
+Porém, podemos também utilizar o pacote `caret`, obter mais métricas e calcular de forma mais rápida.
+
+```{r}
+# Unificando as predições com o valor real
+pred_tbl <- data.frame(as.factor(pred_binario), as.factor(as.numeric(test$survived)-1))
+colnames(pred_tbl) <- c("pred", "survived")
+
+# Model metric
+caret::confusionMatrix(pred_tbl$pred, pred_tbl$survived )
+```
+
+**Exercício:**:
+
+1. Altere a variávei `threshold` para outros valores entre 0 e 1 e rode o código novamente até as métricas pela função `confusionMatrix` do pacote `caret`. Veja como as me'tricas se comportam. 
+
+## ROC Curve
+
+Veja a curva ROC do modelo estimado.
+
+```{r}
+# Carregando pacote para plotar curva ROC
+library(pROC)
+
+# Organizando a tabela de dados para calcular as métricas da curva ROC
+pred_roc <- 
+  dplyr::tibble(
+    pred,
+    "survived" = as.factor(as.numeric(test$survived)-1)
+  ) %>% arrange(desc(pred))
+
+# Criando objeto com as métricas para curva ROC
+roc <- pROC::roc(pred_roc$survived , pred_roc$pred)
+roc
+
+# Se desejar, é possível (e bem simples) utilizar o próprio pacote pROC para plotar a curva ROC.
+#plot.roc(roc)
+```
+
+```{r}
+# Criando função para fazer gráficos da curva ROC
+hchart.roc <- function(x){
+  dplyr::tibble(tpr = round(x$sensitivities*100,2),
+              fpr = round((1-x$specificities)*100,2)) %>%
+  highcharter::hchart(
+    name = "TPR (%)",
+    type = "area",
+    hcaes(x = "fpr", y = "tpr"),
+    showInLegend = FALSE
+  ) %>%
+  highcharter::hc_xAxis(title = list(text = "Taxa de Falso Positivo (1- Especificidade)"), min = 0, max = 100) %>%
+  highcharter::hc_yAxis(title = list(text = "Taxa de Verdadeiro Positivo (Sensibilidade)"), min = 0, max = 100) %>%
+  highcharter::hc_title(text = "Curva Característica de Operação Relativa (ROC)") %>%
+  highcharter::hc_colors("#aaa") %>% 
+  highcharter::hc_size(height = 380)
+}
+
+# Aplicando a função criada e plotando gráfico.
+hchart.roc(roc)
+```
+
+Por fim, a estimação da AUC (*Area Under the Curve*):
+
+```{r}
+pROC::auc(roc)
+```
+
+# Árvore de Decisão
+
+Entre os modelos de aprendizado de máquina mais comuns e mais úteis estão as árvores de decisão. Elas são tão utilizadas porque fornecem ao usuário final uma **fácil interpretação** e desenham uma espécie de **caminho a ser percorrido** para alcançar um determinado objetivo.
+
+> Árvores de decisão são fáceis de interpertar, pois fornecem as **regras de negócio** necessárias para classificar os dados e fornecer uma predição.
+
+
+Algumas das características são:
+
+- Composta por **nós**, em que os extremos são:
+
+  - raiz (primeiro) e
+  - folhas (últimos, onde o resultado final de um conjunto de decisões é mostrado).
+  
+Veja graficamente como fica esta estrutura:
+
+![](images/decision_tree_structure.png)
+
+**Como é definido o que entra em cada nó?**
+  
+- Cada nó é o resultado de **sucessivas subdivisões** nos dados, criando subconjuntos **cada vez mais puros**.
+
+- Um subconjunto será **mais puro** na medida que conter **menos classes** (ou apenas uma) da variável resposta (*target*).
+
+O critério utilizado para realizar as partições é o da utilidade do atributo para a classificação. Aplica-se, por este critério, um determinado ganho de informação a cada atributo. 
+
+A pureza dos subconjuntos (nós) é definida pelo **ganho de informação**. Para calcular este ganho de informação utiliza-se geralmente a **entropia** ou o **índice de Gini**. 
+
+A **entropia** é uma medida de surpresa. A entropia vai de 0 a 1, e se ela for zero, então não há supresa nas respostas possíveis. Entenda melhor pelo diagrama a seguir.
+  
+![](images/entropia.png)
+
+
+O **índice Gini** ([veja mais](https://www.maxwell.vrac.puc-rio.br/7587/7587_4.PDF)) mede o grau de heterogeneidade dos dados. Logo, pode ser utilizado para medir a impureza de um nó. Mas é também um índice usado em diversos campos, como por exemplo para medir a desigualdade de renda nos países ([veja](https://pt.wikipedia.org/wiki/Coeficiente_de_Gini)).
+
+O índice é calculado por nó, e quando é igual a zero, o nó é puro. Por outro lado, quando ele se aproxima do valor um, o nó é impuro (aumenta o número de classes uniformemente distribuídas neste nó).
+
+Alguns algoritmos de árvores de decisão utilizam entropia, outros o índice de Gini. Porém, geralmente a performance do algoritmo não se altera entre usar um método ou outro. Por usar logaritmo em sua formulação, a entropia costuma gerar um maior custo computacional. 
+
+### Árvores de decisão e *overfitting* {.unnumbered}
+
+Problemas de *overfitting* ocorrem quando um modelo explica situações extremamente específicas, que constam no *dataset* de treino, mas não ocorrerão na prática novamente.
+
+Árvores de decisão podem ficar muito copmlexas e extensas, caindo no problema de *overfitting*.
+
+Nestes casos, uma saída é aplicar técnicas de *poda* da árvore. No `R` é possível utilizar a função `prune()` do pacote `rpart`.
+
+
+## Lendo o conjunto de dados do Titanic
+
+Vamos buscar o arquivo csv do repositório. Após iremos excluir as variáveis a não serem utilizadas e separar o dataset em treino e teste.
+
+```{r}
+
+df_titanic_tree <- 
+  read_csv("https://gitlab.com/dados/open/raw/master/titanic.csv") %>% 
+  mutate_if(is.character, as.factor) %>% 
+  select(-name, -ticket, -embarked, -cabin, - passengerid) %>% 
+  mutate(survived = as.factor(survived))
+
+df_titanic_tree %>% 
+  head(5) 
+```
+
+
+Na sequência segue o dicionário dos dados:
+
+- `survived`: sobreviveu $= 1$; não sobreviveu $=0$;
+- `pclass`: classe (1, 2 e 3, indicando primeira, segunda e terceira classe);
+- `sex`: masculino (*male*) e feminino (*female*);
+- `age`: idade do passageiro;
+- `sibsp`: número de irmãos e cônjuge (*siblings and spouse*) a bordo;
+- `parch`: número de pais e filhos (*parents and children*) a bordo;
+- `fare`: tarifa paga pelo passageiro.
+
+
+## Criando uma árvore de decisão com todo o *dataset*
+
+Primeiro, apenas para fins didáticos, vamos contruir uma árvore de decisão para todo o *dataset*, ou seja, não iremos considerar o processo de *machine learning* de treinar e testar o modelo.
+
+Na árvore a seguir, cada nós mostra:
+- a predição binária da classe (não sobreviveu = 0; sobreviveu = 1);
+- a probabilidade predita de sobrevivência (de 0 a 1);
+- a porcentagem de observações no nós.
+
+```{r}
+rtree_fit <-
+  rpart(formula = survived ~ ., 
+        data = df_titanic_tree,
+        parms = list(split = "information") # Usar "information" para entropia ou "gini" para índice de Gini.
+        )
+
+rpart.plot(rtree_fit)
+```
+
+
+## Divindo em treino e teste
+
+Agora sim, iremos dividir o conjunto de dados em treino e teste.
+
+```{r}
+# Separar os dados em treino e teste
+set.seed(100)
+data <- c("training", "test") %>%
+  sample(nrow(df_titanic_tree), replace = T) %>%
+  split(df_titanic_tree, .)
+```
+
+Vamos agora criar a árvore de decisão nos dados de treino:
+
+```{r}
+# Criar a árvore de decisão
+rtree_fit <- 
+  rpart(survived ~ ., 
+          data$training,
+          parms = list(split = "information")
+          )
+rpart.plot(rtree_fit)
+
+```
+
+
+**Exercício**. Troque o seed para outros valores aleatórios e verifique como a estrutura da árvore muda.
+
+
+## Fazendo as predições
+
+Aplicando a função `preditc()`.
+
+```{r}
+pred_num <- predict(rtree_fit,  newdata = data$test)[,2] # segunda coluna para pegar apenas survived = 1
+pred <- predict(rtree_fit,  newdata = data$test, type = "class")
+```
+
+Matriz confusão:
+
+```{r}
+table(pred, data$test$survived )
+```
+
+Pelo pacote `caret`:
+
+```{r}
+caret::confusionMatrix(pred, data$test$survived)
+```
+
+## ROC Curve
+
+Veja a curva ROC do modelo estimado.
+
+```{r}
+#library(pROC)
+
+pred_roc <- data.frame(pred_num, as.factor(as.numeric(data$test$survived)-1)) %>% arrange(desc(pred_num))
+colnames(pred_roc) <- c("pred", "survived")
+
+roc <- roc(pred_roc$survived , pred_roc$pred)
+
+#plot.roc(roc)
+hchart.roc(roc)
+```
+
+
+## Fontes
+
+- Detalhes sobre árvores de decisão no `R`:
+  - <http://www.milbo.org/doc/prp.pdf>
+
+# Random Forest
+
+Um dos pontos negativos das árvores de decisão é a variância nos seus resultados. Duas árvores treinadas no mesmo conjunto podem apresentar resultados bastante distintos. Com isso, uma *random forest* (ou floresta aleatória) é um grande número de árvores de decisão rodadas em paralelo. 
+
+Com este grande número de árvores cria-se uma espécie de "comitês" em que os caminhos mais votados pelas diversas árvores tornam-se o resultado do modelo de *random forest*. Por esta característica pode-se dizer que *random forest* é um tipo de algoritmo de *ensemble learning*.
+
+> *Random forests*, ou florestas aleatórias, representam múltiplas árvores de decisão que são rodadas e unificadas, com o fim obter uma maior acurária e predições mais assertivas.
+
+O procedimento adotado para realizar estes **votos** é chamado de *bagging*. A ideia essencial do *bagging* é obter a **média de diversas árvores descorrelacionadas e com ruído**. É simples de treinar e possui parâmetros fáceis para ajustes, o que resultou na grande popularidade deste tipo de modelo.
+
+> **_Ensemble learning_**, em geral, trata de um modelo que faz predições baseadas em um número de modelos diferentes. Ao combinar modelos individuais, o modelo *ensemble* tende a ser mais flexível (com **menos viés**) e menos *data-sensitive* (com **menos variância**). <br>
+Os dois mais populares métodos de *ensemble* são *bagging* e *boosting*.<br>
+  - **_Bagging_**: treina um grupo de modelos individuais **em paralelo**. Cada modelo é treinado com base em *subsets* aleatórios dos dados.<br>
+  - **_Boosting_**: treina um grupo de modelos individuais **de forma sequencial**. Cada modelo é treinado de forma a aprender com os erros feitos pelo modelo anterior. [Fonte](https://towardsdatascience.com/basic-ensemble-learning-random-forest-adaboost-gradient-boosting-step-by-step-explained-95d49d1e2725).
+
+## Exemplo do uso de *random forest* para prever a saída de colaboradores
+
+Carregando os pacotes básicos:
+
+```{r}
+# Pacotes a serem utilizados
+library(dplyr)
+library(readr)
+library(ranger)
+library(ggplot2)
+```
+
+Os dados utilizados neste exemplo refletem características dos colaboradores de uma empresa. São dados fictícios criados por cientistas de dados da IBM com o fim de alimentar simulações no Watson (ferramenta de *analytics* da IBM). Veja aqui o [link](https://www.ibm.com/communities/analytics/watson-analytics-blog/hr-employee-attrition/) do *dataset* original.
+
+
+A seguir os dados são importados. Veja no comando `select` as variáveis do conjunto de dados que serão utilizadas.
+
+```{r}
+df_hr_turnover <-
+  read_csv("https://gitlab.com/dados/open/raw/master/ibm_hr_emplyee_attrition.csv") %>%
+  mutate_if(is.character, as.factor) %>%
+  select(
+    "Attrition",
+    "Age",
+    "Department",
+    "DistanceFromHome",
+    "Education",
+    "EducationField",
+    "EmployeeCount",
+    "EnvironmentSatisfaction",
+    "Gender",
+    "HourlyRate",
+    "JobInvolvement",
+    "JobLevel",
+    "JobRole",
+    "JobSatisfaction",
+    "MaritalStatus",
+    "MonthlyIncome",
+    "MonthlyRate",
+    "NumCompaniesWorked",
+    "Over18",
+    "OverTime",
+    "PercentSalaryHike",
+    "PerformanceRating" ,
+    "RelationshipSatisfaction",
+    "StandardHours",
+    "StockOptionLevel",
+    "TotalWorkingYears",
+    "TrainingTimesLastYear",
+    "WorkLifeBalance",
+    "YearsAtCompany",
+    "YearsInCurrentRole",
+    "YearsSinceLastPromotion",
+    "YearsWithCurrManager"
+  )
+
+```
+
+## Dividindo em treino e teste
+
+Aqui faremos a divisão do conjunto de dados entre treino e teste.
+
+```{r}
+## set the seed to make your partition reproducible
+set.seed(123)
+
+# Create training subset
+train <- df_hr_turnover %>% dplyr::sample_frac(.70)
+# Create test subset
+test  <- dplyr::anti_join(df_hr_turnover, train)
+```
+
+## Modelando as *random forests*
+
+Iremos utilizar o pacote `ranger`, da linguagem `R `. Este pacote é amplamente utilizado e muito bem implementado. A [documentação](https://www.rdocumentation.org/packages/ranger/versions/0.12.1/topics/ranger) é toda embasada em artigos científicos, o que dá maior credbilidade às funções utilizadas.
+
+Os parâmetros que iremos utilizar são:
+
+- `formula `: fórmula do modelo, no padrão $var_{target} \text{ ~ } var_1 + var_2 + ... + var_n$ ;
+- `data`: objeto com o conjunto de dados;
+- `max.depth`: profundidade de nós máxima para cada árvore;
+- `num.trees`: número de árvores na floresta;
+- `probability`: indica se o modelo irá gerar um resultado probabilístico ou com as *labels* da variável *target*. 
+- `importance` : forma de cálculo da importância das variáveis. Exemplo: "impurity" representa o índice de Gini utilizado para classificação.
+
+Ajuste do modelo
+
+```{r}
+# Ajustar e mostrar o modelo Random Forest
+#####
+
+# Se desejar escolher certas variáveis
+ # fml <- "Attrition ~ OverTime + MonthlyIncome + Age + TotalWorkingYears + DistanceFromHome"
+
+# Se desejar incluir todas variáveis do dataset
+fml <- "Attrition ~ ."
+
+# Definir o número de árvores que o modelo irá rodar
+ntrees <- 100
+
+# Estimando modelo com resultado como labels
+fit_turnover_rf_class <-
+  ranger::ranger(
+    formula = fml,
+    data = train,
+    max.depth = 15,
+    num.trees = ntrees,
+    probability = FALSE,
+    importance = "impurity", # "impurity" é o coeficiente de Gini
+    seed = 999
+  )
+
+# Estimando modelo probabilístico
+fit_turnover_rf_prob <-
+  ranger::ranger(
+    formula = fml,
+    data = train,
+    max.depth = 15,
+    num.trees = ntrees,
+    probability = TRUE,
+    importance = "impurity", # "impurity" é o coeficiente de Gini
+    seed = 999
+  )
+```
+
+## Importância das variáveis
+
+No gráfico a seguir as variáveis mais relevantes para realizar as classificações são elencadas. No caso de árvores de decisão (e também *random forests*) o gráfico mostra as variáveis ordenadas por nível de ganho informacional gerado após os splits nos dado (que geram os nós das árvores).
+
+```{r}
+ggplot(
+  stack(fit_turnover_rf_prob$variable.importance) %>% 
+    arrange(desc(values)), 
+  aes(x=reorder(ind,values), y=values,fill=values)) +
+   geom_bar(stat="identity", position="dodge")+ coord_flip()+
+   ylab("Importância das variáveis")+
+   xlab("Variáveis")+
+   ggtitle("Informação de cada variável")+
+   guides(fill=F)+
+   scale_fill_gradient(low="red", high="blue")
+```
+
+<div class = "specialbox"> 
+**Curiosidade sobre a importância das variáveis e _Random Forest_**
+
+Um das áreas de *machine learning* é *feature selection*, que trata de selecionar as variáveis que são mais relevantes em um modelo, excluindo variáveis que mais trazem **ruídos** do que ajudam nas predições. 
+
+Existem várias formas de realizar *feature selection*, como utilizar análise de correlação, por exemplo. Mas há outras formas, como utilizar *Random Forest* e os métodos de cálculos de importância das variáveis para filtrar apenas as variáveis mais relevantes.
+
+Além do método mostrado anteriormente, o pacote `ranger` permite também identificar o `p-valor` da importância das variáveis, o que viabiliza ter um ponto de corte, como eliminar todas as variáveis com `p-valor` maior que $0.10$, por exemplo. Veja:
+
+  - **Variáveis escolhidas**:
+  
+```{r}
+# Rodando novamente o modelo com o parâmetro "importance" em impurity_corrected para viabilizar análise de p-valor
+fit_turnover_rf_prob <-
+  ranger::ranger(
+    formula = fml,
+    data = train,
+    max.depth = 15,
+    num.trees = ntrees,
+    probability = TRUE,
+    importance = "impurity_corrected", # "impurity" é o coeficiente de Gini
+    seed = 999
+  )
+
+ranger::importance_pvalues(fit_turnover_rf_prob) %>% 
+  dplyr::as_tibble(rownames = "Variável") %>% 
+  dplyr::arrange(pvalue) %>% 
+  dplyr::filter(pvalue <= 0.1)
+```
+
+  - **Variáveis eliminadas**:
+  
+```{r}
+ranger::importance_pvalues(fit_turnover_rf_prob) %>% 
+  dplyr::as_tibble(rownames = "Variável") %>% 
+  dplyr::arrange(pvalue) %>% 
+  dplyr::filter(pvalue > 0.1)
+```
+
+
+</div>
+
+## Avaliando a floresta alatória
+
+
+Aplicando a função `preditc()`.
+
+```{r}
+# Para confusion matrix
+pred_class <- 
+  predict(
+  fit_turnover_rf_class,
+  test)
+
+# Para curva ROC
+pred_prob <- 
+  predict(
+  fit_turnover_rf_prob,
+  test)
+
+```
+
+A matriz confusão:
+
+```{r}
+library(caret)
+
+confusionMatrix(pred_class$predictions, 
+                test$Attrition)
+
+```
+
+## Considerações
+
+Este modelo apresenta um problema: uma alta taxa de falso negativo. Ou seja, para um número considerável de colaboradores foi predito que não sairíam da empresa, mas saíram. Além disso, neste caso o custo de um falso negativo é alto!
+
+## Fontes
+
+- Detalhes sobre *random forest*:
+  - <https://towardsdatascience.com/the-random-forest-algorithm-d457d499ffcd>
+- Conjunto de dados:
+  - <https://www.ibm.com/communities/analytics/watson-analytics-blog/hr-employee-attrition/>
+- Outro exemplo de análise com o mesmo conjunto de dados:
+  - <https://rpubs.com/ssindw/295564>
+
+
+# Redes Neurais Artificiais e *Deep Learning*
+
+*Deep learning* é uma forma de aplicação de **redes neurais artificiais (RNA)**, em que há **mais de uma camada** (geralmente são inúmeras) entre a camada de entrada (*input*) e a camada de saída (*output*). É também chamada de ***Deep Neural Network***. 
+
+Uma rede neural é "mais profunda" dependendo da quantidade de camadas que possui. Estas camadas são chamadas de *hidden layers*. Quanto maior o número de *hidden layers* mais "black-box" fica o modelo, se tornando praticamente impossível dar uma explicação "real" aos parâmetros que o modelo define ao longo das entradas e saídas das diversas camadas.
+
+Vale ainda ressaltar, conforme será explicado na sequência, que a complexidade de uma rede neural não é devida somente à quantidade de camadas de um modelo, mas também está relacionada ao montante de neurônios que estarão contidos em cada camada. 
+
+Sendo assim, trabalhar com *deep learning* é uma forma de utilizar o elevado potencial computacional que temos atualmente para executar modelos extremamente complexos em busca de predições melhores.
+
+Na sequência, entenda como funcionam as redes neurais, partindo desde o caso mais simples, sem nenhuma *hidden layer*, até casos complexos, em que há inúmeras camadas, que podemos chamar de "*deep learning*".
+
+### Conceito de Redes Neurais Artificiais {.unnumbered}
+
+Redes neurais executam seu processamento por meio de **neurônios distribuídos em camadas**, que podem ser de **entrada, ocultas ou de saída**. 
+
+- Camada de **entrada**: *input* dos dados;
+- Camadas **ocultas** (*hidden layers*): processamento;
+- Camada de **saída**: é o resultado final do processamento de uma rede neural.
+	
+Para que haja o processamento, a rede precisa de uma **função de ativação**, que é a função matemática utilizada para definir os pesos associados a cada rede. Algumas funções que podem ser utilizadas são: linear, logística (*sigmoide*), *rectified linear units*, *softmax*,  etc.	A função logística foi a mais usada por muito tempo, mas com o surgimento de cada vez mais aplicações para o uso de redes neurais, algumas funções específicas se tornaram mais assertivas ou mais eficientes dependendo do caso. Na sequência, serão apresentados mais detalhes sobre funções de ativação em *deep learning*.
+
+Veja a seguir um exemplo de como podemos demonstrar graficamente uma rede neural.
+
+<div class="row specialbox">
+**Exemplo: classificar o colaborador entre departamento de TI e RH.** 
+
+  <div class="col-md-8">
+Para esta tarefa podemos construir a rede neural da figura ao lado, a qual contém as seguintes características:
+
+- Camada de **entrada**: 4 sinais binários (representados pelos círculos) indicando formação do colaborador (ciência da computação ou psicologia) e gênero (masculino ou feminino).
+- Camada **oculta** com 3 neurônios (definidos pelo usuário).
+- Camada de **saída**: duas camadas, indicando departamento do colaborador se TI (sim ou não) ou RH (sim ou não).
+
+Vale ressaltar que **_não_** há programação, *a priori*, nos neurônios. Eles trabalham com tentativa e erro atrelados a um sistema de ***feedback***, que atribui **pesos maiores** para as redes mais assertivas.
+
+Além disso, geralmente os modelos de redes neurais criam estes sinais binários automaticamente a partir de um *input* de variáveis categóricas. Ou seja, na prática não precisaríamos ter 4 variáveis binárias em um conjunto de dados para compor os dados de entrada, pois bastariam duas variáveis categóricas identificando o departamento e o gênero. 
+
+Vale lembrar que variáveis numéricas também podem servir de *input* nas redes neurais, sendo que estas são tratadas em sua forma original.
+
+  </div>
+  
+  <div class="col-md-4">
+  <center>
+![](images/rede_neural_1.png)
+</center>
+  </div>
+</div>
+
+
+### Como Funcionam as Redes Neurais? {.unnumbered}
+
+Após entender a lógica das redes neurais, vamos agora avançar desde o caso mais simples de rede neural até chegar em casos complexos, que é onde entra o conceito de *deep learning*.
+
+A rede neural mais simples é chamada de `perceptron`, e contém:
+
+- 1 ou mais `inputs`;
+- 1 processador;
+- 1 única saída.
+
+Um `perceptron` segue 4 passos principais:
+
+  i. **Recebe** os `inputs`;
+  ii. Dá **peso** aos `inputs`;
+  iii. **Soma** os `inputs`;
+  iv. Gera um **`output`**.
+
+A seguir é apresentado um exemplo de uma tabela de dados muito simples para aplicarmos uma rede neural. O objetivo com este exemplo é demostrar como funcionam as redes neurais e também como é possível construir modelos extremamente complexos mesmo com uma tabela de dados com poucas linhas e colunas.
+
+A tabela possui a seguinte estrutura:
+
+- Duas variáveis explicativas: $Talento$ (1 = sim, 0 = não) e $Sem~gest.~conseq.$ (1 = mais de 2 anos sem gestão de consequência, 0 = teve gestão de consequência nos últimos 2 anos).
+- Uma variável dependente: $Turnover$ (1 = colaborador pediu demissão, 0 = colaborador ativo).
+
+Neste exemplo, que foca na simplicidade para demonstrar o funcionamento das redes neurais, a tabela foi construída usando o operador lógico "E".
+
+```{r rnaexemplodados}
+# Criando Y, a variável dependente
+turnover <- c(rep(0, 3), 1)
+
+# Criando o conjunto de dados fictício
+binary.data <- 
+  data.frame(expand.grid("talento" = c(0, 1), "sem.gest.conseq" = c(0, 1)), turnover) %>% as_tibble()
+# Obs.: Se adicionar Y2 = c(0,1,0,0) e usar a formula Y + Y2 ~ Var1 + Var2 é possível ter 2 saídas
+
+binary.data %>%
+  dplyr::rename("Talento" = talento, 
+                "Sem gestão de conseq." = sem.gest.conseq, 
+                "Turnover" = turnover ) 
+
+```
+
+Com estes dados podemos construir um exemplo de *perceptron*, conforme segue:
+
+```{r}
+library(neuralnet)
+
+# Seed para manter o mesmo modelo quando replicar
+set.seed(123)
+
+# Criando o modelo
+net0hidden <- neuralnet(
+  turnover ~ talento + sem.gest.conseq,
+  binary.data,
+  hidden = 0,
+  err.fct = "ce",
+  linear.output = FALSE
+)
+
+# Criando gráfico
+plot(net0hidden, rep = "best", information = FALSE)
+```
+
+O gráfico acima mostra:
+
+- Uma *input layer* (círculos da esquerda);
+- Uma *output layer* (círculo da direita).  
+
+Além disso:
+
+- Os **números** nas linhas apontam os melhores **pesos**.
+- O anexo em azul representa um *bias node*, que nada mais é que uma **constante** aplicada.
+
+Neste exemplo foi utilizada uma função de ativação logística, conforme segue:
+
+
+$$z = -11.86 + 7.7538 ~ talento + 7.7552 ~ sem~gest.~conseq.~ $$
+
+sendo que $z$ é chamado de "ativador".
+
+O ativador passa por uma função sigmoide (neste caso, mas poderia ser outro tipo de função), assim como ocorre em uma **regressão logística**, gerando:
+
+$$ turnover = \frac{1}{1 + e^{−(-11.86 + 7.7538 ~ talento + 7.7552 ~ sem~gest.~conseq.)}} $$
+
+
+Para ter os resultados da predição do `perceptron` exemplificado basta substituir os valores das variáveis `talento` e `sem gest. conseq.` para 0 ou 1 e resolver a equação apresentada acima para todas combinações possíveis. Veja como fica o resultado:
+
+```{r predperceptron}
+# Criando a função logística
+Y = function(Var1,Var2){
+  1/(1+exp(-(-11.86048+7.75382*Var1+7.75519*Var2)))
+}
+
+# Obtendo as probabilidades para as situações possíveis
+binary.data %>%
+  dplyr::mutate(predicao = round(c(Y(0, 0),
+                            Y(1, 0),
+                            Y(0, 1),
+                            Y(1, 1)), 3)) %>% 
+  dplyr::rename("Talento" = talento, 
+                "Sem gestão de conseq." = sem.gest.conseq, 
+                "Turnover" = turnover,
+                "Predição" = predicao)
+
+```
+
+A generalização de `perceptrons` é chamada de **neurônios**. São então criadas camadas (*hidden layers*), em que o *output* de um neurônio serve de *input* para um neurônio da próxima camada, formando assim a rede neural.
+
+Exemplo de rede neural com **uma _hidden layer_** de **1 neurônio**:
+
+```{r}
+# Seed para replicação
+set.seed(123)
+
+# Criando modelo com 1 neurônio em uma hidden layer
+net1neur <- 
+  neuralnet(
+    turnover ~ talento + sem.gest.conseq,
+    binary.data,
+    hidden = 1,
+    err.fct = "ce",
+    linear.output = FALSE
+  )
+
+# Gerando gráfico da rede
+plot(
+  net1neur,
+  rep = "best",
+  information = FALSE
+)
+
+```
+
+Como exemplo, veja como ficaria se aumentássemos o número de **neurônios para 4**, mas ainda com **apenas uma *hidden layer***:
+
+```{r}
+# Seed para replicação
+set.seed(123)
+
+# Criando modelo com 4 neurônios em uma hidden layer
+net4neur <-
+  neuralnet(
+    turnover ~ talento + sem.gest.conseq,
+    binary.data,
+    hidden = 4, # Número de neurônios na hidden layer
+    err.fct = "ce",
+    linear.output = FALSE
+  )
+
+# Gerando gráfico da rede
+plot(
+  net4neur,
+  rep = "best",
+  information = FALSE
+)
+```
+
+Por fim, veja um exemplo gráfico de uma *deep neural network* com **2 _hidden layers_**, sendo que a primeira possui **5 neurônios e a segunda 3**.
+
+```{r}
+# Seed para replicação
+set.seed(123)
+
+# Criando modelo com 2 hidden layers (5 e 3 neurônios)
+net2hidden <- 
+  neuralnet(
+    turnover ~ talento + sem.gest.conseq,
+    binary.data,
+    hidden = c(5, 3),
+    err.fct = "ce",
+    linear.output = FALSE
+  ) 
+
+# Gerando gráfico da rede
+plot(
+  net2hidden,
+  rep = "best",
+  information = FALSE
+)
+```
+
+O gráfico acima demonstra como é possível construir uma rede neural bastante complexa e de difícil interpretação, mesmo sobre um conjunto de dados simples. Vale ressaltar que o ponto mais relevante ao aplicar redes neurais não é obter redes complexas, mas sim um melhor o resultado das predições.
+
+A definição da quantidade de *hidden layers* ou os seus tamanhos não possuem regras gerais de configuração. Basicamente, a melhor configuração será encontrada por experimentação, utilizando diversas configurações e comparando para as métricas de cada modelo. Por isso que o processo de *grid search* é muito importante para a utilização de redes neurais. Uma vez que as possibilidades de configurações são infinitas (quantidade de camadas e número de neurônios para cada uma), normalmente é feito um levantamento aleatório de inúmeras possibilidades de configurações.
+
+## Funções de Ativação  
+
+Até esta parte do documento, os exemplos foram apresentados utilizando função de ativação logística. Porém, a função de ativação mais utilizada em *deep learning* chama-se ReLU (*Rectified Linear Unit*), ou simplesmente *Rectifier*. Para ser possível explicar a função *Rectifier* é preciso explicar primeiramente a função *Tanh*, que é base para a *Rectifier*, bem como as razões pelas quais não é recomendado utliizar a função logística em *deep learning*. 
+
+Antes de entrar em detalhes das funções de ativação é importante ressaltar que os modelos de *deep learning*, especificamente do *framework* H2O (utilizado neste projeto), são treinados com [*gradient descent*](https://papers.nips.cc/paper/4390-hogwild-a-lock-free-approach-to-parallelizing-stochastic-gradient-descent.pdf) usando [*back propagation*](https://hmkcode.com/ai/backpropagation-step-by-step/) (mecanismo que atualiza os pesos de uma rede neural com base em alguma otimização, que no caso é *gradient descent*). Dito isto, voltamos às funções.
+
+A **função logística** tem uma curva na forma de "S" e conta com a seguinte equação: 
+
+$f(z) = \frac{1}{1+e^{-z}}$, que vai de 0 a 1, e já exemplificada acima.
+
+Alguns dos problemas existentes nas redes neurais com ativação logística são:
+
+* **Saturação**: um neurônio torna-se saturado quando sua saída atinge seu máximo ou seu mínimo. Um neurônio saturado prejudica o processo de otimização na *back-propagation*, pois o gradiente dos pesos desaparece ou chega muito próximo a zero.
+* **Não é centrada em zero**: é uma função que não possui massa igual nos dois lados do zero. No caso da função logística isso ocorre por ter limites entre 0 e 1, fazendo com que os *outputs* sejam sempre positivos. Essa característica prejudica bastante o processo de otimização por *gradient descent*, pois faz com que a atualização dos pesos "ande em apenas uma direção", e não em todas as direções possíveis. A otimização fica muito mais difícil.
+* O parâmetro $e^{-x}$ exige bastante poder computacional e faz com que a **convergência seja mais lenta**.
+
+A função de ativação **Tanh** (tangente hiperbólica) possui uma curva também em S, mas com limites de *output* entre -1 e 1. Dessa forma, sua massa é igualmente distribuída ao longo do ponto zero, tornando-a uma função centrada em zero. Isto já resolve um dos problemas da função logística apresentado, pois o processo de otimização fica mais fácil de ser executado. A função pode ser encarada como uma "normalização" da função sigmoide, sendo escrita da seguinte forma:
+
+$$ f(z) = \frac{e^z - e^{-z}}{e^z + e^{-z}} $$
+Alguns dos problemas existentes nas redes neurais com ativação **tanh** são:
+
+* Saturação dos neurônios (devido aos limites de -1 e 1), o que impacta na otimização por *gradient descent* (problema chamado de *vanishing gradient*).
+* É exigido alto poder computacional nos parâmetros $e^x$.
+
+
+A função ***ReLu*** (*Rectified Linear Unit*, ou *Rectifier*) é de simples entendimento: ela é linear para todos os valores positivos e zero para todos os valores negativos. Por ser zero para os valores negativos, significa que nem todos neurônios são ativados o tempo todo, o que faz com que o processamento seja consideravelmente menor. Por não ter limite na saída, o problema de saturação é resolvido. Ela é amplamente utilizada em *deep learning*, sendo expressa da seguinte forma:
+
+$$
+    f(z)= max(0,z)
+$$
+
+Um dos problemas da função ReLu pode ocorrer quando, por exemplo, um *bias* (uma constante) é inicializada na rede com um valor negativo muito grande, de tal forma que a soma dos *inputs* fica menor ou muito próxima a zero. Neste caso o neurônio é desabilitado logo na ativação. Porém, a solução pode ser simplesmente começar a inicialização dos *bias* sempre com valores positivos (critério que já é *default* no H2O, *framework* de *machine leanring* utilizado neste projeto).
+
+Outro problema que ocorre tanto na função logística quando na *tanh* é que a derivada (usada na otimização no processo de *backpropagation*) pode ser ou muito grande ou muito pequena, dependendo da característica do dado. Já na função ReLU este ponto também é resolvido, uma vez que a derivada da função será 1 para $z > 0$ e 0 para $z \leq 0$.
+
+Há ainda uma função chamada Leaky ReLu, uma variação da função ReLu, que "suaviza" os valores negativos, mas não os trata como zero. Isto facilita o processo de otimização. Mas esta ainda não é uma função muito utilizada na prática. Sua equação é $f(z)= max(0.01z,z)$.
+
+Veja a seguir os gráficos dos *outputs* de cada uma das funções de ativação mencionadas para uma amostra simulada de 1000 observações (linhas de dados), com valores aleatoriamente gerados entre -10 e +10. Nos gráficos é possível perceber como as funções logística e *tanh* saturam nos extremos. É possível perceber também, ao passar o mouse sobre o gráfico da Leaky ReLu, como os valores negativos são diferentes de zero, embora muito próximos.
+
+
+Resumindo, a função mais comum em termos de uso e de implementação nos *frameworks* de *deep learning* é a **função ReLu**, pois seu processamento é rápido e sua performance tem se demonstrado melhor que as funções logística e *tanh*. 
+
+Veja mais sobre as funções de ativação [neste link](https://towardsdatascience.com/analyzing-different-types-of-activation-functions-in-neural-networks-which-one-to-prefer-e11649256209).
+
+## Termos Úteis para *Setup* de *Deep Neural Networks*
+
+Além da função de ativação, existem diversos parâmetros de *setup* que precisam ser definidos para rodar um *deep learning*. A maioria dos *frameworks* já possuem parâmetros *default* que atendem a maior parte dos casos. Porém, para casos em que há necessidade de ajustes (por exemplo, pelo tempo excessivo de processamento), seguem as descrições dos principais parâmetros:
+
+* `Backpropagation`. Técnica que objetiva reduzir o erro geral de uma rede neural por meio de ajustes nos pesos. Para isso utiliza a [regra da cadeia](https://ml-cheatsheet.readthedocs.io/en/latest/calculus.html#chain-rule) para calcular as derivadas de funções compostas. Se reduzirmos iterativamente o erro de cada peso, teremos uma série de pesos para produzir boas previsões. Ver [detalhes](https://ml-cheatsheet.readthedocs.io/en/latest/backpropagation.html).
+* `Epoch`: uma época (*epoch*) é quando todo o conjunto de dados é percorrido pela rede neural por uma vez. É preciso múltiplas épocas em um modelo de *deep learning* porque utilizamos *gradient descent* para otimizar o processo de aprendizagem, que é um processo iterativo e exige várias "passagens" pelos dados para atualizar os pesos.
+* `Batch`: é o tamanho máximo de dados que será processado por vez, é um lote.
+* `Iterações`: é o número de *batchs* necessários para completar uma época (*epoch*). 
+
+
+## Exemplo de Redes Neurais. Lendo o conjunto de dados do Titanic
+
+Vamos buscar o arquivo csv do repositório. Após iremos excluir as variáveis a não serem utilizadas e separar o dataset em treino e teste.
+
+```{r}
+# Caso de estar sem internet e precisar puxar o dado localmente
+# df_titanic <- read_csv("data/titanic.csv") %>%
+#   select(passengerid, survived, pclass, sex, age, sibsp, parch, fare) %>% 
+#   mutate_if(is.character, as.factor) %>% 
+#   dplyr::mutate(survived = as.factor(survived)) %>% 
+#   na.omit
+  
+df_titanic <-
+  read_csv("https://gitlab.com/dados/open/raw/master/titanic.csv") %>%
+  select(passengerid, survived, pclass, sex, age, sibsp, parch, fare) %>%
+  mutate_if(is.character, as.factor) %>%
+  dplyr::mutate(survived = as.factor(survived)) %>%
+  na.omit 
+
+df_titanic %>% head(5) 
+```
+
+
+Na sequência segue o dicionário dos dados:
+
+- `survived`: sobreviveu $= 1$; não sobreviveu $=0$;
+- `pclass`: classe (1, 2 e 3, indicando primeira, segunda e terceira classe);
+- `sex`: masculino (*male*) e feminino (*female*);
+- `age`: idade do passageiro;
+- `sibsp`: número de irmãos e cônjuge (*siblings and spouse*) a bordo;
+- `parch`: número de pais e filhos (*parents and children*) a bordo;
+- `fare`: tarifa paga pelo passageiro.
+
+
+### Criando `dummies` (binarização) para fatores (variáveis categóricas) 
+
+Os algortimos de redes neurais não trabalham com fatores (variáveis categóricas) diretamente. O passo que é realizado para que o algoritmo consiga trabalhar é criar `n` variáveis binárias (chamadas de `dummies`). Teremos então que cada `dummy` representará um nível de uma variável categórica. 
+
+Por exemplo, ao utilizarmos a variável `sex` dos dados do titanic, obteremos duas `dummies`: `sex.male` e `sex.female`. 
+
+Para fins matemáticos, evitando viés do modelo, de formar geral não recomenda-se que um conjunto de `dummies` forme uma matriz de soma 1 para cada linha. Por isso, uma categoria chave é escolhida para cada variável categórica e excluída do modelo. Exemplo: as `dummies` `sex.male` e `sex.female` sempre somarão 1 em cada linha, sendo assim, optamos por desconsiderar a variável `sex.female`, uma vez que informação do gênero feminino já está inclusa no caso de `sex.male = 0`.
+
+
+```{r}
+
+df_titanic <-
+  df_titanic %>% 
+  cbind(as_tibble(model.matrix(~ sex - 1 , data = .))) # Criando dummies para a variável sex
+
+```
+
+
+### Divindo em treino e teste 
+ 
+Agora sim, iremos dividir o conjunto de dados em treino e teste.
+
+```{r}
+## set the seed to make your partition reproducible
+set.seed(123)
+
+# Create training subset
+train <- df_titanic %>% sample_frac(.70)
+# Create test subset
+test  <- anti_join(df_titanic, train, by = 'passengerid')
+```
+
+### Rodando os modelos
+
+```{r}
+library(neuralnet)
+set.seed(123)
+
+# Simples, 1 neurônio, mas com vários inputs
+t1 <- Sys.time()
+net <- neuralnet(
+  survived ~ age + pclass + fare + sexmale + sibsp + parch ,
+  train,
+  hidden = 1,
+  threshold = .3, # aumentar o threshold reduz o tempo para rodar, mas compromete a acurácia do modelo.
+  err.fct = "sse",
+  linear.output = FALSE
+)
+t2 <- Sys.time()
+
+plot(
+  net,
+  rep = "best",
+  information = FALSE
+)
+```
+
+O tempo de processamento foi:
+
+```{r}
+t2-t1
+```
+
+
+Veja que o pacote `neuralnet` nos permite também aumentar o número de neurônios e de *hidden layers*. Veja como fica:
+
+```{r}
+# Modelo complexo, com duas hidden layers e diversos neurônios
+t3 <- Sys.time()
+net2 <- neuralnet(
+  survived ~ age + pclass + fare + sexmale + sibsp + parch ,
+  data = train,
+  hidden = c(7,3), # número de neurônios a utilizar na hidden layer.
+  #stepmax=1e6, # dar mais tempo ao algoritmo para convergir, mas pode demorar horas!
+  threshold = .3, # aumentar o threshold reduz o tempo para rodar, mas compromete a acurácia do modelo.
+  err.fct = "sse", # usar "sse" ou "ce" para cálculo dos erros.
+  linear.output = FALSE
+)
+t4 <- Sys.time()
+
+plot(
+  net2,
+  rep = "best",
+  information = FALSE
+)
+
+```
+
+O tempo de processamento foi:
+
+```{r}
+t4-t3
+```
+
+
+###  Avaliação dos modelos 
+
+
+#### Modelo 1 - Rede neural com apenas um neurônio na _hidden layer_ {.unnumbered}
+
+Aplicando a função `preditc()`.
+
+```{r}
+pred1 <- predict(net,
+                newdata =
+                  test %>%
+                  select(survived, age, pclass, fare, sexmale, sibsp, parch)
+                )[, 2] # segunda coluna para pegar apenas survived = 1
+
+```
+
+Veja a curva ROC do modelo estimado.
+
+
+
+```{r}
+library(pROC)
+
+pred1_roc <- 
+  data.frame(pred1, as.factor(as.numeric(test$survived)-1)) %>% arrange(desc(pred1))
+colnames(pred1_roc) <- c("pred", "survived")
+
+roc1 <- roc(pred1_roc$survived , pred1_roc$pred, percent = TRUE)
+
+par(pty = "s")
+plot.roc(
+  roc1,
+  print.auc = TRUE,
+  legacy.axes = TRUE,
+  xlab = "Taxa de Falso Positivo (100 - Especificidade)",
+  ylab = "Taxa de Verdadeiro Positivo (Sensibilidade)"
+)
+```
+
+
+
+### Modelo 2 - Rede neural com diversos neurônios e 2 _hidden layers_
+
+Aplicando a função `preditc()`.
+
+```{r}
+pred2 <- predict(net2,
+                newdata =
+                  test %>%
+                  select(survived, age, pclass, fare, sexmale, sibsp, parch)
+                )[, 2] # segunda coluna para pegar apenas survived = 1
+
+```
+
+Veja a curva ROC do modelo estimado.
+
+```{r}
+library(pROC)
+
+pred2_roc <- 
+  data.frame(pred2, as.factor(as.numeric(test$survived)-1)) %>% arrange(desc(pred2))
+colnames(pred2_roc) <- c("pred", "survived")
+
+roc2 <- roc(pred2_roc$survived , pred2_roc$pred, percent = TRUE)
+
+par(pty = "s")
+plot.roc(
+  roc2,
+  print.auc = TRUE,
+  legacy.axes = TRUE,
+  xlab = "% de Falso Positivo (100 - Especificidade)",
+  ylab = "% de Verdadeiro Positivo (Sensibilidade)"
+)
+```
+
+
+### Comparando a curva ROC dos dois modelos
+
+```{r}
+par(pty = "s")
+plot(roc1, print.auc = TRUE, col = "blue", main = "ROC", legacy.axes = TRUE, 
+     xlab = "% de Falso Positivo (100 - Especificidade)",
+     ylab = "% de Verdadeiro Positivo (Sensibilidade)")
+plot(roc2, print.auc = TRUE, col = "green", print.auc.y = 40, add = TRUE, legacy.axes = TRUE)
+legend("bottomright", legend=c("RNA 1 Neur. e 1 H. Layer", "Deep Learning (+ de 1 H. Layer)"),
+       col= c("blue", "green"), lwd=2)
+```
+
+**Dados dois modelos e as duas curvas ROC, será que a AUC dos dois modelos são estatisticamente diferentes?** Para responder esta pergunta pode-se utilizar o teste de DeLong para duas curvas ROC. Veja o teste a seguir:
+
+```{r}
+# Rodando o teste DeLong, se p-valor < 0.10, então há diferença, caso contrário não há.
+roc.test(roc1, roc2, method = "delong")
+```
+
+
+### Considerações
+
+Entre os modelos treinados, nem sempre é nítida a diferença entre o melhor apenas observando a curva ROC. Sendo assim, o teste de DeLong permite terum parâmetro objetivo para ajudar na escolha do melhor modelo. O teste possui a hipótese nula ($H_0$) de que a AUC dos testes são iguais.
+
+Veja também que **nem sempre o aumento do porder computacional exigido traz resultados proporcionalmente melhores!**
+
+O grande *trade-off* das redes neurais (e principalmente das *deep learnings*, que usam diversas *hidden layers*) é justamente este: **até que ponto a necessidade exponencial de maior poder computacional gera de fato um ganho preditivo no modelo que está sendo treinado?**
+
+
+
+<!-- Modelos com o H2O -->
+
+<!-- # *Gradient Boosting Model* (GBM) -->
+
+<!--# *Deep Learning* -->
+
+
+# Apêndice
+
+## Avaliação de modelos
+
+É comum que na prática sejam aplicados **modelos com variadas parametrizações** e também **diferentes famílias de modelos** sobre um mesmo conjunto de dados de treino.
+
+Com isso, o tema **avaliação de modelos de _machine learning_** possui uma grande relevância, além de possuir temas bastante complexos e ser um tema extenso.
+
+A seguir alguns dos pontos principais são elencados acerca deste tópico.
+
+### Avaliação de modelos de Classificação {.unnumbered}
+
+O caso mais clássico e certamente mais utilizado de classificador é o **classificador binário**: em uma tentativa, **ou acerta ou erra**. 
+
+Com base neste tipo de classificador é possível construir uma grande quantidade de métricas de avaliação (algumas das quais podem inclusive serem generalizadas para classificadores com mais de duas classes). 
+
+Algumas principais destas métricas serão abordadas a seguir. Veremos:
+
+  - Acurácia;
+  - Precisão;
+  - Tabela (ou matriz) confusão;
+  - Taxas criadas com a matriz confusão;
+  - Curva ROC;
+  - Área soba curva ROC
+
+**Nota**: Apesar de parecer básico, a Wikipedia possui uma rede de conteúdos de alta qualidade sobre os temas que cercam a matriz confusão. [Veja](https://en.wikipedia.org/wiki/Confusion_matrix).
+
+Antes de entrar nas métricas, vale lembrar que é comum que na prática os analistas se refiram a assertividade de um classificador apenas pelo percentual de acertos (**acurácia**), ou ainda pelo percentual de casos positivos que o modelo de fato acertou (**precisão**). Veja:
+
+**Acurácia** é o percentual de acertos sobre todas as apostas do algoritmo.
+
+$$ Acurácia = \frac{Acertos}{Total} $$
+
+A acurácia, porém, possui diversas limitações. Em alguns casos, o conceito de precisão pode se encaixar melhor. Veja um exemplo:
+
+ > Exemplo. Em uma campanha de marketing, a empresa deseja enviar seus materiais apenas para os indivíduos que um modelo preditivo afirma que irão comprar o produto (a variável resposta ou dependente é binária, indicando a compra ou não compra do produto). Essa abordagem reduz muito os custos quando feita um comparação com o envio dos materiais publicitários para toda a base de indivíduos que a empresa possui.
+ 
+ Neste caso, olhar apenas para o percentual de preditos positivos corretos dentro de todos casos preditos positivos (precisão) é a melhor saída para escolher o melhor modelo de *machine learning*.
+
+
+**Precisão** é o percentual dos casos que o algoritmo classificou como positivo e acertou sobre todas as respostas que foram preditas como positivas.
+
+
+$$ Precisão = \frac{\text{Respostas postivas corretas}}{\text{Total de positivos preditos}} $$
+
+Porém, **apenas a acurácia e a precisão não são suficientes**.
+
+Para entender melhor este tema é preciso incialmente compreender os **tipos de erros e acertos** possíveis em classificadores.
+
+Tipos de erros e acertos em modelos de classificação:
+
+- **Verdadeiro Positivo (VP)**: falou que seria, e foi.
+- **Verdadeiro Negativo (VN)**: falou que não seria, e não foi.
+- **Falso Positivo (FP)**: falou que seria, mas não foi.
+- **Falso Negativo (FN)**: falou que não seria, mas foi.
+
+
+**Tabela (ou matriz) confusão (*confusion matrix*)**
+
+|                                  | Real <br /> Positivo = 1 |  Real <br /> Negativo  = 0 |
+|:---------------------------------|--------------------------|----------------------------|
+| **Predito <br /> Positivo = 1 ** |              **VP**      |             *FP*           |
+| **Predito <br /> Negativo = 0 ** |              *FN*        |            **VN**          |
+
+Para refletir ...
+
+> Os **custos** atrelados a cada tipo de erro possível são os mesmos? Ou ainda, os benefícios associados a cada tipo de acerto possuem o mesmo peso? 
+
+Para responder as perguntas acima é preciso olhar para as **taxas** que podem ser extraídas da matriz confusão. Estas taxas resumem a capacidade de um modelo de acertar suas predições, cada uma apresentando um olhar diferente. Veja:
+
+| Métrica                                                      | Fórmula                       |  Ex. | 
+|:-------------------------------------------------------------|:------------------------------|-----:|
+| Taxa de Verdadeiro Positivo (TVP), Sensibilidade ou _Recall_ | TVP = VP / (FN+VP)            | 72 % |
+| Taxa de Falso Positivo (TFP, ou 1 - Especificidade)          | TFP = FP / (VN+FP)            |  4 % |  
+| Taxa de Verdadeiro Negativo (TVN) ou Especificidade          | TVN = VN / (VN+FP)            | 96 % |
+| Taxa de Falso Negativo (TFN)                                 | TFN = FN / (FN+VP)            | 28 % |
+| Acurácia                                                     | Acc = (VP+VN) / (VP+VN+FP+FN) | 85 % |
+| Precisão                                                     | Prec = VP / (VP+FP)           | 93 % |
+
+Resumidamente, cada uma delas diz o seguinte:
+
+- **Taxa de Verdadeiro Positivo (TVP)**: percentual que foi predito <span style="color:blue">positivo</span> corretamente sobre o total que de fato era <span style="color:blue">positivo</span>.
+
+- **Taxa de Falso Positivo (TFP)**: percentual que foi predito <span style="color:blue">positivo</span> sobre o total que de fato era <span style="color:red">negativo</span>.
+
+- **Taxa de Verdadeiro Negativo (TVN)**: percentual que foi predito <span style="color:red">negativo</span> corretamente sobre o total que de fato era <span style="color:red">negativo</span>.
+
+- **Taxa de Falso Negativo (TFN)**: percentual que foi predito <span style="color:red">negativo</span> sobre o total que de fato era <span style="color:blue">positivo</span>.
+
+
+
+
+#### Curva ROC (*Receiver Operating Characteristic*) {.unnumbered}
+
+Veja que um modelo de classificação binária geralmente fornece uma **probabilidade** da variável *target* ser $=1$, e não uma resposta fixa de 0 ou 1.
+
+
+Sendo assim, é preciso definir um *threshold* (limite, ou ponto de corte), a qual definirá se a predição será considerada como 0 ou 1 (ocorrência ou não ocorrência de um evento). Podemos também olhar estes valores em percentual, de 0 a 100%.
+
+Ou seja, dependendo do *threshold* escolhido, o mesmo modelo pode apresentar uma ótima ou uma péssima predição. Neste sentido, as **curvas ROC** ajudam a identificar o **melhor modelo** dado `n` *thresholds*.
+
+Para construir a Curva ROC é preciso:
+
+- elencar os dados em ordem decrescente da probabilidade estimada pelo modelo;
+- calcular a taxa de verdadeiro positivo (será o eixo y da curva) e a taxa de falso positivo (que será o eixo x da curva) para cada linha (sempre considerando de forma cumulativa).
+
+Veja alguns exemplos de como ficam as curvas ROC dos modelos a seguir:
+
+ - Modelo perfeito: a medida que o threshold vai diminuindo o modelo nunca comete um falso positivo e a taxa de verdadeiro positivo está sempre em 100%.
+ 
+![](images/ROC_1.png)
+
+- Modelo usual: comete alguns falsos positivos e falsos negativos.
+
+![](images/ROC_2.png)
+
+- Modelo que não agrega: um modelo que não agrega nada a mais em relação a chutes aleatórios.
+![](images/ROC_3.png)
+
+- Modelo totalmente errado: faz todas classificações de forma errada. É pior que o chute aleatório.
+![](images/ROC_4.png)
+
+Veja exemplo de construção da curva ROC com o Excel, a ser apresentado.
+
+Veja também o exemplo dos dados que a função `roc()` do R utiliza para criar as curvas.
+
+```{r}
+
+roc_df <-
+  dplyr::tibble(
+    TVP = roc1$sensitivities,
+    TFP = (100 - roc1$specificities),
+    Thresholds = roc1$thresholds
+  )
+
+DT::datatable(
+  roc_df %>% arrange(desc(Thresholds))
+)
+```
+
+Alguns pontos:
+
+- Quando o threshold é 1, então todos os valores serão preditos como 0, o que faz com que não haja nenhuma verdadeiro positivo e nenhum falso positivo. O que torna a TVP = 0 e a TFP = 0.
+- A medida em que o threshold é reduzido, começam a surgir os casos de verdadeiro positivo e falso positivo, aumentando as TVP e TFP.
+- A ideia é que os verdadeiros positivos (VP) sejam clasificados em um número maior possível a medida que o threshold é reduzido, antes que os falsos positivos comecem a aumentar muito.
+- O threshold ótimo pode ser escolhido pelo ponto onde a variação do crescimento do crescimento da curva ROC começa a cair. Em outras palavras, no ponto em que temos a maior possível TVP para a menor possível TFP.
+- O modelo utópico perfeito classifica todos os verdadeiros positivos corretamente sem nenhum falso positivo, tendo TVP = 100% e TFP = 0%.
+- Se o threshold for 0, então todos valores serão preditos como 1, o que faz com que todos os verdadeiros positivos sejam classificados corretamente (TVP = 100%) e nenhum verdadeiro negativo seja classificado. Como não há verdadeiro negativo, então a Taxa de Falso Positivo (TFP) é 100% também.
+
+### Avaliação de modelos de Regressão {.unnumbered}
+
+Nos modelos de regressão, em uma tentativa, **não há certo ou errado**, mas sim o **quão próximo** chegou. Portanto, avalia-se o modelo pelo **erro** do *predicted* *vs* *actual* na lógica do **quanto menor, melhor**.
+
+O que veremos:
+
+- MAE e RMSE (medidas de erro) - [Ver mais](https://medium.com/human-in-a-machine-world/mae-and-rmse-which-metric-is-better-e60ac3bde13d)
+- $R^2$ mede o percentual que as variáveis independentes ($X$) explicam a dependente ($y$).
+
+MAE (*Mean Absolute Error*) representa a média dos erros em conjunto de predições. 
+
+$$ MAE = \frac{1}{n} \sum^n_{j=1} | y_j - \hat{y}_j | $$
+
+RMSE (*Root Mean Squared Error*) representa a raiz da média dos quadrados dos erros. A equação é igual a do **desvio-padrão**, porém, ao invés de fazer a diferença de cada observação com a média, a faz contra os valores preditos. 
+
+Por utilizar os quadrados dos erros, **valores grandes são penalizados**, elevando o erro e piorando a avaliação do modelo.
+
+$$ RMSE = \sqrt{ \frac{1}{n} \sum^n_{j=1} ( y_j - \hat{y}_j )^2 } $$
+
+
+
+**R-quadrado (ou coeficiente de determinação)**
+
+Mostra o quão bem as variáveis independentes (explicativas) explicam a variabilidade da variável dependente (resposta).
+
+Vai de **0 a 1** (ou em percentual, de 0% a 100%), indicando a **proporção da variabilidade** da variável a ser predita que é explicada pelas variáveis que constam no modelo.
+
+
+**R-quadrado Ajustado**
+
+Mesmo conceito do R-quadrado, mas faz ajustes em relação ao número de variáveis do modelo.
+
+O R-quadrado Ajustado leva em conta a **melhoria marginal** de adicionar uma nova variável ao modelo. 
+
+**Sempre será igual ou menor que o R-quadrado**, e destas duas é a **métrica preferível**.

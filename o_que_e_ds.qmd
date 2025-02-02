@@ -1,0 +1,218 @@
+# O que é Ciência de Dados (Data Science)?
+
+Ciência de dados é um campo que tem se destacado pela sua **capacidade de transformar dados em resultados para as organizações**, utilizando técnicas e ferramentas que vão além das tradicionais planilhas eletrônicas e dos *dashboards* descritivos de *business intelligence* (BI). Veja neste artigo o que é ciência de dados, bem como exemplos práticos de aplicação da área e também uma descrição acerca de quem é e o que se espera do profissional desta área, o cientista de dados.
+
+## O que é ciência de dados (*data science*)?
+
+Para auxiliar na definição do termo, vamos ver o que alguns autores e sites especializados dizem a respeito de ciência de dados:
+
+-   "A ciência de dados é uma disciplina multifacetada, que abrange \[aprendizado de máquina\] e outros processos analíticos, estatísticas e ramos relacionados da matemática. Cada vez mais se utiliza da computação científica de alto desempenho, tudo isso para extrair informações dos dados e usar essas informações encontradas para contar histórias." (Matthew Mayo, KDnuggets).
+
+-   "*Data science* envolve princípios, processos e técnicas para compreender fenômenos por meio da análise (automatizada) de dados." (PROVOST e FAWCETT, p. 4, 2016).
+
+-   "A ciência de dados é um conjunto multidisciplinar de inferência de dados, desenvolvimento de algoritmos e tecnologia para resolver problemas analiticamente complexos. No centro estão os dados: um grande número de informações brutas, transmitidas e armazenadas em data warehouses corporativos. \[...\] A ciência de dados é basicamente o uso desses dados de maneiras criativas para gerar valor aos negócios." (Divya Singh, Data Science Central).
+
+Definição que acredito:
+
+> Ciência de dados é uma **área multidisciplinar** que se utiliza principalmente, mas não apenas, de **método científico, estatística, conhecimento de negócio e ciência da computação** para gerar valor aos negócios.
+
+A forma como cada uma das subáreas contribui para o campo de ciência de dados é, de maneira geral, a seguinte:
+
+-   **Método científico**: auxilia na estrutura do projeto de *data science*, que contempla a definição de um problema de negócio (análogo ao problema de pesquisa dos trabalhos acadêmicos); definição de objetivos geral e específicos; discussão e apresentação de resultados; conclusões e procedimentos futuros.
+
+-   **Estatística**: formas de resumir e visualizar dados; testes de hipóteses; técnicas de análise preditiva.
+
+-   **Negócio**: necessário para ser capaz de definir hipóteses de negócio a serem posteriormente transformadas em hipóteses estatísticas; fundamental para escolher o **problema de negócio de fato mais relevante** para se investir tempo e dinheiro com análise de dados.
+
+-   **Ciência da computação**: contribui com métodos que impulsionam as técnicas estatíticas (*machine learning*), utilizando poder computacional, linguagens de programação, computação na nuvem, bancos de dados, entre outros.
+
+Um dos pontos principais para um bom funcionamento de um projeto de ciência de dados na prática é um perfeito alinhamento entre a equipe técnica (os cientistas de dados) e a área de negócio do cliente (interno ou externo). É comum que sejam realizadas sessões de *Design Thinking* e utilizadas adaptações do *Business Canvas* para identificar o problema de negócio e também gerar *insights* relevantes à equipe técnica, o que deverá conduzir a entregas de melhor qualidade.
+
+## Surgimento da ciência de dados
+
+A área de ciência de dados é bastante nova, tendo sido assim chamada pela primeira vez a princípio em 2001. Porém, foi a partir de aproximadamente o ano de 2010 que a área começou a ganhar notoriedade, principalmente devido à onda de *big data*.
+
+A razão para as empresas passarem a gerar e armazenar grandes volumes de dados (*big data*) se deu com o avanço da tecnologia a partir da bolha "ponto com", e principalmente com o barateamento dos discos rígidos.
+
+A partir disso, grandes companhias como Google e Amazon desenvolveram novas arquiteturas computacionais, que chamamos hoje de computação nas nuvens (*cloud computing*).
+
+Com todo este cenário ficou fácil e barato para as empresas armazenarem diversos tipos de dados, muitos que até então eram ignorados.
+
+A grande pergunta que surgiu foi **"o que fazer com todos estes dados, e como gerar valor de negócio a partir deles?"**.
+
+Sendo assim, o termo *big data* saiu um pouco de enfoque, dando lugar à multidisciplinariedade da **ciência de dados**, em que *big data* é apenas uma parte de um todo.
+
+## Perfil e papel do cientista de dados
+
+O objetivo aqui é de trazer uma base do perfil e também do papel do cientista de dados nas organizações. Claro que dependendo da companhia a opinião pode divergir em alguns aspectos. Por isso, meu objetivo aqui não é focar em habilidades técnicas exigidas, nem tampouco em linguagens de programação ou tecnologias.
+
+Inicialmente, apresento uma citação de Provost e Fawcett (2016, p. 333) que resume muito bem o processo de ciência de dados no ponto de vista do cientista de dados:
+
+> A prática de *data science* pode ser melhor descrita como uma combinação de **engenharia analítica e exploração**. O negócio apresenta um problema que gostaríamos de resolver. Raramente, o problema de negócio é, de modo direto, uma de nossas tarefas básicas de mineração de dados. **Decompomos o problema em subtarefas** que achamos que podemos resolver, geralmente, começando com as ferramentas existentes. Para algumas dessas tarefas podemos não saber o quão bem podemos resolvê-las, por isso, temos que explorar os dados e fazer uma avaliação para verificar. Se isso não for possível, **poderemos ter de tentar algo completamente diferente**. No processo, **podemos descobrir o conhecimento** que vai nos ajudar a resolver o problema que queremos ou podemos descobrir algo inesperado que nos leva a outros sucessos importantes.
+
+Este parágrafo acima é excelente, pois resume algumas das principais capacidades que um cientista de dados deve ter:
+
+-   Criatividade.
+-   Capacidade de explorar possibilidades de soluções de problemas até então desconhecidas.
+-   Pensamento crítico para ser capaz de extrair conclusões importantes, resultantes dos processos de análise de dados, mas que não faziam parte diretamente da questão inicial levantada. Claro que sobre este ponto vale ressaltar que o cientista de dados precisa ter cuidado para não perder o foco do projeto. É preciso ter bom senso.
+
+Um dos pontos que me chama atenção no perfil do profissional cientista de dados é que ter conhecimento do método científico contribui muito para a execução prática dos projetos de ciência de dados. Isto faz com que a área de *data science* seja capaz de interligar a "teoria" do mundo acadêmico com a "prática" do mundo dos negócios.
+
+Na minha opinião, sempre achei que a academia e o meio corporativo têm muito a aprender um com o outro. O campo de ciência de dados é um exemplo de sucesso desta mescla de abordagens.
+
+## Ferramentas do cientista de dados
+
+Não há necessariamente um conjunto de ferramentas padrão para trabalhar com ciência de dados. Porém, devido à característica do trabalho, alguns pontos importantes são:
+
+-   Ter conhecimento de alguma linguagem de programação com alto poder de aplicação analítica. Hoje em dia se destacam as linguagens R e Python.
+-   Ter conhecimentos intermediários em métodos estatísticos.
+-   Capacidade didática de explicar os resultados encontrados, principalmente de forma escrita.
+-   Ter conhecimentos básicos de computação na nuvem.
+-   Saber trabalhar com versionamento de códigos (basicamente Git).
+-   Outros conhecimentos são importantes, mas que talvez não sejam tão essenciais quanto os demais, que são: bancos de dados, html, javascript.
+
+Como já mencionado, o trabalho do cientista de dados é muito versátil e dinâmico. Por isso, quanto mais conhecimentos o indivíduo tiver melhor, mas as linguagens R e Python são tão poderosas para fins analíticos e tão integradoras de outras tecnologias que geralmente não é necessário ter profundos conhecimentos além delas para executar bons projetos de ciência de dados.
+
+## Aplicações: ciência de dados para negócios
+
+As aplicações são diversas, mas a seguir tento exemplificar algumas possibilidades de aplicação de ciência de dados na solução prática de problemas de negócio reais:
+
+### Recursos humanos
+
+-   **Turnover**: identificação das causas principais que levam um colaborador a pedir demissão da empresa, bem como aplicação de modelo preditivo para gerar uma lista com os colaboradores com maior probabilidade de pedirem para sair.
+-   **Recrutamento**: identificar os perfis de candidatos (internos ou externos) a vagas dentro da empresa que melhor se enquadram, utilizando dados de perfil, CV, experiências anteriores, aspectos demográficos, entre outros.
+
+### Logística
+
+-   **Falhas em entregas**: identificação, por meio de modelo preditivo, dos casos em que há maior probabilidade de uma entrega não ser efetivida.
+
+### Finanças
+
+-   **Gestão de carteiras**: identificação dos ativos com maior probabilidade de apresentarem bom desempenho no futuro com base em diversos dados históricos. É possível mesclar dados contábeis/fundamentalistas com indicadores técnicos e também variáveis categóricas, como setor ou níveis de governança corporativa, por exemplo.
+
+### Marketing
+
+-   **Identificação de *leads***: utilizar modelo preditivo para encontrar *leads* com maior probabilidade de se tornarem clientes.
+-   **Redução de *churn*** (clientes que cancelam assinaturas): abordagem muito próxima a utilizada no caso de *turnover* (colaboradores que pedem demissão).
+
+## Ciclo de Vida de um Projeto de Ciência de Dados
+
+A ciência de dados se tornou um componente crucial em muitos setores, fornecendo insights valiosos e informando decisões baseadas em dados. Compreender as fases do ciclo de vida de um projeto de ciência de dados é essencial para obter os melhores resultados.
+
+Um projeto de ciência de dados é uma série de etapas inter-relacionadas. Cada etapa desempenha um papel importante na obtenção de insights significativos dos dados. Vamos entender melhor cada uma dessas fases.
+
+### Definição do Problema
+
+A fase inicial de qualquer projeto de ciência de dados é a **definição do problema**. É aqui que identificamos a questão ou desafio que queremos resolver. Esta fase define o rumo do projeto, garantindo que as soluções geradas sejam relevantes e impactantes.
+
+Uma clara definição do problema serve como guia para as fases subsequentes do projeto, incluindo a coleta e análise de dados. Garantir que o problema esteja bem definido desde o início é vital para o sucesso de qualquer projeto de ciência de dados.
+
+### Coleta de Dados
+
+Depois de definir claramente o problema, o próximo passo é a **coleta de dados**. Os dados podem ser obtidos de diversas fontes, como bancos de dados internos, APIs da web ou fontes de terceiros. A escolha das fontes de dados depende da natureza do problema que estamos tentando resolver.
+
+Os dados coletados formam a base do projeto. Portanto, é essencial garantir que os dados sejam relevantes para o problema e de alta qualidade. Dados de baixa qualidade ou irrelevantes podem levar a insights imprecisos e soluções ineficazes.
+
+### Preparação de Dados
+
+Uma vez que os dados foram coletados, eles precisam ser preparados para análise. A **preparação de dados** inclui a limpeza dos dados, como tratar valores ausentes e remover outliers. Mas também abrange a transformação de dados e a criação de novas variáveis, que são partes fundamentais da preparação dos dados.
+
+Essa etapa é vital, pois a qualidade dos dados afeta a qualidade dos insights e soluções geradas. Sem um adequado preparo dos dados, corremos o risco de tirar conclusões erradas e propor soluções que não resolvam efetivamente o problema.
+
+### Modelagem de Dados
+
+A **modelagem de dados** é onde aplicamos técnicas e algoritmos de aprendizado de máquina aos nossos dados preparados. A escolha do modelo a ser usado depende do problema que estamos tentando resolver. Podemos empregar desde modelos mais simples, como regressões, até abordagens mais complexas, como redes neurais.
+
+Esta fase é a essência da ciência de dados, onde os dados são transformados em insights valiosos. Um bom modelo pode extrair informações significativas dos dados, proporcionando soluções eficazes para o problema definido.
+
+### Avaliação do Modelo de Dados
+
+A **avaliação do modelo** é a última fase do ciclo de vida de um projeto de ciência de dados. Aqui, testamos o desempenho do nosso modelo. Verificamos se o modelo é capaz de fornecer insights precisos e úteis para o problema.
+
+As métricas de avaliação variam dependendo do problema e do tipo de modelo usado. O objetivo é garantir que o modelo seja não só preciso, mas também relevante e útil para resolver o problema que foi definido no início do projeto.
+
+Cada projeto de ciência de dados é único e pode exigir abordagens diferentes. No entanto, as fases básicas descritas aqui proporcionam uma estrutura sólida que pode ser adaptada conforme necessário. Dominar essas fases será um trampolim para qualquer projeto de ciência de dados bem-sucedido.
+
+## Metodologia Ágil em Ciência de Dados
+
+A aplicação de metodologias ágeis em projetos de ciência de dados tem se mostrado extremamente eficaz, especialmente considerando a natureza iterativa e experimental destes projetos. O Scrum, em particular, tem sido amplamente adotado, com algumas adaptações específicas para projetos de dados.
+
+### Scrum em Projetos de Data Science
+
+O Scrum em ciência de dados mantém seus princípios fundamentais, mas adapta-se às particularidades da área:
+
+* **Sprints**: Geralmente de 2 a 4 semanas, com objetivos específicos como:
+  - Sprint 1: Definição do problema e coleta inicial de dados
+  - Sprint 2: Limpeza e preparação dos dados
+  - Sprint 3: Desenvolvimento do primeiro modelo (MVP)
+  - Sprints subsequentes: Iterações e melhorias do modelo
+
+### Cerimônias Essenciais
+
+* **Daily Scrum**: Reuniões diárias de 15 minutos onde a equipe discute:
+  - Progresso na preparação dos dados
+  - Resultados preliminares dos modelos
+  - Bloqueios técnicos encontrados
+
+* **Sprint Planning**: Define os objetivos da sprint, como:
+  - Métricas a serem alcançadas
+  - Quantidade de dados a ser processada
+  - Features a serem desenvolvidas
+
+* **Sprint Review**: Apresentação dos resultados para stakeholders:
+  - Demonstração dos modelos desenvolvidos
+  - Apresentação de métricas alcançadas
+  - Visualizações de dados relevantes
+
+* **Sprint Retrospective**: Reflexão sobre o processo:
+  - O que funcionou bem no desenvolvimento dos modelos
+  - Desafios na coleta ou processamento de dados
+  - Ajustes necessários para a próxima sprint
+
+### Artefatos Adaptados
+
+* **Product Backlog**: Lista priorizada incluindo:
+  - Features do modelo a serem desenvolvidas
+  - Conjuntos de dados a serem incorporados
+  - Métricas de performance a serem alcançadas
+
+* **Sprint Backlog**: Tarefas específicas como:
+  - Limpeza de determinado conjunto de dados
+  - Implementação de algoritmos específicos
+  - Desenvolvimento de visualizações
+
+* **Quadro Kanban**: Adaptado com colunas como:
+  - Coleta de Dados
+  - Preparação
+  - Modelagem
+  - Validação
+  - Produção
+
+### Papéis Principais
+
+* **Product Owner**: Foca em:
+  - Definição clara dos objetivos de negócio
+  - Priorização de features do modelo
+  - Validação dos resultados do ponto de vista do negócio
+
+* **Scrum Master**: Auxilia removendo impedimentos como:
+  - Acesso a dados necessários
+  - Recursos computacionais adequados
+  - Comunicação com áreas de negócio
+
+* **Time de Data Science**: Composto por:
+  - Cientistas de dados
+  - Engenheiros de dados
+  - Analistas de negócio
+
+Esta estrutura ágil permite que projetos de ciência de dados mantenham o foco na entrega de valor, enquanto permanecem flexíveis para incorporar novos insights e requisitos que surgem durante o desenvolvimento dos modelos.
+
+## Conclusões
+
+A área de ciência de dados muito se desenvolveu, e hoje as empresas em geral já vêem valor tanto em contratar projetos quanto em construir áreas de *data science*. A maior parte das empresas grandes, na verdade, já possuem áreas de ciência de dados constituídas. Contudo, ainda há muito que se consolidar em termos metodológicos e também de quais são os tipos de entregas mais adequadas.
+
+Vale lembrar, tanto para gestores das áreas de ciência de dados, quanto para cientistas de dados, que o papel mais importante de um projeto de *data science* não está no modelo de *machine learning* utilizado, mas sim na capacidade de impactar positivamente a organização em algum KPI de negócio.
+
+## Referências
+
+PROVOST, F., FAWCETT, T. (2016). Data science para negócios: o que você precisa saber sobre mineração de dados e pensamento analítico de dados. Rio de Janeiro: Alta Books.
