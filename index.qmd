@@ -1,5 +1,11 @@
 # Prefácio {.unnumbered}
 
-Seja Bem vindo (a) ao livro de Data Science da Mentoria de Ciência de Dados da Data Mundo.
+Seja bem-vindo(a) ao "O Manual do Cientista de Dados". Este projeto é uma jornada contínua para criar um recurso acessível e gratuito para todos que desejam explorar o fascinante mundo da ciência de dados. 
 
-To learn more about Quarto books visit <https://quarto.org/docs/books>.
+Sou Wlademir Ribeiro Prates, Cientista de Dados Senior e PhD em Finanças pela UFSC. Ao longo da minha carreira, tive a oportunidade de trabalhar em diversas empresas, tanto em consultoria quanto integrando times de dados em grandes organizações, no Brasil e no exterior. Essa experiência me motivou a compartilhar conhecimento e contribuir para o crescimento da comunidade de ciência de dados.
+
+Este livro é um esforço colaborativo, e sua contribuição é essencial. Sinta-se à vontade para participar, seja através de sugestões, correções ou novas ideias. Juntos, podemos construir um material de alta qualidade que beneficie a todos.
+
+Acompanhe o desenvolvimento do livro e acesse a versão mais recente em [O Manual do Cientista de Dados](https://wrprates.github.io/o-manual-do-cientista-de-dados/). Vamos nos conectar e trocar experiências nas redes sociais: [LinkedIn](https://www.linkedin.com/in/wrprates/) e [Instagram](https://instagram.com/datamundo.cientista/).
+
+Agradeço seu interesse e apoio. Espero que este livro seja uma fonte valiosa de aprendizado e inspiração para sua jornada na ciência de dados.
