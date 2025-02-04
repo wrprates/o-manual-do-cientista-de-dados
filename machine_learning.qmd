@@ -1,6 +1,6 @@
 # *Machine Learning* para negócios
 
-```{r, echo=FALSE, message=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 # library("bookdown")
 library("broom")
 library("caret") # métricas de ML
@@ -18,12 +18,52 @@ library("pROC")
 library("xtable")
 ```
 
-# Introdução
 *Machine Learning*, ou Aprendizado de Máquina, é uma área muito ampla e bastante complexa. Contudo, é também um campo com infinitas possibilidades de uso. Nos negócios não é diferente, é possível aplicar machine learning de diversas maneiras.
 
-O objetivo desta apostila é **trazer os conceitos básicos para alguns dos principais modelos de aprendizado de máquina e na sequência mostrar como implementá-los**. Não é propósito deste material entrar a fundo nos detalhes de cada modelo, pois a proposta é focar na compreensão dos conceitos e dos casos de usos para rápida aplicação na área de negócios.
+Aprendizado de máquina (*machine learning*) é dar a uma máquina a habilidade de aprender, mesmo que nem tudo esteja explicitamente programado. Contudo, existem duas grandes divisões iniciais de formas pela qual o aprendizado de máquina pode ocorrer: aprendizado de máquina supervisionado; e aprendizado de máquina não supervisionado. Veja os detalhes neste capítulo.
 
-# Clustering
+O objetivo deste capítulo é **trazer os conceitos básicos para alguns dos principais modelos de aprendizado de máquina e na sequência mostrar como implementá-los**. Não é propósito deste material entrar a fundo nos detalhes de cada modelo, pois a proposta é focar na compreensão dos conceitos e dos casos de usos para rápida aplicação na área de negócios.
+
+## O que é aprendizado de máquina?
+
+O aprendizado de máquina ocorre quando um algoritmo ou um programa de computador consegue melhorar sua **performance** nas tarefas que desempenha com base na **experiência**, utilizando **inteligência artificial**. Essa experiência ocorre com a alimentação de dados e informações colhidas a partir de interações com o mundo real.
+
+Dessa forma, podemos dividir o aprendizado de máquina em **supervisionado**, que busca responder um *target*, ou seja, há uma variável explícita a ser respondida; e **não supervisionado**, em que busca-se identificar grupos ou padrões a partir dos dados, sem um objetivo específico a ser alcançado.
+
+Na sequência do capítulo veja os principais conceitos, métodos e exemplos introdutórios de aplicações de aprendizado de máquina na linguagem R.
+
+### Como *machine learning* gera valor nos negócios?
+
+Aprendizado de máquina é composto por um conjunto de métodos. Sendo assim, para identificar qual tipo de abordagem de *machine learning* é mais adequada a cada situação é preciso entender muito bem a **pergunta de negócio** que busca-se resolver.
+
+Neste contexto vale ressaltar que o mais importante não é o método em si.
+
+A questão é: **não existem problemas de aprendizado de máquina para serem resolvidos, mas sim problemas práticos de negócio**. Por isso, o foco deve ser mantido em soluções que atendam às dores sentidas pelas empresas e que de fato vão resolver problemas reais.
+
+Assim, o aprendizado de máquina irá gerar muito valor para as empresas.
+
+### Aprendizado de máquina supervisionado
+
+Em termos de *machine learning* aplicado a empresas, quando se tem uma pergunta de negócio do tipo “Qual ação de marketing mais impacta nas vendas?” estamos falando de aprendizado de máquina supervisionado, pois estamos tentando identificar as causas que impactam na variável “vendas”.
+
+Nos modelos de aprendizagem de máquina supervisionada conseguimos dar pesos ou calibrar o nível de assertividade e de precisão de um modelo. A maior parte dos modelos de *machine learning* são supervisionados.
+
+São dividos em:
+
+- **Regressão**: métodos de regressão buscam encontrar como uma variável evolui em relação a outras. Estão entre os métodos mais comuns e mais ensinados nas aulas de estatística nas universidades.
+- **Classificação**: são métodos que buscam explicar uma variável categórica, com duas categorias (variável binária) ou mais.
+
+Podem existir ainda modelos de aprendizado de máquina **mistos**, que podem utilizar partes de regressão para fazer classificação, ou o oposto.
+
+### Aprendizado de máquina não supervisionado
+
+Quando a pergunta de negócio é algo do tipo “Quais os perfis de clientes que compram em uma loja?” estamos falando de aprendizado de máquina **não supervisionado**. Neste caso, portanto, não temos uma variável específica a ser respondida, pois estamos apenas buscando encontrar os indivíduos, itens ou elementos semelhantes.
+
+Modelos não supervisionados são mais raros na prática, mas são muito úteis para guiar o raciocínio do cientista de dados no processo de exploração dos dados para análises futuras.
+
+
+# Aprendizado de máquina não supervisionado
+## Clustering
 
 Modelos de *Clustering* referem-se a técnicas de **agrupamento**, dentro de **aprendizado não supervisionado**.
 
@@ -47,7 +87,7 @@ Para exemplificar os métodos de *clustering* será utilizado o modelo K-means.
 
 
 
-## Aplicando *K-Means* a dados gerados aleatoriamente 
+### Aplicando *K-Means* a dados gerados aleatoriamente 
 
 
 Inicialmente criamos uma matriz com duas variáveis aleatórias. Ambas variáveis de dados aleatórios possuem desvio-padrão de 0,3. Porém uma delas possui média 0 e a outra média 1.
@@ -121,16 +161,16 @@ highcharter::hchart(
 
 ```
 
-### Exercício {.unnumbered}
+#### Exercício {.unnumbered}
 
 1. Altere a quantidade de observações de 100 para 1000 e veja como o K-Means se comporta.
 2. Altere o desvio-padrão de 0,3 para 3 (mantendo 1000 observações) e veja como o K-Means se comporta.
 
-## Aplicando *K-Means* para o *Iris dataset*
+### Aplicando *K-Means* para o *Iris dataset*
 
 *Iris dataset* é um conjunto de dados de 150 medidas realizadas em 3 espécies diferentes de um tipo de flor (*Iris*). É um conjunto de dados muito usado para testes em algoritmos de reconhecimento de padrões. Um dos pontos que torna este conjunto de dados interessante é o fato de que uma espécie é linearmente separável das outras duas, mas as duas restantes não podem ser separadas de forma linear. [Veja mais](https://archive.ics.uci.edu/ml/datasets/iris).
 
-### Conhecendo o conjunto de dados
+#### Conhecendo o conjunto de dados
 
 Veja o resumo dos dados:
 
@@ -204,7 +244,7 @@ hchart(
 ```
 :::
 
-### Pré-processamento: normalizando os dados
+#### Pré-processamento: normalizando os dados
 
 ```{r}
 # Separando a colunas de espécies das colunas numéricas
@@ -233,7 +273,7 @@ Se for o caso de usar uma função para normalizar os dados, o código está com
 # head(iris.new)
 ```
 
-### Aplicando o *K-means*
+#### Aplicando o *K-means*
 
 Definindo o número de centróides o dado, já na função do kmeans:
 
@@ -264,7 +304,7 @@ result$cluster
 ```
 
 
-## Verificação dos resultados
+### Verificação dos resultados
 
 O código abaixo apenas cria os gráficos que seguem, comparando as classificações da clusterização pelo K-means com os rótulos reais da coluna "Species".
 
@@ -369,12 +409,12 @@ Os resultados foram:
 - Cluster 2 corresponde à espécie "Virgínica".
 - Cluster 3 corresponde à espécie "Setosa".
 
-## Fontes
+### Fontes
 
 1. http://rpubs.com/Nitika/kmeans_Iris
 2. https://rpubs.com/AnanyaDu/361293
 
-# *Principal Component Analysis* (PCA)
+## *Principal Component Analysis* (PCA)
 
 Podemos comparar duas variáveis (colunas) de cada vez se usarmos diagramas de dispersão (*scatter plots*). Porém, veja a quantidade necessária de *scatter plots* dependendo da quantidade de variáveis a serem comparadas:
 
@@ -413,7 +453,7 @@ O autovetor com maior autovalor é o primeiro componente principal.
 
 [Veja mais](https://www.datacamp.com/community/tutorials/pca-analysis-r)
 
-## Aplicando PCA no conjunto de dados *mtcars*
+### Aplicando PCA no conjunto de dados *mtcars*
 
 O conjunto de dados "*Motor Trend Car Road Tests*" foi extraído de uma revista automobilística de 1974 e contempla 10 variáveis que representam características ou métricas de desempenho dos veículos. Os dados são nativos do R, basta digitar `mtcars` no console. Pra informações, como dicionário de dados, basta digitar `? mtcars`, e accessar a documentação de ajuda.
 
@@ -448,15 +488,13 @@ mtcars.pca$x[,1:4] %>% head(10)
 ```
 
 
-## Visualizando graficamente os resultados do PCA
+### Visualizando graficamente os resultados do PCA
 
 É possível também criar um *biplot* para visualizar como cada variável impacta nas relações entre os componentes principais. Para isso vamos usar novamente o pacote de visualização `highcharter`.
 
 
 
 Agora, veja o gráfico `biplot` que compara o PC1 e PC2 e mostra como cada variável impactou na construção de cada componente. Cada ponto do gráfico corresponde a uma linha de dado (dataset com 32 linhas no total). 
-
-
 
 ```{r}
 # Criando Biplot para PC1 e PC2
@@ -476,12 +514,13 @@ highcharter::hchart(mtcars.pca, choices = 2:3) %>%
   highcharter::hc_yAxis(title = list(text = "PC3"))
 ```
 
-## Considerações
+### Considerações
 
 O resultado de uma análise de componentes principais pode ser utilizado para estimar outros modelos. Veja, se você possui um *dataset* com um número muito grande de variáveis, o PCA viabiliza que haja uma redução de muitas variáveis para poucos componentes principais que expressem a maior parte da variância dos dados. A maior dificuldade desta abordagem é analisar os resultados depois, pois não há uma interpretação "real" para os valores dos componentes principais.
 
+# Aprendizado de máquina supervisionado
 
-# Regressão linear 
+## Regressão linear 
 
 Relaciona uma variável dependente (*target*, rótulo) com uma matriz de variáveis explicativas (independentes):
 
@@ -509,7 +548,7 @@ Algumas considerações adicionais são:
 Obs.: Métodos de regressão linear possuem diversas variações, e é uma área de estudo com muitos métodos específicos. O exemplo dado acima é apenas o caso mais simples.
 
 
-## Exemplo: velocidade contra tempo para um carro parar (dados de 1920's)
+### Exemplo: velocidade contra tempo para um carro parar (dados de 1920's)
 
 Veja um exemplo de dados que mostram a velocidade de um carro e o tempo que ele levava até parar completamente.
 
@@ -564,14 +603,14 @@ highcharter::highchart() %>%
 Para concluir, veja que o gráfico de dispersão acima só é possível de ser realizado porque este exemplo trata de uma **regressão simples**, ou seja, em que temos **apenas uma variável independente**. Se tivéssemos um caso de **regressão múltipla**, com duas até $N$ variáveis independentes, teríamos que fazer um gráfico de dimensão $N+1$ para exemplificar a regressão linear, o que é possível. Por isso, a visualização da reta de melhor ajuste ao longo de todas as variáveis de uma regressão fica impossível a medida que mais variáveis independentes são adicionadas.
 
 
-# Regressão Logística
+## Regressão Logística
 
 A regressão logística é um tipo de regressão que tem como variável resposta (dependente) uma **variável binária**, ou seja, os valores possíveis são **0 ou 1**, ocorrência ou não de um evento. O resultado do modelo é uma probabilidade, que pode ser transformado em *labels* de 0 e 1 ao levar em conta um ponto de corte na probabilidade estimada.
 
 > "O modelo de regressão logística é adequado para trabalhar com **dados qualitativos**. Serve para as situações nas quais a **variável dependente (Y) é binária** (assume os valores de 0 e 1) e o valor que **se busca é a probabilidade** ($\pi$) de que a Y seja 1 dado o valor de determinada variiável x, que poderá tanto ser binária, numérica ou dividida em categorias." (CHATTERJEE; HADI, 2006; RYAN, 2009). 
 
 
-## Exemplo: regressão logística com dados do naufrágio do Titanic
+### Exemplo: regressão logística com dados do naufrágio do Titanic
 
 Analisaremos um conjunto de dados dos passageiros do navio Titanic, que naufragou em 1912. Então aplicaremos um modelo de regressão logística para calcular o probabilidade de um passageiro, ao embarcar no navio, vir a sobreviver à tragédia ($y$, variável dependente).
 
@@ -599,7 +638,7 @@ df_titanic <-
 head(df_titanic, 5)
 ```
 
-## Dividindo o dataset em treino e teste
+### Dividindo o dataset em treino e teste
 
 Existem diversas formas de fazer esta divisão pela linguagem R. Não há jeito certo ou errado, neste caso o importante é chegar ao objetivo de dividir o *dataset*.
 
@@ -617,7 +656,7 @@ test  <- dplyr::anti_join(df_titanic, train, by = 'passengerid')
 
 
 
-## Aplicando o modelo de regressão logística
+### Aplicando o modelo de regressão logística
 
 Vamos utilizar a função `glm()`, nativa do `R`. Apenas certifique-se de configurar o parâmetro `family` para `family = binomial(link = 'logit')`. No termo da equação, a variável *target* é precedida de `~`. Esta, inclusive, é uma terminologia padrão para a maior parte das funções de modelos supervisionados de *machine learning* no `R`.
 
@@ -647,7 +686,7 @@ broom::tidy(fit) %>%
 ```
 
 
-## Realizando as predições
+### Realizando as predições
 
 Usando a função `predict` do R para fazer as predições no *dataset* de teste com base no modelo que foi treinado.
 
@@ -665,7 +704,7 @@ DT::datatable(
 )
 ```
 
-## Avaliação do modelo 
+### Avaliação do modelo 
 
 A seguir, vamos criar a matriz confusão e calcular a acurácia "na mão", sem usar função específica para isso, a fim de entendermos o procedimento.
 
@@ -713,7 +752,7 @@ caret::confusionMatrix(pred_tbl$pred, pred_tbl$survived )
 
 1. Altere a variávei `threshold` para outros valores entre 0 e 1 e rode o código novamente até as métricas pela função `confusionMatrix` do pacote `caret`. Veja como as me'tricas se comportam. 
 
-## ROC Curve
+### ROC Curve
 
 Veja a curva ROC do modelo estimado.
 
@@ -764,7 +803,7 @@ Por fim, a estimação da AUC (*Area Under the Curve*):
 pROC::auc(roc)
 ```
 
-# Árvore de Decisão
+## Árvore de Decisão
 
 Entre os modelos de aprendizado de máquina mais comuns e mais úteis estão as árvores de decisão. Elas são tão utilizadas porque fornecem ao usuário final uma **fácil interpretação** e desenham uma espécie de **caminho a ser percorrido** para alcançar um determinado objetivo.
 
@@ -812,12 +851,11 @@ Problemas de *overfitting* ocorrem quando um modelo explica situações extremam
 Nestes casos, uma saída é aplicar técnicas de *poda* da árvore. No `R` é possível utilizar a função `prune()` do pacote `rpart`.
 
 
-## Lendo o conjunto de dados do Titanic
+### Lendo o conjunto de dados do Titanic
 
 Vamos buscar o arquivo csv do repositório. Após iremos excluir as variáveis a não serem utilizadas e separar o dataset em treino e teste.
 
 ```{r}
-
 df_titanic_tree <- 
   read_csv("https://gitlab.com/dados/open/raw/master/titanic.csv") %>% 
   mutate_if(is.character, as.factor) %>% 
@@ -840,7 +878,7 @@ Na sequência segue o dicionário dos dados:
 - `fare`: tarifa paga pelo passageiro.
 
 
-## Criando uma árvore de decisão com todo o *dataset*
+### Criando uma árvore de decisão com todo o *dataset*
 
 Primeiro, apenas para fins didáticos, vamos contruir uma árvore de decisão para todo o *dataset*, ou seja, não iremos considerar o processo de *machine learning* de treinar e testar o modelo.
 
@@ -860,7 +898,7 @@ rpart.plot(rtree_fit)
 ```
 
 
-## Divindo em treino e teste
+### Divindo em treino e teste
 
 Agora sim, iremos dividir o conjunto de dados em treino e teste.
 
@@ -889,7 +927,7 @@ rpart.plot(rtree_fit)
 **Exercício**. Troque o seed para outros valores aleatórios e verifique como a estrutura da árvore muda.
 
 
-## Fazendo as predições
+### Fazendo as predições
 
 Aplicando a função `preditc()`.
 
@@ -910,7 +948,7 @@ Pelo pacote `caret`:
 caret::confusionMatrix(pred, data$test$survived)
 ```
 
-## ROC Curve
+### ROC Curve
 
 Veja a curva ROC do modelo estimado.
 
@@ -927,12 +965,12 @@ hchart.roc(roc)
 ```
 
 
-## Fontes
+### Fontes
 
 - Detalhes sobre árvores de decisão no `R`:
   - <http://www.milbo.org/doc/prp.pdf>
 
-# Random Forest
+## Random Forest
 
 Um dos pontos negativos das árvores de decisão é a variância nos seus resultados. Duas árvores treinadas no mesmo conjunto podem apresentar resultados bastante distintos. Com isso, uma *random forest* (ou floresta aleatória) é um grande número de árvores de decisão rodadas em paralelo. 
 
@@ -947,7 +985,7 @@ Os dois mais populares métodos de *ensemble* são *bagging* e *boosting*.<br>
   - **_Bagging_**: treina um grupo de modelos individuais **em paralelo**. Cada modelo é treinado com base em *subsets* aleatórios dos dados.<br>
   - **_Boosting_**: treina um grupo de modelos individuais **de forma sequencial**. Cada modelo é treinado de forma a aprender com os erros feitos pelo modelo anterior. [Fonte](https://towardsdatascience.com/basic-ensemble-learning-random-forest-adaboost-gradient-boosting-step-by-step-explained-95d49d1e2725).
 
-## Exemplo do uso de *random forest* para prever a saída de colaboradores
+### Exemplo do uso de *random forest* para prever a saída de colaboradores
 
 Carregando os pacotes básicos:
 
@@ -1005,7 +1043,7 @@ df_hr_turnover <-
 
 ```
 
-## Dividindo em treino e teste
+### Dividindo em treino e teste
 
 Aqui faremos a divisão do conjunto de dados entre treino e teste.
 
@@ -1019,7 +1057,7 @@ train <- df_hr_turnover %>% dplyr::sample_frac(.70)
 test  <- dplyr::anti_join(df_hr_turnover, train)
 ```
 
-## Modelando as *random forests*
+### Modelando as *random forests*
 
 Iremos utilizar o pacote `ranger`, da linguagem `R `. Este pacote é amplamente utilizado e muito bem implementado. A [documentação](https://www.rdocumentation.org/packages/ranger/versions/0.12.1/topics/ranger) é toda embasada em artigos científicos, o que dá maior credbilidade às funções utilizadas.
 
@@ -1072,7 +1110,7 @@ fit_turnover_rf_prob <-
   )
 ```
 
-## Importância das variáveis
+### Importância das variáveis
 
 No gráfico a seguir as variáveis mais relevantes para realizar as classificações são elencadas. No caso de árvores de decisão (e também *random forests*) o gráfico mostra as variáveis ordenadas por nível de ganho informacional gerado após os splits nos dado (que geram os nós das árvores).
 
@@ -1131,7 +1169,7 @@ ranger::importance_pvalues(fit_turnover_rf_prob) %>%
 
 </div>
 
-## Avaliando a floresta alatória
+### Avaliando a floresta alatória
 
 
 Aplicando a função `preditc()`.
@@ -1161,11 +1199,11 @@ confusionMatrix(pred_class$predictions,
 
 ```
 
-## Considerações
+### Considerações
 
 Este modelo apresenta um problema: uma alta taxa de falso negativo. Ou seja, para um número considerável de colaboradores foi predito que não sairíam da empresa, mas saíram. Além disso, neste caso o custo de um falso negativo é alto!
 
-## Fontes
+### Fontes
 
 - Detalhes sobre *random forest*:
   - <https://towardsdatascience.com/the-random-forest-algorithm-d457d499ffcd>
@@ -1175,7 +1213,7 @@ Este modelo apresenta um problema: uma alta taxa de falso negativo. Ou seja, par
   - <https://rpubs.com/ssindw/295564>
 
 
-# Redes Neurais Artificiais e *Deep Learning*
+## Redes Neurais Artificiais e *Deep Learning*
 
 *Deep learning* é uma forma de aplicação de **redes neurais artificiais (RNA)**, em que há **mais de uma camada** (geralmente são inúmeras) entre a camada de entrada (*input*) e a camada de saída (*output*). É também chamada de ***Deep Neural Network***. 
 
@@ -1410,7 +1448,7 @@ O gráfico acima demonstra como é possível construir uma rede neural bastante 
 
 A definição da quantidade de *hidden layers* ou os seus tamanhos não possuem regras gerais de configuração. Basicamente, a melhor configuração será encontrada por experimentação, utilizando diversas configurações e comparando para as métricas de cada modelo. Por isso que o processo de *grid search* é muito importante para a utilização de redes neurais. Uma vez que as possibilidades de configurações são infinitas (quantidade de camadas e número de neurônios para cada uma), normalmente é feito um levantamento aleatório de inúmeras possibilidades de configurações.
 
-## Funções de Ativação  
+### Funções de Ativação  
 
 Até esta parte do documento, os exemplos foram apresentados utilizando função de ativação logística. Porém, a função de ativação mais utilizada em *deep learning* chama-se ReLU (*Rectified Linear Unit*), ou simplesmente *Rectifier*. Para ser possível explicar a função *Rectifier* é preciso explicar primeiramente a função *Tanh*, que é base para a *Rectifier*, bem como as razões pelas quais não é recomendado utliizar a função logística em *deep learning*. 
 
@@ -1454,7 +1492,7 @@ Resumindo, a função mais comum em termos de uso e de implementação nos *fram
 
 Veja mais sobre as funções de ativação [neste link](https://towardsdatascience.com/analyzing-different-types-of-activation-functions-in-neural-networks-which-one-to-prefer-e11649256209).
 
-## Termos Úteis para *Setup* de *Deep Neural Networks*
+### Termos Úteis para *Setup* de *Deep Neural Networks*
 
 Além da função de ativação, existem diversos parâmetros de *setup* que precisam ser definidos para rodar um *deep learning*. A maioria dos *frameworks* já possuem parâmetros *default* que atendem a maior parte dos casos. Porém, para casos em que há necessidade de ajustes (por exemplo, pelo tempo excessivo de processamento), seguem as descrições dos principais parâmetros:
 
@@ -1464,7 +1502,7 @@ Além da função de ativação, existem diversos parâmetros de *setup* que pre
 * `Iterações`: é o número de *batchs* necessários para completar uma época (*epoch*). 
 
 
-## Exemplo de Redes Neurais. Lendo o conjunto de dados do Titanic
+### Exemplo de Redes Neurais. Lendo o conjunto de dados do Titanic
 
 Vamos buscar o arquivo csv do repositório. Após iremos excluir as variáveis a não serem utilizadas e separar o dataset em treino e teste.
 
@@ -1498,7 +1536,7 @@ Na sequência segue o dicionário dos dados:
 - `fare`: tarifa paga pelo passageiro.
 
 
-### Criando `dummies` (binarização) para fatores (variáveis categóricas) 
+#### Criando `dummies` (binarização) para fatores (variáveis categóricas) 
 
 Os algortimos de redes neurais não trabalham com fatores (variáveis categóricas) diretamente. O passo que é realizado para que o algoritmo consiga trabalhar é criar `n` variáveis binárias (chamadas de `dummies`). Teremos então que cada `dummy` representará um nível de uma variável categórica. 
 
@@ -1516,7 +1554,7 @@ df_titanic <-
 ```
 
 
-### Divindo em treino e teste 
+#### Divindo em treino e teste 
  
 Agora sim, iremos dividir o conjunto de dados em treino e teste.
 
@@ -1530,7 +1568,7 @@ train <- df_titanic %>% sample_frac(.70)
 test  <- anti_join(df_titanic, train, by = 'passengerid')
 ```
 
-### Rodando os modelos
+#### Rodando os modelos
 
 ```{r}
 library(neuralnet)
@@ -1706,9 +1744,7 @@ O grande *trade-off* das redes neurais (e principalmente das *deep learnings*, q
 <!--# *Deep Learning* -->
 
 
-# Apêndice
-
-## Avaliação de modelos
+## Avaliação de modelos supervisionados
 
 É comum que na prática sejam aplicados **modelos com variadas parametrizações** e também **diferentes famílias de modelos** sobre um mesmo conjunto de dados de treino.
 
@@ -1873,8 +1909,6 @@ RMSE (*Root Mean Squared Error*) representa a raiz da média dos quadrados dos e
 Por utilizar os quadrados dos erros, **valores grandes são penalizados**, elevando o erro e piorando a avaliação do modelo.
 
 $$ RMSE = \sqrt{ \frac{1}{n} \sum^n_{j=1} ( y_j - \hat{y}_j )^2 } $$
-
-
 
 **R-quadrado (ou coeficiente de determinação)**
 

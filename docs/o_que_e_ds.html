@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -211,7 +231,7 @@ ul.task-list li input[type="checkbox"] {
 <p>Para auxiliar na definição do termo, vamos ver o que alguns autores e sites especializados dizem a respeito de ciência de dados:</p>
 <ul>
 <li><p>“A ciência de dados é uma disciplina multifacetada, que abrange [aprendizado de máquina] e outros processos analíticos, estatísticas e ramos relacionados da matemática. Cada vez mais se utiliza da computação científica de alto desempenho, tudo isso para extrair informações dos dados e usar essas informações encontradas para contar histórias.” (Matthew Mayo, KDnuggets).</p></li>
-<li><p>“<em>Data science</em> envolve princípios, processos e técnicas para compreender fenômenos por meio da análise (automatizada) de dados.” (PROVOST e FAWCETT, p.&nbsp;4, 2016).</p></li>
+<li><p>“<em>Data science</em> envolve princípios, processos e técnicas para compreender fenômenos por meio da análise (automatizada) de dados.” <span class="citation" data-cites="provost2016data">(<a href="references.html#ref-provost2016data" role="doc-biblioref">Provost, Fawcett, and Boscato 2016, 4</a>)</span>.</p></li>
 <li><p>“A ciência de dados é um conjunto multidisciplinar de inferência de dados, desenvolvimento de algoritmos e tecnologia para resolver problemas analiticamente complexos. No centro estão os dados: um grande número de informações brutas, transmitidas e armazenadas em data warehouses corporativos. […] A ciência de dados é basicamente o uso desses dados de maneiras criativas para gerar valor aos negócios.” (Divya Singh, Data Science Central).</p></li>
 </ul>
 <p>Definição que acredito:</p>
@@ -239,7 +259,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="perfil-e-papel-do-cientista-de-dados" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="perfil-e-papel-do-cientista-de-dados"><span class="header-section-number">2.3</span> Perfil e papel do cientista de dados</h2>
 <p>O objetivo aqui é de trazer uma base do perfil e também do papel do cientista de dados nas organizações. Claro que dependendo da companhia a opinião pode divergir em alguns aspectos. Por isso, meu objetivo aqui não é focar em habilidades técnicas exigidas, nem tampouco em linguagens de programação ou tecnologias.</p>
-<p>Inicialmente, apresento uma citação de Provost e Fawcett (2016, p.&nbsp;333) que resume muito bem o processo de ciência de dados no ponto de vista do cientista de dados:</p>
+<p>Inicialmente, apresento uma citação de <span class="citation" data-cites="provost2016data">Provost, Fawcett, and Boscato (<a href="references.html#ref-provost2016data" role="doc-biblioref">2016, 333</a>)</span> que resume muito bem o processo de ciência de dados no ponto de vista do cientista de dados:</p>
 <blockquote class="blockquote">
 <p>A prática de <em>data science</em> pode ser melhor descrita como uma combinação de <strong>engenharia analítica e exploração</strong>. O negócio apresenta um problema que gostaríamos de resolver. Raramente, o problema de negócio é, de modo direto, uma de nossas tarefas básicas de mineração de dados. <strong>Decompomos o problema em subtarefas</strong> que achamos que podemos resolver, geralmente, começando com as ferramentas existentes. Para algumas dessas tarefas podemos não saber o quão bem podemos resolvê-las, por isso, temos que explorar os dados e fazer uma avaliação para verificar. Se isso não for possível, <strong>poderemos ter de tentar algo completamente diferente</strong>. No processo, <strong>podemos descobrir o conhecimento</strong> que vai nos ajudar a resolver o problema que queremos ou podemos descobrir algo inesperado que nos leva a outros sucessos importantes.</p>
 </blockquote>
@@ -431,6 +451,11 @@ ul.task-list li input[type="checkbox"] {
 <p>PROVOST, F., FAWCETT, T. (2016). Data science para negócios: o que você precisa saber sobre mineração de dados e pensamento analítico de dados. Rio de Janeiro: Alta Books.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-provost2016data" class="csl-entry" role="listitem">
+Provost, F., T. Fawcett, and M. Boscato. 2016. <em>Data Science Para Neg<span>ó</span>cios</em>. ALTA BOOKS. <a href="https://books.google.com.br/books?id=c4lAvgAACAAJ">https://books.google.com.br/books?id=c4lAvgAACAAJ</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
