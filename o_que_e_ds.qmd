@@ -8,7 +8,7 @@ Para auxiliar na definição do termo, vamos ver o que alguns autores e sites es
 
 -   "A ciência de dados é uma disciplina multifacetada, que abrange \[aprendizado de máquina\] e outros processos analíticos, estatísticas e ramos relacionados da matemática. Cada vez mais se utiliza da computação científica de alto desempenho, tudo isso para extrair informações dos dados e usar essas informações encontradas para contar histórias." (Matthew Mayo, KDnuggets).
 
--   "*Data science* envolve princípios, processos e técnicas para compreender fenômenos por meio da análise (automatizada) de dados." (PROVOST e FAWCETT, p. 4, 2016).
+-   "*Data science* envolve princípios, processos e técnicas para compreender fenômenos por meio da análise (automatizada) de dados." [@provost2016data  pp. 4].
 
 -   "A ciência de dados é um conjunto multidisciplinar de inferência de dados, desenvolvimento de algoritmos e tecnologia para resolver problemas analiticamente complexos. No centro estão os dados: um grande número de informações brutas, transmitidas e armazenadas em data warehouses corporativos. \[...\] A ciência de dados é basicamente o uso desses dados de maneiras criativas para gerar valor aos negócios." (Divya Singh, Data Science Central).
 
@@ -46,7 +46,7 @@ Sendo assim, o termo *big data* saiu um pouco de enfoque, dando lugar à multidi
 
 O objetivo aqui é de trazer uma base do perfil e também do papel do cientista de dados nas organizações. Claro que dependendo da companhia a opinião pode divergir em alguns aspectos. Por isso, meu objetivo aqui não é focar em habilidades técnicas exigidas, nem tampouco em linguagens de programação ou tecnologias.
 
-Inicialmente, apresento uma citação de Provost e Fawcett (2016, p. 333) que resume muito bem o processo de ciência de dados no ponto de vista do cientista de dados:
+Inicialmente, apresento uma citação de @provost2016data[pp. 333]  que resume muito bem o processo de ciência de dados no ponto de vista do cientista de dados:
 
 > A prática de *data science* pode ser melhor descrita como uma combinação de **engenharia analítica e exploração**. O negócio apresenta um problema que gostaríamos de resolver. Raramente, o problema de negócio é, de modo direto, uma de nossas tarefas básicas de mineração de dados. **Decompomos o problema em subtarefas** que achamos que podemos resolver, geralmente, começando com as ferramentas existentes. Para algumas dessas tarefas podemos não saber o quão bem podemos resolvê-las, por isso, temos que explorar os dados e fazer uma avaliação para verificar. Se isso não for possível, **poderemos ter de tentar algo completamente diferente**. No processo, **podemos descobrir o conhecimento** que vai nos ajudar a resolver o problema que queremos ou podemos descobrir algo inesperado que nos leva a outros sucessos importantes.
 
