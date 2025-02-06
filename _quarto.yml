@@ -10,6 +10,7 @@ book:
     - index.qmd
     - intro.qmd
     - o_que_e_ds.qmd
+    - qualidade_de_dados.qmd
     - teste_de_hipoteses.qmd
     - machine_learning.qmd
     - references.qmd

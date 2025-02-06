@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>4&nbsp; Machine Learning para negócios – O manual do Cientista de Dados</title>
+<title>5&nbsp; Machine Learning para negócios – O manual do Cientista de Dados</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -195,7 +195,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./machine_learning.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title"><em>Machine Learning</em> para negócios</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./machine_learning.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title"><em>Machine Learning</em> para negócios</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -240,14 +240,20 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./qualidade_de_dados.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Qualidade de Dados</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./teste_de_hipoteses.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Análise de Hipóteses</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Análise de Hipóteses</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./machine_learning.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title"><em>Machine Learning</em> para negócios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title"><em>Machine Learning</em> para negócios</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -266,76 +272,76 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#o-que-é-aprendizado-de-máquina" id="toc-o-que-é-aprendizado-de-máquina" class="nav-link active" data-scroll-target="#o-que-é-aprendizado-de-máquina"><span class="header-section-number">4.1</span> O que é aprendizado de máquina?</a>
+  <li><a href="#o-que-é-aprendizado-de-máquina" id="toc-o-que-é-aprendizado-de-máquina" class="nav-link active" data-scroll-target="#o-que-é-aprendizado-de-máquina"><span class="header-section-number">5.1</span> O que é aprendizado de máquina?</a>
   <ul class="collapse">
-  <li><a href="#como-machine-learning-gera-valor-nos-negócios" id="toc-como-machine-learning-gera-valor-nos-negócios" class="nav-link" data-scroll-target="#como-machine-learning-gera-valor-nos-negócios"><span class="header-section-number">4.1.1</span> Como <em>machine learning</em> gera valor nos negócios?</a></li>
-  <li><a href="#aprendizado-de-máquina-supervisionado" id="toc-aprendizado-de-máquina-supervisionado" class="nav-link" data-scroll-target="#aprendizado-de-máquina-supervisionado"><span class="header-section-number">4.1.2</span> Aprendizado de máquina supervisionado</a></li>
-  <li><a href="#aprendizado-de-máquina-não-supervisionado" id="toc-aprendizado-de-máquina-não-supervisionado" class="nav-link" data-scroll-target="#aprendizado-de-máquina-não-supervisionado"><span class="header-section-number">4.1.3</span> Aprendizado de máquina não supervisionado</a></li>
+  <li><a href="#como-machine-learning-gera-valor-nos-negócios" id="toc-como-machine-learning-gera-valor-nos-negócios" class="nav-link" data-scroll-target="#como-machine-learning-gera-valor-nos-negócios"><span class="header-section-number">5.1.1</span> Como <em>machine learning</em> gera valor nos negócios?</a></li>
+  <li><a href="#aprendizado-de-máquina-supervisionado" id="toc-aprendizado-de-máquina-supervisionado" class="nav-link" data-scroll-target="#aprendizado-de-máquina-supervisionado"><span class="header-section-number">5.1.2</span> Aprendizado de máquina supervisionado</a></li>
+  <li><a href="#aprendizado-de-máquina-não-supervisionado" id="toc-aprendizado-de-máquina-não-supervisionado" class="nav-link" data-scroll-target="#aprendizado-de-máquina-não-supervisionado"><span class="header-section-number">5.1.3</span> Aprendizado de máquina não supervisionado</a></li>
   </ul></li>
-  <li><a href="#aprendizado-de-máquina-não-supervisionado-1" id="toc-aprendizado-de-máquina-não-supervisionado-1" class="nav-link" data-scroll-target="#aprendizado-de-máquina-não-supervisionado-1"><span class="header-section-number">5</span> Aprendizado de máquina não supervisionado</a>
+  <li><a href="#aprendizado-de-máquina-não-supervisionado-1" id="toc-aprendizado-de-máquina-não-supervisionado-1" class="nav-link" data-scroll-target="#aprendizado-de-máquina-não-supervisionado-1"><span class="header-section-number">6</span> Aprendizado de máquina não supervisionado</a>
   <ul class="collapse">
-  <li><a href="#clustering" id="toc-clustering" class="nav-link" data-scroll-target="#clustering"><span class="header-section-number">5.1</span> Clustering</a>
+  <li><a href="#clustering" id="toc-clustering" class="nav-link" data-scroll-target="#clustering"><span class="header-section-number">6.1</span> Clustering</a>
   <ul class="collapse">
-  <li><a href="#aplicando-k-means-a-dados-gerados-aleatoriamente" id="toc-aplicando-k-means-a-dados-gerados-aleatoriamente" class="nav-link" data-scroll-target="#aplicando-k-means-a-dados-gerados-aleatoriamente"><span class="header-section-number">5.1.1</span> Aplicando <em>K-Means</em> a dados gerados aleatoriamente</a></li>
-  <li><a href="#aplicando-k-means-para-o-iris-dataset" id="toc-aplicando-k-means-para-o-iris-dataset" class="nav-link" data-scroll-target="#aplicando-k-means-para-o-iris-dataset"><span class="header-section-number">5.1.2</span> Aplicando <em>K-Means</em> para o <em>Iris dataset</em></a></li>
-  <li><a href="#verificação-dos-resultados" id="toc-verificação-dos-resultados" class="nav-link" data-scroll-target="#verificação-dos-resultados"><span class="header-section-number">5.1.3</span> Verificação dos resultados</a></li>
-  <li><a href="#fontes" id="toc-fontes" class="nav-link" data-scroll-target="#fontes"><span class="header-section-number">5.1.4</span> Fontes</a></li>
+  <li><a href="#aplicando-k-means-a-dados-gerados-aleatoriamente" id="toc-aplicando-k-means-a-dados-gerados-aleatoriamente" class="nav-link" data-scroll-target="#aplicando-k-means-a-dados-gerados-aleatoriamente"><span class="header-section-number">6.1.1</span> Aplicando <em>K-Means</em> a dados gerados aleatoriamente</a></li>
+  <li><a href="#aplicando-k-means-para-o-iris-dataset" id="toc-aplicando-k-means-para-o-iris-dataset" class="nav-link" data-scroll-target="#aplicando-k-means-para-o-iris-dataset"><span class="header-section-number">6.1.2</span> Aplicando <em>K-Means</em> para o <em>Iris dataset</em></a></li>
+  <li><a href="#verificação-dos-resultados" id="toc-verificação-dos-resultados" class="nav-link" data-scroll-target="#verificação-dos-resultados"><span class="header-section-number">6.1.3</span> Verificação dos resultados</a></li>
+  <li><a href="#fontes" id="toc-fontes" class="nav-link" data-scroll-target="#fontes"><span class="header-section-number">6.1.4</span> Fontes</a></li>
   </ul></li>
-  <li><a href="#principal-component-analysis-pca" id="toc-principal-component-analysis-pca" class="nav-link" data-scroll-target="#principal-component-analysis-pca"><span class="header-section-number">5.2</span> <em>Principal Component Analysis</em> (PCA)</a>
+  <li><a href="#principal-component-analysis-pca" id="toc-principal-component-analysis-pca" class="nav-link" data-scroll-target="#principal-component-analysis-pca"><span class="header-section-number">6.2</span> <em>Principal Component Analysis</em> (PCA)</a>
   <ul class="collapse">
-  <li><a href="#aplicando-pca-no-conjunto-de-dados-mtcars" id="toc-aplicando-pca-no-conjunto-de-dados-mtcars" class="nav-link" data-scroll-target="#aplicando-pca-no-conjunto-de-dados-mtcars"><span class="header-section-number">5.2.1</span> Aplicando PCA no conjunto de dados <em>mtcars</em></a></li>
-  <li><a href="#visualizando-graficamente-os-resultados-do-pca" id="toc-visualizando-graficamente-os-resultados-do-pca" class="nav-link" data-scroll-target="#visualizando-graficamente-os-resultados-do-pca"><span class="header-section-number">5.2.2</span> Visualizando graficamente os resultados do PCA</a></li>
-  <li><a href="#considerações" id="toc-considerações" class="nav-link" data-scroll-target="#considerações"><span class="header-section-number">5.2.3</span> Considerações</a></li>
+  <li><a href="#aplicando-pca-no-conjunto-de-dados-mtcars" id="toc-aplicando-pca-no-conjunto-de-dados-mtcars" class="nav-link" data-scroll-target="#aplicando-pca-no-conjunto-de-dados-mtcars"><span class="header-section-number">6.2.1</span> Aplicando PCA no conjunto de dados <em>mtcars</em></a></li>
+  <li><a href="#visualizando-graficamente-os-resultados-do-pca" id="toc-visualizando-graficamente-os-resultados-do-pca" class="nav-link" data-scroll-target="#visualizando-graficamente-os-resultados-do-pca"><span class="header-section-number">6.2.2</span> Visualizando graficamente os resultados do PCA</a></li>
+  <li><a href="#considerações" id="toc-considerações" class="nav-link" data-scroll-target="#considerações"><span class="header-section-number">6.2.3</span> Considerações</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#aprendizado-de-máquina-supervisionado-1" id="toc-aprendizado-de-máquina-supervisionado-1" class="nav-link" data-scroll-target="#aprendizado-de-máquina-supervisionado-1"><span class="header-section-number">6</span> Aprendizado de máquina supervisionado</a>
+  <li><a href="#aprendizado-de-máquina-supervisionado-1" id="toc-aprendizado-de-máquina-supervisionado-1" class="nav-link" data-scroll-target="#aprendizado-de-máquina-supervisionado-1"><span class="header-section-number">7</span> Aprendizado de máquina supervisionado</a>
   <ul class="collapse">
-  <li><a href="#regressão-linear" id="toc-regressão-linear" class="nav-link" data-scroll-target="#regressão-linear"><span class="header-section-number">6.1</span> Regressão linear</a>
+  <li><a href="#regressão-linear" id="toc-regressão-linear" class="nav-link" data-scroll-target="#regressão-linear"><span class="header-section-number">7.1</span> Regressão linear</a>
   <ul class="collapse">
-  <li><a href="#exemplo-velocidade-contra-tempo-para-um-carro-parar-dados-de-1920s" id="toc-exemplo-velocidade-contra-tempo-para-um-carro-parar-dados-de-1920s" class="nav-link" data-scroll-target="#exemplo-velocidade-contra-tempo-para-um-carro-parar-dados-de-1920s"><span class="header-section-number">6.1.1</span> Exemplo: velocidade contra tempo para um carro parar (dados de 1920’s)</a></li>
+  <li><a href="#exemplo-velocidade-contra-tempo-para-um-carro-parar-dados-de-1920s" id="toc-exemplo-velocidade-contra-tempo-para-um-carro-parar-dados-de-1920s" class="nav-link" data-scroll-target="#exemplo-velocidade-contra-tempo-para-um-carro-parar-dados-de-1920s"><span class="header-section-number">7.1.1</span> Exemplo: velocidade contra tempo para um carro parar (dados de 1920’s)</a></li>
   </ul></li>
-  <li><a href="#regressão-logística" id="toc-regressão-logística" class="nav-link" data-scroll-target="#regressão-logística"><span class="header-section-number">6.2</span> Regressão Logística</a>
+  <li><a href="#regressão-logística" id="toc-regressão-logística" class="nav-link" data-scroll-target="#regressão-logística"><span class="header-section-number">7.2</span> Regressão Logística</a>
   <ul class="collapse">
-  <li><a href="#exemplo-regressão-logística-com-dados-do-naufrágio-do-titanic" id="toc-exemplo-regressão-logística-com-dados-do-naufrágio-do-titanic" class="nav-link" data-scroll-target="#exemplo-regressão-logística-com-dados-do-naufrágio-do-titanic"><span class="header-section-number">6.2.1</span> Exemplo: regressão logística com dados do naufrágio do Titanic</a></li>
-  <li><a href="#dividindo-o-dataset-em-treino-e-teste" id="toc-dividindo-o-dataset-em-treino-e-teste" class="nav-link" data-scroll-target="#dividindo-o-dataset-em-treino-e-teste"><span class="header-section-number">6.2.2</span> Dividindo o dataset em treino e teste</a></li>
-  <li><a href="#aplicando-o-modelo-de-regressão-logística" id="toc-aplicando-o-modelo-de-regressão-logística" class="nav-link" data-scroll-target="#aplicando-o-modelo-de-regressão-logística"><span class="header-section-number">6.2.3</span> Aplicando o modelo de regressão logística</a></li>
-  <li><a href="#realizando-as-predições" id="toc-realizando-as-predições" class="nav-link" data-scroll-target="#realizando-as-predições"><span class="header-section-number">6.2.4</span> Realizando as predições</a></li>
-  <li><a href="#avaliação-do-modelo" id="toc-avaliação-do-modelo" class="nav-link" data-scroll-target="#avaliação-do-modelo"><span class="header-section-number">6.2.5</span> Avaliação do modelo</a></li>
-  <li><a href="#roc-curve" id="toc-roc-curve" class="nav-link" data-scroll-target="#roc-curve"><span class="header-section-number">6.2.6</span> ROC Curve</a></li>
+  <li><a href="#exemplo-regressão-logística-com-dados-do-naufrágio-do-titanic" id="toc-exemplo-regressão-logística-com-dados-do-naufrágio-do-titanic" class="nav-link" data-scroll-target="#exemplo-regressão-logística-com-dados-do-naufrágio-do-titanic"><span class="header-section-number">7.2.1</span> Exemplo: regressão logística com dados do naufrágio do Titanic</a></li>
+  <li><a href="#dividindo-o-dataset-em-treino-e-teste" id="toc-dividindo-o-dataset-em-treino-e-teste" class="nav-link" data-scroll-target="#dividindo-o-dataset-em-treino-e-teste"><span class="header-section-number">7.2.2</span> Dividindo o dataset em treino e teste</a></li>
+  <li><a href="#aplicando-o-modelo-de-regressão-logística" id="toc-aplicando-o-modelo-de-regressão-logística" class="nav-link" data-scroll-target="#aplicando-o-modelo-de-regressão-logística"><span class="header-section-number">7.2.3</span> Aplicando o modelo de regressão logística</a></li>
+  <li><a href="#realizando-as-predições" id="toc-realizando-as-predições" class="nav-link" data-scroll-target="#realizando-as-predições"><span class="header-section-number">7.2.4</span> Realizando as predições</a></li>
+  <li><a href="#avaliação-do-modelo" id="toc-avaliação-do-modelo" class="nav-link" data-scroll-target="#avaliação-do-modelo"><span class="header-section-number">7.2.5</span> Avaliação do modelo</a></li>
+  <li><a href="#roc-curve" id="toc-roc-curve" class="nav-link" data-scroll-target="#roc-curve"><span class="header-section-number">7.2.6</span> ROC Curve</a></li>
   </ul></li>
-  <li><a href="#árvore-de-decisão" id="toc-árvore-de-decisão" class="nav-link" data-scroll-target="#árvore-de-decisão"><span class="header-section-number">6.3</span> Árvore de Decisão</a>
+  <li><a href="#árvore-de-decisão" id="toc-árvore-de-decisão" class="nav-link" data-scroll-target="#árvore-de-decisão"><span class="header-section-number">7.3</span> Árvore de Decisão</a>
   <ul class="collapse">
   <li><a href="#árvores-de-decisão-e-overfitting" id="toc-árvores-de-decisão-e-overfitting" class="nav-link" data-scroll-target="#árvores-de-decisão-e-overfitting">Árvores de decisão e <em>overfitting</em></a></li>
-  <li><a href="#lendo-o-conjunto-de-dados-do-titanic" id="toc-lendo-o-conjunto-de-dados-do-titanic" class="nav-link" data-scroll-target="#lendo-o-conjunto-de-dados-do-titanic"><span class="header-section-number">6.3.1</span> Lendo o conjunto de dados do Titanic</a></li>
-  <li><a href="#criando-uma-árvore-de-decisão-com-todo-o-dataset" id="toc-criando-uma-árvore-de-decisão-com-todo-o-dataset" class="nav-link" data-scroll-target="#criando-uma-árvore-de-decisão-com-todo-o-dataset"><span class="header-section-number">6.3.2</span> Criando uma árvore de decisão com todo o <em>dataset</em></a></li>
-  <li><a href="#divindo-em-treino-e-teste" id="toc-divindo-em-treino-e-teste" class="nav-link" data-scroll-target="#divindo-em-treino-e-teste"><span class="header-section-number">6.3.3</span> Divindo em treino e teste</a></li>
-  <li><a href="#fazendo-as-predições" id="toc-fazendo-as-predições" class="nav-link" data-scroll-target="#fazendo-as-predições"><span class="header-section-number">6.3.4</span> Fazendo as predições</a></li>
-  <li><a href="#roc-curve-1" id="toc-roc-curve-1" class="nav-link" data-scroll-target="#roc-curve-1"><span class="header-section-number">6.3.5</span> ROC Curve</a></li>
-  <li><a href="#fontes-1" id="toc-fontes-1" class="nav-link" data-scroll-target="#fontes-1"><span class="header-section-number">6.3.6</span> Fontes</a></li>
+  <li><a href="#lendo-o-conjunto-de-dados-do-titanic" id="toc-lendo-o-conjunto-de-dados-do-titanic" class="nav-link" data-scroll-target="#lendo-o-conjunto-de-dados-do-titanic"><span class="header-section-number">7.3.1</span> Lendo o conjunto de dados do Titanic</a></li>
+  <li><a href="#criando-uma-árvore-de-decisão-com-todo-o-dataset" id="toc-criando-uma-árvore-de-decisão-com-todo-o-dataset" class="nav-link" data-scroll-target="#criando-uma-árvore-de-decisão-com-todo-o-dataset"><span class="header-section-number">7.3.2</span> Criando uma árvore de decisão com todo o <em>dataset</em></a></li>
+  <li><a href="#divindo-em-treino-e-teste" id="toc-divindo-em-treino-e-teste" class="nav-link" data-scroll-target="#divindo-em-treino-e-teste"><span class="header-section-number">7.3.3</span> Divindo em treino e teste</a></li>
+  <li><a href="#fazendo-as-predições" id="toc-fazendo-as-predições" class="nav-link" data-scroll-target="#fazendo-as-predições"><span class="header-section-number">7.3.4</span> Fazendo as predições</a></li>
+  <li><a href="#roc-curve-1" id="toc-roc-curve-1" class="nav-link" data-scroll-target="#roc-curve-1"><span class="header-section-number">7.3.5</span> ROC Curve</a></li>
+  <li><a href="#fontes-1" id="toc-fontes-1" class="nav-link" data-scroll-target="#fontes-1"><span class="header-section-number">7.3.6</span> Fontes</a></li>
   </ul></li>
-  <li><a href="#random-forest" id="toc-random-forest" class="nav-link" data-scroll-target="#random-forest"><span class="header-section-number">6.4</span> Random Forest</a>
+  <li><a href="#random-forest" id="toc-random-forest" class="nav-link" data-scroll-target="#random-forest"><span class="header-section-number">7.4</span> Random Forest</a>
   <ul class="collapse">
-  <li><a href="#exemplo-do-uso-de-random-forest-para-prever-a-saída-de-colaboradores" id="toc-exemplo-do-uso-de-random-forest-para-prever-a-saída-de-colaboradores" class="nav-link" data-scroll-target="#exemplo-do-uso-de-random-forest-para-prever-a-saída-de-colaboradores"><span class="header-section-number">6.4.1</span> Exemplo do uso de <em>random forest</em> para prever a saída de colaboradores</a></li>
-  <li><a href="#dividindo-em-treino-e-teste" id="toc-dividindo-em-treino-e-teste" class="nav-link" data-scroll-target="#dividindo-em-treino-e-teste"><span class="header-section-number">6.4.2</span> Dividindo em treino e teste</a></li>
-  <li><a href="#modelando-as-random-forests" id="toc-modelando-as-random-forests" class="nav-link" data-scroll-target="#modelando-as-random-forests"><span class="header-section-number">6.4.3</span> Modelando as <em>random forests</em></a></li>
-  <li><a href="#importância-das-variáveis" id="toc-importância-das-variáveis" class="nav-link" data-scroll-target="#importância-das-variáveis"><span class="header-section-number">6.4.4</span> Importância das variáveis</a></li>
-  <li><a href="#avaliando-a-floresta-alatória" id="toc-avaliando-a-floresta-alatória" class="nav-link" data-scroll-target="#avaliando-a-floresta-alatória"><span class="header-section-number">6.4.5</span> Avaliando a floresta alatória</a></li>
-  <li><a href="#considerações-1" id="toc-considerações-1" class="nav-link" data-scroll-target="#considerações-1"><span class="header-section-number">6.4.6</span> Considerações</a></li>
-  <li><a href="#fontes-2" id="toc-fontes-2" class="nav-link" data-scroll-target="#fontes-2"><span class="header-section-number">6.4.7</span> Fontes</a></li>
+  <li><a href="#exemplo-do-uso-de-random-forest-para-prever-a-saída-de-colaboradores" id="toc-exemplo-do-uso-de-random-forest-para-prever-a-saída-de-colaboradores" class="nav-link" data-scroll-target="#exemplo-do-uso-de-random-forest-para-prever-a-saída-de-colaboradores"><span class="header-section-number">7.4.1</span> Exemplo do uso de <em>random forest</em> para prever a saída de colaboradores</a></li>
+  <li><a href="#dividindo-em-treino-e-teste" id="toc-dividindo-em-treino-e-teste" class="nav-link" data-scroll-target="#dividindo-em-treino-e-teste"><span class="header-section-number">7.4.2</span> Dividindo em treino e teste</a></li>
+  <li><a href="#modelando-as-random-forests" id="toc-modelando-as-random-forests" class="nav-link" data-scroll-target="#modelando-as-random-forests"><span class="header-section-number">7.4.3</span> Modelando as <em>random forests</em></a></li>
+  <li><a href="#importância-das-variáveis" id="toc-importância-das-variáveis" class="nav-link" data-scroll-target="#importância-das-variáveis"><span class="header-section-number">7.4.4</span> Importância das variáveis</a></li>
+  <li><a href="#avaliando-a-floresta-alatória" id="toc-avaliando-a-floresta-alatória" class="nav-link" data-scroll-target="#avaliando-a-floresta-alatória"><span class="header-section-number">7.4.5</span> Avaliando a floresta alatória</a></li>
+  <li><a href="#considerações-1" id="toc-considerações-1" class="nav-link" data-scroll-target="#considerações-1"><span class="header-section-number">7.4.6</span> Considerações</a></li>
+  <li><a href="#fontes-2" id="toc-fontes-2" class="nav-link" data-scroll-target="#fontes-2"><span class="header-section-number">7.4.7</span> Fontes</a></li>
   </ul></li>
-  <li><a href="#redes-neurais-artificiais-e-deep-learning" id="toc-redes-neurais-artificiais-e-deep-learning" class="nav-link" data-scroll-target="#redes-neurais-artificiais-e-deep-learning"><span class="header-section-number">6.5</span> Redes Neurais Artificiais e <em>Deep Learning</em></a>
+  <li><a href="#redes-neurais-artificiais-e-deep-learning" id="toc-redes-neurais-artificiais-e-deep-learning" class="nav-link" data-scroll-target="#redes-neurais-artificiais-e-deep-learning"><span class="header-section-number">7.5</span> Redes Neurais Artificiais e <em>Deep Learning</em></a>
   <ul class="collapse">
   <li><a href="#conceito-de-redes-neurais-artificiais" id="toc-conceito-de-redes-neurais-artificiais" class="nav-link" data-scroll-target="#conceito-de-redes-neurais-artificiais">Conceito de Redes Neurais Artificiais</a></li>
   <li><a href="#como-funcionam-as-redes-neurais" id="toc-como-funcionam-as-redes-neurais" class="nav-link" data-scroll-target="#como-funcionam-as-redes-neurais">Como Funcionam as Redes Neurais?</a></li>
-  <li><a href="#funções-de-ativação" id="toc-funções-de-ativação" class="nav-link" data-scroll-target="#funções-de-ativação"><span class="header-section-number">6.5.1</span> Funções de Ativação</a></li>
-  <li><a href="#termos-úteis-para-setup-de-deep-neural-networks" id="toc-termos-úteis-para-setup-de-deep-neural-networks" class="nav-link" data-scroll-target="#termos-úteis-para-setup-de-deep-neural-networks"><span class="header-section-number">6.5.2</span> Termos Úteis para <em>Setup</em> de <em>Deep Neural Networks</em></a></li>
-  <li><a href="#exemplo-de-redes-neurais.-lendo-o-conjunto-de-dados-do-titanic" id="toc-exemplo-de-redes-neurais.-lendo-o-conjunto-de-dados-do-titanic" class="nav-link" data-scroll-target="#exemplo-de-redes-neurais.-lendo-o-conjunto-de-dados-do-titanic"><span class="header-section-number">6.5.3</span> Exemplo de Redes Neurais. Lendo o conjunto de dados do Titanic</a></li>
-  <li><a href="#avaliação-dos-modelos" id="toc-avaliação-dos-modelos" class="nav-link" data-scroll-target="#avaliação-dos-modelos"><span class="header-section-number">6.5.4</span> Avaliação dos modelos</a></li>
-  <li><a href="#modelo-2---rede-neural-com-diversos-neurônios-e-2-hidden-layers" id="toc-modelo-2---rede-neural-com-diversos-neurônios-e-2-hidden-layers" class="nav-link" data-scroll-target="#modelo-2---rede-neural-com-diversos-neurônios-e-2-hidden-layers"><span class="header-section-number">6.5.5</span> Modelo 2 - Rede neural com diversos neurônios e 2 <em>hidden layers</em></a></li>
-  <li><a href="#comparando-a-curva-roc-dos-dois-modelos" id="toc-comparando-a-curva-roc-dos-dois-modelos" class="nav-link" data-scroll-target="#comparando-a-curva-roc-dos-dois-modelos"><span class="header-section-number">6.5.6</span> Comparando a curva ROC dos dois modelos</a></li>
-  <li><a href="#considerações-2" id="toc-considerações-2" class="nav-link" data-scroll-target="#considerações-2"><span class="header-section-number">6.5.7</span> Considerações</a></li>
+  <li><a href="#funções-de-ativação" id="toc-funções-de-ativação" class="nav-link" data-scroll-target="#funções-de-ativação"><span class="header-section-number">7.5.1</span> Funções de Ativação</a></li>
+  <li><a href="#termos-úteis-para-setup-de-deep-neural-networks" id="toc-termos-úteis-para-setup-de-deep-neural-networks" class="nav-link" data-scroll-target="#termos-úteis-para-setup-de-deep-neural-networks"><span class="header-section-number">7.5.2</span> Termos Úteis para <em>Setup</em> de <em>Deep Neural Networks</em></a></li>
+  <li><a href="#exemplo-de-redes-neurais.-lendo-o-conjunto-de-dados-do-titanic" id="toc-exemplo-de-redes-neurais.-lendo-o-conjunto-de-dados-do-titanic" class="nav-link" data-scroll-target="#exemplo-de-redes-neurais.-lendo-o-conjunto-de-dados-do-titanic"><span class="header-section-number">7.5.3</span> Exemplo de Redes Neurais. Lendo o conjunto de dados do Titanic</a></li>
+  <li><a href="#avaliação-dos-modelos" id="toc-avaliação-dos-modelos" class="nav-link" data-scroll-target="#avaliação-dos-modelos"><span class="header-section-number">7.5.4</span> Avaliação dos modelos</a></li>
+  <li><a href="#modelo-2---rede-neural-com-diversos-neurônios-e-2-hidden-layers" id="toc-modelo-2---rede-neural-com-diversos-neurônios-e-2-hidden-layers" class="nav-link" data-scroll-target="#modelo-2---rede-neural-com-diversos-neurônios-e-2-hidden-layers"><span class="header-section-number">7.5.5</span> Modelo 2 - Rede neural com diversos neurônios e 2 <em>hidden layers</em></a></li>
+  <li><a href="#comparando-a-curva-roc-dos-dois-modelos" id="toc-comparando-a-curva-roc-dos-dois-modelos" class="nav-link" data-scroll-target="#comparando-a-curva-roc-dos-dois-modelos"><span class="header-section-number">7.5.6</span> Comparando a curva ROC dos dois modelos</a></li>
+  <li><a href="#considerações-2" id="toc-considerações-2" class="nav-link" data-scroll-target="#considerações-2"><span class="header-section-number">7.5.7</span> Considerações</a></li>
   </ul></li>
-  <li><a href="#avaliação-de-modelos-supervisionados" id="toc-avaliação-de-modelos-supervisionados" class="nav-link" data-scroll-target="#avaliação-de-modelos-supervisionados"><span class="header-section-number">6.6</span> Avaliação de modelos supervisionados</a>
+  <li><a href="#avaliação-de-modelos-supervisionados" id="toc-avaliação-de-modelos-supervisionados" class="nav-link" data-scroll-target="#avaliação-de-modelos-supervisionados"><span class="header-section-number">7.6</span> Avaliação de modelos supervisionados</a>
   <ul class="collapse">
   <li><a href="#avaliação-de-modelos-de-classificação" id="toc-avaliação-de-modelos-de-classificação" class="nav-link" data-scroll-target="#avaliação-de-modelos-de-classificação">Avaliação de modelos de Classificação</a></li>
   <li><a href="#avaliação-de-modelos-de-regressão" id="toc-avaliação-de-modelos-de-regressão" class="nav-link" data-scroll-target="#avaliação-de-modelos-de-regressão">Avaliação de modelos de Regressão</a></li>
@@ -349,7 +355,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title"><em>Machine Learning</em> para negócios</span></h1>
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title"><em>Machine Learning</em> para negócios</span></h1>
 </div>
 
 
@@ -369,20 +375,20 @@ window.Quarto = {
 <p><em>Machine Learning</em>, ou Aprendizado de Máquina, é uma área muito ampla e bastante complexa. Contudo, é também um campo com infinitas possibilidades de uso. Nos negócios não é diferente, é possível aplicar machine learning de diversas maneiras.</p>
 <p>Aprendizado de máquina (<em>machine learning</em>) é dar a uma máquina a habilidade de aprender, mesmo que nem tudo esteja explicitamente programado. Contudo, existem duas grandes divisões iniciais de formas pela qual o aprendizado de máquina pode ocorrer: aprendizado de máquina supervisionado; e aprendizado de máquina não supervisionado. Veja os detalhes neste capítulo.</p>
 <p>O objetivo deste capítulo é <strong>trazer os conceitos básicos para alguns dos principais modelos de aprendizado de máquina e na sequência mostrar como implementá-los</strong>. Não é propósito deste material entrar a fundo nos detalhes de cada modelo, pois a proposta é focar na compreensão dos conceitos e dos casos de usos para rápida aplicação na área de negócios.</p>
-<section id="o-que-é-aprendizado-de-máquina" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="o-que-é-aprendizado-de-máquina"><span class="header-section-number">4.1</span> O que é aprendizado de máquina?</h2>
+<section id="o-que-é-aprendizado-de-máquina" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="o-que-é-aprendizado-de-máquina"><span class="header-section-number">5.1</span> O que é aprendizado de máquina?</h2>
 <p>O aprendizado de máquina ocorre quando um algoritmo ou um programa de computador consegue melhorar sua <strong>performance</strong> nas tarefas que desempenha com base na <strong>experiência</strong>, utilizando <strong>inteligência artificial</strong>. Essa experiência ocorre com a alimentação de dados e informações colhidas a partir de interações com o mundo real.</p>
 <p>Dessa forma, podemos dividir o aprendizado de máquina em <strong>supervisionado</strong>, que busca responder um <em>target</em>, ou seja, há uma variável explícita a ser respondida; e <strong>não supervisionado</strong>, em que busca-se identificar grupos ou padrões a partir dos dados, sem um objetivo específico a ser alcançado.</p>
 <p>Na sequência do capítulo veja os principais conceitos, métodos e exemplos introdutórios de aplicações de aprendizado de máquina na linguagem R.</p>
-<section id="como-machine-learning-gera-valor-nos-negócios" class="level3" data-number="4.1.1">
-<h3 data-number="4.1.1" class="anchored" data-anchor-id="como-machine-learning-gera-valor-nos-negócios"><span class="header-section-number">4.1.1</span> Como <em>machine learning</em> gera valor nos negócios?</h3>
+<section id="como-machine-learning-gera-valor-nos-negócios" class="level3" data-number="5.1.1">
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="como-machine-learning-gera-valor-nos-negócios"><span class="header-section-number">5.1.1</span> Como <em>machine learning</em> gera valor nos negócios?</h3>
 <p>Aprendizado de máquina é composto por um conjunto de métodos. Sendo assim, para identificar qual tipo de abordagem de <em>machine learning</em> é mais adequada a cada situação é preciso entender muito bem a <strong>pergunta de negócio</strong> que busca-se resolver.</p>
 <p>Neste contexto vale ressaltar que o mais importante não é o método em si.</p>
 <p>A questão é: <strong>não existem problemas de aprendizado de máquina para serem resolvidos, mas sim problemas práticos de negócio</strong>. Por isso, o foco deve ser mantido em soluções que atendam às dores sentidas pelas empresas e que de fato vão resolver problemas reais.</p>
 <p>Assim, o aprendizado de máquina irá gerar muito valor para as empresas.</p>
 </section>
-<section id="aprendizado-de-máquina-supervisionado" class="level3" data-number="4.1.2">
-<h3 data-number="4.1.2" class="anchored" data-anchor-id="aprendizado-de-máquina-supervisionado"><span class="header-section-number">4.1.2</span> Aprendizado de máquina supervisionado</h3>
+<section id="aprendizado-de-máquina-supervisionado" class="level3" data-number="5.1.2">
+<h3 data-number="5.1.2" class="anchored" data-anchor-id="aprendizado-de-máquina-supervisionado"><span class="header-section-number">5.1.2</span> Aprendizado de máquina supervisionado</h3>
 <p>Em termos de <em>machine learning</em> aplicado a empresas, quando se tem uma pergunta de negócio do tipo “Qual ação de marketing mais impacta nas vendas?” estamos falando de aprendizado de máquina supervisionado, pois estamos tentando identificar as causas que impactam na variável “vendas”.</p>
 <p>Nos modelos de aprendizagem de máquina supervisionada conseguimos dar pesos ou calibrar o nível de assertividade e de precisão de um modelo. A maior parte dos modelos de <em>machine learning</em> são supervisionados.</p>
 <p>São dividos em:</p>
@@ -392,16 +398,16 @@ window.Quarto = {
 </ul>
 <p>Podem existir ainda modelos de aprendizado de máquina <strong>mistos</strong>, que podem utilizar partes de regressão para fazer classificação, ou o oposto.</p>
 </section>
-<section id="aprendizado-de-máquina-não-supervisionado" class="level3" data-number="4.1.3">
-<h3 data-number="4.1.3" class="anchored" data-anchor-id="aprendizado-de-máquina-não-supervisionado"><span class="header-section-number">4.1.3</span> Aprendizado de máquina não supervisionado</h3>
+<section id="aprendizado-de-máquina-não-supervisionado" class="level3" data-number="5.1.3">
+<h3 data-number="5.1.3" class="anchored" data-anchor-id="aprendizado-de-máquina-não-supervisionado"><span class="header-section-number">5.1.3</span> Aprendizado de máquina não supervisionado</h3>
 <p>Quando a pergunta de negócio é algo do tipo “Quais os perfis de clientes que compram em uma loja?” estamos falando de aprendizado de máquina <strong>não supervisionado</strong>. Neste caso, portanto, não temos uma variável específica a ser respondida, pois estamos apenas buscando encontrar os indivíduos, itens ou elementos semelhantes.</p>
 <p>Modelos não supervisionados são mais raros na prática, mas são muito úteis para guiar o raciocínio do cientista de dados no processo de exploração dos dados para análises futuras.</p>
 </section>
 </section>
-<section id="aprendizado-de-máquina-não-supervisionado-1" class="level1 page-columns page-full" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Aprendizado de máquina não supervisionado</h1>
-<section id="clustering" class="level2 page-columns page-full" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="clustering"><span class="header-section-number">5.1</span> Clustering</h2>
+<section id="aprendizado-de-máquina-não-supervisionado-1" class="level1 page-columns page-full" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Aprendizado de máquina não supervisionado</h1>
+<section id="clustering" class="level2 page-columns page-full" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="clustering"><span class="header-section-number">6.1</span> Clustering</h2>
 <p>Modelos de <em>Clustering</em> referem-se a técnicas de <strong>agrupamento</strong>, dentro de <strong>aprendizado não supervisionado</strong>.</p>
 <blockquote class="blockquote">
 <p>É uma abordagem para encontrar <strong>perfis similares</strong>, sem buscar a explicação para uma variável especificamente.</p>
@@ -421,8 +427,8 @@ window.Quarto = {
 <li>Define os centróides por iterações que minimizam as distâncias.</li>
 <li>É preciso escolher o número de <em>clusters</em>.</li>
 </ul>
-<section id="aplicando-k-means-a-dados-gerados-aleatoriamente" class="level3" data-number="5.1.1">
-<h3 data-number="5.1.1" class="anchored" data-anchor-id="aplicando-k-means-a-dados-gerados-aleatoriamente"><span class="header-section-number">5.1.1</span> Aplicando <em>K-Means</em> a dados gerados aleatoriamente</h3>
+<section id="aplicando-k-means-a-dados-gerados-aleatoriamente" class="level3" data-number="6.1.1">
+<h3 data-number="6.1.1" class="anchored" data-anchor-id="aplicando-k-means-a-dados-gerados-aleatoriamente"><span class="header-section-number">6.1.1</span> Aplicando <em>K-Means</em> a dados gerados aleatoriamente</h3>
 <p>Inicialmente criamos uma matriz com duas variáveis aleatórias. Ambas variáveis de dados aleatórios possuem desvio-padrão de 0,3. Porém uma delas possui média 0 e a outra média 1.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Definindo o seed</span></span>
@@ -507,11 +513,11 @@ window.Quarto = {
 </ol>
 </section>
 </section>
-<section id="aplicando-k-means-para-o-iris-dataset" class="level3 page-columns page-full" data-number="5.1.2">
-<h3 data-number="5.1.2" class="anchored" data-anchor-id="aplicando-k-means-para-o-iris-dataset"><span class="header-section-number">5.1.2</span> Aplicando <em>K-Means</em> para o <em>Iris dataset</em></h3>
+<section id="aplicando-k-means-para-o-iris-dataset" class="level3 page-columns page-full" data-number="6.1.2">
+<h3 data-number="6.1.2" class="anchored" data-anchor-id="aplicando-k-means-para-o-iris-dataset"><span class="header-section-number">6.1.2</span> Aplicando <em>K-Means</em> para o <em>Iris dataset</em></h3>
 <p><em>Iris dataset</em> é um conjunto de dados de 150 medidas realizadas em 3 espécies diferentes de um tipo de flor (<em>Iris</em>). É um conjunto de dados muito usado para testes em algoritmos de reconhecimento de padrões. Um dos pontos que torna este conjunto de dados interessante é o fato de que uma espécie é linearmente separável das outras duas, mas as duas restantes não podem ser separadas de forma linear. <a href="https://archive.ics.uci.edu/ml/datasets/iris">Veja mais</a>.</p>
-<section id="conhecendo-o-conjunto-de-dados" class="level4 page-columns page-full" data-number="5.1.2.1">
-<h4 data-number="5.1.2.1" class="anchored" data-anchor-id="conhecendo-o-conjunto-de-dados"><span class="header-section-number">5.1.2.1</span> Conhecendo o conjunto de dados</h4>
+<section id="conhecendo-o-conjunto-de-dados" class="level4 page-columns page-full" data-number="6.1.2.1">
+<h4 data-number="6.1.2.1" class="anchored" data-anchor-id="conhecendo-o-conjunto-de-dados"><span class="header-section-number">6.1.2.1</span> Conhecendo o conjunto de dados</h4>
 <p>Veja o resumo dos dados:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -608,8 +614,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="pré-processamento-normalizando-os-dados" class="level4" data-number="5.1.2.2">
-<h4 data-number="5.1.2.2" class="anchored" data-anchor-id="pré-processamento-normalizando-os-dados"><span class="header-section-number">5.1.2.2</span> Pré-processamento: normalizando os dados</h4>
+<section id="pré-processamento-normalizando-os-dados" class="level4" data-number="6.1.2.2">
+<h4 data-number="6.1.2.2" class="anchored" data-anchor-id="pré-processamento-normalizando-os-dados"><span class="header-section-number">6.1.2.2</span> Pré-processamento: normalizando os dados</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Separando a colunas de espécies das colunas numéricas</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>iris.new <span class="ot">&lt;-</span> iris <span class="sc">|&gt;</span></span>
@@ -644,8 +650,8 @@ window.Quarto = {
 <span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co"># head(iris.new)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="aplicando-o-k-means" class="level4" data-number="5.1.2.3">
-<h4 data-number="5.1.2.3" class="anchored" data-anchor-id="aplicando-o-k-means"><span class="header-section-number">5.1.2.3</span> Aplicando o <em>K-means</em></h4>
+<section id="aplicando-o-k-means" class="level4" data-number="6.1.2.3">
+<h4 data-number="6.1.2.3" class="anchored" data-anchor-id="aplicando-o-k-means"><span class="header-section-number">6.1.2.3</span> Aplicando o <em>K-means</em></h4>
 <p>Definindo o número de centróides o dado, já na função do kmeans:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Aplicar K-Means com 3 centróides</span></span>
@@ -684,8 +690,8 @@ window.Quarto = {
 </div>
 </section>
 </section>
-<section id="verificação-dos-resultados" class="level3 page-columns page-full" data-number="5.1.3">
-<h3 data-number="5.1.3" class="anchored" data-anchor-id="verificação-dos-resultados"><span class="header-section-number">5.1.3</span> Verificação dos resultados</h3>
+<section id="verificação-dos-resultados" class="level3 page-columns page-full" data-number="6.1.3">
+<h3 data-number="6.1.3" class="anchored" data-anchor-id="verificação-dos-resultados"><span class="header-section-number">6.1.3</span> Verificação dos resultados</h3>
 <p>O código abaixo apenas cria os gráficos que seguem, comparando as classificações da clusterização pelo K-means com os rótulos reais da coluna “Species”.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Concatenando coluna  de cluster criado </span></span>
@@ -806,16 +812,16 @@ window.Quarto = {
 <li>Cluster 3 corresponde à espécie “Setosa”.</li>
 </ul>
 </section>
-<section id="fontes" class="level3" data-number="5.1.4">
-<h3 data-number="5.1.4" class="anchored" data-anchor-id="fontes"><span class="header-section-number">5.1.4</span> Fontes</h3>
+<section id="fontes" class="level3" data-number="6.1.4">
+<h3 data-number="6.1.4" class="anchored" data-anchor-id="fontes"><span class="header-section-number">6.1.4</span> Fontes</h3>
 <ol type="1">
 <li>http://rpubs.com/Nitika/kmeans_Iris</li>
 <li>https://rpubs.com/AnanyaDu/361293</li>
 </ol>
 </section>
 </section>
-<section id="principal-component-analysis-pca" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="principal-component-analysis-pca"><span class="header-section-number">5.2</span> <em>Principal Component Analysis</em> (PCA)</h2>
+<section id="principal-component-analysis-pca" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="principal-component-analysis-pca"><span class="header-section-number">6.2</span> <em>Principal Component Analysis</em> (PCA)</h2>
 <p>Podemos comparar duas variáveis (colunas) de cada vez se usarmos diagramas de dispersão (<em>scatter plots</em>). Porém, veja a quantidade necessária de <em>scatter plots</em> dependendo da quantidade de variáveis a serem comparadas:</p>
 <ul>
 <li><strong>2</strong> variáveis (A,B) = <strong>1</strong> <em>scatter</em> = (AxB)</li>
@@ -846,8 +852,8 @@ window.Quarto = {
 </ul>
 <p>O autovetor com maior autovalor é o primeiro componente principal.</p>
 <p><a href="https://www.datacamp.com/community/tutorials/pca-analysis-r">Veja mais</a></p>
-<section id="aplicando-pca-no-conjunto-de-dados-mtcars" class="level3" data-number="5.2.1">
-<h3 data-number="5.2.1" class="anchored" data-anchor-id="aplicando-pca-no-conjunto-de-dados-mtcars"><span class="header-section-number">5.2.1</span> Aplicando PCA no conjunto de dados <em>mtcars</em></h3>
+<section id="aplicando-pca-no-conjunto-de-dados-mtcars" class="level3" data-number="6.2.1">
+<h3 data-number="6.2.1" class="anchored" data-anchor-id="aplicando-pca-no-conjunto-de-dados-mtcars"><span class="header-section-number">6.2.1</span> Aplicando PCA no conjunto de dados <em>mtcars</em></h3>
 <p>O conjunto de dados “<em>Motor Trend Car Road Tests</em>” foi extraído de uma revista automobilística de 1974 e contempla 10 variáveis que representam características ou métricas de desempenho dos veículos. Os dados são nativos do R, basta digitar <code>mtcars</code> no console. Pra informações, como dicionário de dados, basta digitar <code>? mtcars</code>, e accessar a documentação de ajuda.</p>
 <p>Veja o <em>head</em> dos dados:</p>
 <div class="cell">
@@ -901,8 +907,8 @@ Merc 280          -0.38252133  0.5811211  0.8863227  0.07026946</code></pre>
 </div>
 </div>
 </section>
-<section id="visualizando-graficamente-os-resultados-do-pca" class="level3" data-number="5.2.2">
-<h3 data-number="5.2.2" class="anchored" data-anchor-id="visualizando-graficamente-os-resultados-do-pca"><span class="header-section-number">5.2.2</span> Visualizando graficamente os resultados do PCA</h3>
+<section id="visualizando-graficamente-os-resultados-do-pca" class="level3" data-number="6.2.2">
+<h3 data-number="6.2.2" class="anchored" data-anchor-id="visualizando-graficamente-os-resultados-do-pca"><span class="header-section-number">6.2.2</span> Visualizando graficamente os resultados do PCA</h3>
 <p>É possível também criar um <em>biplot</em> para visualizar como cada variável impacta nas relações entre os componentes principais. Para isso vamos usar novamente o pacote de visualização <code>highcharter</code>.</p>
 <p>Agora, veja o gráfico <code>biplot</code> que compara o PC1 e PC2 e mostra como cada variável impactou na construção de cada componente. Cada ponto do gráfico corresponde a uma linha de dado (dataset com 32 linhas no total).</p>
 <div class="cell">
@@ -929,16 +935,16 @@ Merc 280          -0.38252133  0.5811211  0.8863227  0.07026946</code></pre>
 </div>
 </div>
 </section>
-<section id="considerações" class="level3" data-number="5.2.3">
-<h3 data-number="5.2.3" class="anchored" data-anchor-id="considerações"><span class="header-section-number">5.2.3</span> Considerações</h3>
+<section id="considerações" class="level3" data-number="6.2.3">
+<h3 data-number="6.2.3" class="anchored" data-anchor-id="considerações"><span class="header-section-number">6.2.3</span> Considerações</h3>
 <p>O resultado de uma análise de componentes principais pode ser utilizado para estimar outros modelos. Veja, se você possui um <em>dataset</em> com um número muito grande de variáveis, o PCA viabiliza que haja uma redução de muitas variáveis para poucos componentes principais que expressem a maior parte da variância dos dados. A maior dificuldade desta abordagem é analisar os resultados depois, pois não há uma interpretação “real” para os valores dos componentes principais.</p>
 </section>
 </section>
 </section>
-<section id="aprendizado-de-máquina-supervisionado-1" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Aprendizado de máquina supervisionado</h1>
-<section id="regressão-linear" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="regressão-linear"><span class="header-section-number">6.1</span> Regressão linear</h2>
+<section id="aprendizado-de-máquina-supervisionado-1" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Aprendizado de máquina supervisionado</h1>
+<section id="regressão-linear" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="regressão-linear"><span class="header-section-number">7.1</span> Regressão linear</h2>
 <p>Relaciona uma variável dependente (<em>target</em>, rótulo) com uma matriz de variáveis explicativas (independentes):</p>
 <p><span class="math display">\[y = \alpha + \beta_1 x_1 + \beta_2 x_2 + \dots \beta_n x_n + e\]</span></p>
 <p>Possui diversas <strong>premissas</strong> acerca dos dados, como:</p>
@@ -960,8 +966,8 @@ Merc 280          -0.38252133  0.5811211  0.8863227  0.07026946</code></pre>
 <li>Previsões em meteorologia.</li>
 </ul>
 <p>Obs.: Métodos de regressão linear possuem diversas variações, e é uma área de estudo com muitos métodos específicos. O exemplo dado acima é apenas o caso mais simples.</p>
-<section id="exemplo-velocidade-contra-tempo-para-um-carro-parar-dados-de-1920s" class="level3" data-number="6.1.1">
-<h3 data-number="6.1.1" class="anchored" data-anchor-id="exemplo-velocidade-contra-tempo-para-um-carro-parar-dados-de-1920s"><span class="header-section-number">6.1.1</span> Exemplo: velocidade contra tempo para um carro parar (dados de 1920’s)</h3>
+<section id="exemplo-velocidade-contra-tempo-para-um-carro-parar-dados-de-1920s" class="level3" data-number="7.1.1">
+<h3 data-number="7.1.1" class="anchored" data-anchor-id="exemplo-velocidade-contra-tempo-para-um-carro-parar-dados-de-1920s"><span class="header-section-number">7.1.1</span> Exemplo: velocidade contra tempo para um carro parar (dados de 1920’s)</h3>
 <p>Veja um exemplo de dados que mostram a velocidade de um carro e o tempo que ele levava até parar completamente.</p>
 <p>Variáveis:</p>
 <ul>
@@ -1017,14 +1023,14 @@ Merc 280          -0.38252133  0.5811211  0.8863227  0.07026946</code></pre>
 <p>Para concluir, veja que o gráfico de dispersão acima só é possível de ser realizado porque este exemplo trata de uma <strong>regressão simples</strong>, ou seja, em que temos <strong>apenas uma variável independente</strong>. Se tivéssemos um caso de <strong>regressão múltipla</strong>, com duas até <span class="math inline">\(N\)</span> variáveis independentes, teríamos que fazer um gráfico de dimensão <span class="math inline">\(N+1\)</span> para exemplificar a regressão linear, o que é possível. Por isso, a visualização da reta de melhor ajuste ao longo de todas as variáveis de uma regressão fica impossível a medida que mais variáveis independentes são adicionadas.</p>
 </section>
 </section>
-<section id="regressão-logística" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="regressão-logística"><span class="header-section-number">6.2</span> Regressão Logística</h2>
+<section id="regressão-logística" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="regressão-logística"><span class="header-section-number">7.2</span> Regressão Logística</h2>
 <p>A regressão logística é um tipo de regressão que tem como variável resposta (dependente) uma <strong>variável binária</strong>, ou seja, os valores possíveis são <strong>0 ou 1</strong>, ocorrência ou não de um evento. O resultado do modelo é uma probabilidade, que pode ser transformado em <em>labels</em> de 0 e 1 ao levar em conta um ponto de corte na probabilidade estimada.</p>
 <blockquote class="blockquote">
 <p>“O modelo de regressão logística é adequado para trabalhar com <strong>dados qualitativos</strong>. Serve para as situações nas quais a <strong>variável dependente (Y) é binária</strong> (assume os valores de 0 e 1) e o valor que <strong>se busca é a probabilidade</strong> (<span class="math inline">\(\pi\)</span>) de que a Y seja 1 dado o valor de determinada variiável x, que poderá tanto ser binária, numérica ou dividida em categorias.” (CHATTERJEE; HADI, 2006; RYAN, 2009).</p>
 </blockquote>
-<section id="exemplo-regressão-logística-com-dados-do-naufrágio-do-titanic" class="level3" data-number="6.2.1">
-<h3 data-number="6.2.1" class="anchored" data-anchor-id="exemplo-regressão-logística-com-dados-do-naufrágio-do-titanic"><span class="header-section-number">6.2.1</span> Exemplo: regressão logística com dados do naufrágio do Titanic</h3>
+<section id="exemplo-regressão-logística-com-dados-do-naufrágio-do-titanic" class="level3" data-number="7.2.1">
+<h3 data-number="7.2.1" class="anchored" data-anchor-id="exemplo-regressão-logística-com-dados-do-naufrágio-do-titanic"><span class="header-section-number">7.2.1</span> Exemplo: regressão logística com dados do naufrágio do Titanic</h3>
 <p>Analisaremos um conjunto de dados dos passageiros do navio Titanic, que naufragou em 1912. Então aplicaremos um modelo de regressão logística para calcular o probabilidade de um passageiro, ao embarcar no navio, vir a sobreviver à tragédia (<span class="math inline">\(y\)</span>, variável dependente).</p>
 <p>O dicionário dos dados, que mostra o significado de cada variável, é o seguinte:</p>
 <ul>
@@ -1068,8 +1074,8 @@ dbl (7): passengerid, survived, pclass, age, sibsp, parch, fare
 </div>
 </div>
 </section>
-<section id="dividindo-o-dataset-em-treino-e-teste" class="level3" data-number="6.2.2">
-<h3 data-number="6.2.2" class="anchored" data-anchor-id="dividindo-o-dataset-em-treino-e-teste"><span class="header-section-number">6.2.2</span> Dividindo o dataset em treino e teste</h3>
+<section id="dividindo-o-dataset-em-treino-e-teste" class="level3" data-number="7.2.2">
+<h3 data-number="7.2.2" class="anchored" data-anchor-id="dividindo-o-dataset-em-treino-e-teste"><span class="header-section-number">7.2.2</span> Dividindo o dataset em treino e teste</h3>
 <p>Existem diversas formas de fazer esta divisão pela linguagem R. Não há jeito certo ou errado, neste caso o importante é chegar ao objetivo de dividir o <em>dataset</em>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># O seed é um número que garante que a geração "aleatória" do computador será sempre a mesma. </span></span>
@@ -1083,8 +1089,8 @@ dbl (7): passengerid, survived, pclass, age, sibsp, parch, fare
 <span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>test  <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">anti_join</span>(df_titanic, train, <span class="at">by =</span> <span class="st">'passengerid'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="aplicando-o-modelo-de-regressão-logística" class="level3" data-number="6.2.3">
-<h3 data-number="6.2.3" class="anchored" data-anchor-id="aplicando-o-modelo-de-regressão-logística"><span class="header-section-number">6.2.3</span> Aplicando o modelo de regressão logística</h3>
+<section id="aplicando-o-modelo-de-regressão-logística" class="level3" data-number="7.2.3">
+<h3 data-number="7.2.3" class="anchored" data-anchor-id="aplicando-o-modelo-de-regressão-logística"><span class="header-section-number">7.2.3</span> Aplicando o modelo de regressão logística</h3>
 <p>Vamos utilizar a função <code>glm()</code>, nativa do <code>R</code>. Apenas certifique-se de configurar o parâmetro <code>family</code> para <code>family = binomial(link = 'logit')</code>. No termo da equação, a variável <em>target</em> é precedida de <code>~</code>. Esta, inclusive, é uma terminologia padrão para a maior parte das funções de modelos supervisionados de <em>machine learning</em> no <code>R</code>.</p>
 <p><strong>Importante</strong>: o modelo será aplicado no <em>dataset</em> de <strong>treino</strong>, e não no dataset completo.</p>
 <div class="cell">
@@ -1133,8 +1139,8 @@ Residual Deviance: 543.8    AIC: 557.8</code></pre>
 </div>
 </div>
 </section>
-<section id="realizando-as-predições" class="level3" data-number="6.2.4">
-<h3 data-number="6.2.4" class="anchored" data-anchor-id="realizando-as-predições"><span class="header-section-number">6.2.4</span> Realizando as predições</h3>
+<section id="realizando-as-predições" class="level3" data-number="7.2.4">
+<h3 data-number="7.2.4" class="anchored" data-anchor-id="realizando-as-predições"><span class="header-section-number">7.2.4</span> Realizando as predições</h3>
 <p>Usando a função <code>predict</code> do R para fazer as predições no <em>dataset</em> de teste com base no modelo que foi treinado.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fazendo as predições</span></span>
@@ -1152,8 +1158,8 @@ Residual Deviance: 543.8    AIC: 557.8</code></pre>
 </div>
 </div>
 </section>
-<section id="avaliação-do-modelo" class="level3" data-number="6.2.5">
-<h3 data-number="6.2.5" class="anchored" data-anchor-id="avaliação-do-modelo"><span class="header-section-number">6.2.5</span> Avaliação do modelo</h3>
+<section id="avaliação-do-modelo" class="level3" data-number="7.2.5">
+<h3 data-number="7.2.5" class="anchored" data-anchor-id="avaliação-do-modelo"><span class="header-section-number">7.2.5</span> Avaliação do modelo</h3>
 <p>A seguir, vamos criar a matriz confusão e calcular a acurácia “na mão”, sem usar função específica para isso, a fim de entendermos o procedimento.</p>
 <p>Neste caso, vale ressaltar que o <em>threshold</em> (ponto de corte na probabilidade para definir se a saída será 0 ou 1) é definido de forma arbitrária. Porém, é possível aplicar métodos de otimização do <em>threshold</em>. Um exemplo de uso para otimização é a função <code>thresholder()</code> do pacote <code>caret</code>. <a href="https://rdrr.io/cran/caret/man/thresholder.html">Veja mais</a>. Esta função não foi aplicada neste exemplo porque todo o modelo deve ter sido rodado com funções do <code>caret</code> para que seja possível realizar esta otimização.</p>
 <p>Primeiro, a <strong>matriz confusão</strong>:</p>
@@ -1231,8 +1237,8 @@ Prediction   0   1
 <li>Altere a variávei <code>threshold</code> para outros valores entre 0 e 1 e rode o código novamente até as métricas pela função <code>confusionMatrix</code> do pacote <code>caret</code>. Veja como as me’tricas se comportam.</li>
 </ol>
 </section>
-<section id="roc-curve" class="level3" data-number="6.2.6">
-<h3 data-number="6.2.6" class="anchored" data-anchor-id="roc-curve"><span class="header-section-number">6.2.6</span> ROC Curve</h3>
+<section id="roc-curve" class="level3" data-number="7.2.6">
+<h3 data-number="7.2.6" class="anchored" data-anchor-id="roc-curve"><span class="header-section-number">7.2.6</span> ROC Curve</h3>
 <p>Veja a curva ROC do modelo estimado.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Carregando pacote para plotar curva ROC</span></span>
@@ -1299,8 +1305,8 @@ Area under the curve: 0.8876</code></pre>
 </div>
 </section>
 </section>
-<section id="árvore-de-decisão" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="árvore-de-decisão"><span class="header-section-number">6.3</span> Árvore de Decisão</h2>
+<section id="árvore-de-decisão" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="árvore-de-decisão"><span class="header-section-number">7.3</span> Árvore de Decisão</h2>
 <p>Entre os modelos de aprendizado de máquina mais comuns e mais úteis estão as árvores de decisão. Elas são tão utilizadas porque fornecem ao usuário final uma <strong>fácil interpretação</strong> e desenham uma espécie de <strong>caminho a ser percorrido</strong> para alcançar um determinado objetivo.</p>
 <blockquote class="blockquote">
 <p>Árvores de decisão são fáceis de interpertar, pois fornecem as <strong>regras de negócio</strong> necessárias para classificar os dados e fornecer uma predição.</p>
@@ -1333,8 +1339,8 @@ Area under the curve: 0.8876</code></pre>
 <p>Árvores de decisão podem ficar muito copmlexas e extensas, caindo no problema de <em>overfitting</em>.</p>
 <p>Nestes casos, uma saída é aplicar técnicas de <em>poda</em> da árvore. No <code>R</code> é possível utilizar a função <code>prune()</code> do pacote <code>rpart</code>.</p>
 </section>
-<section id="lendo-o-conjunto-de-dados-do-titanic" class="level3" data-number="6.3.1">
-<h3 data-number="6.3.1" class="anchored" data-anchor-id="lendo-o-conjunto-de-dados-do-titanic"><span class="header-section-number">6.3.1</span> Lendo o conjunto de dados do Titanic</h3>
+<section id="lendo-o-conjunto-de-dados-do-titanic" class="level3" data-number="7.3.1">
+<h3 data-number="7.3.1" class="anchored" data-anchor-id="lendo-o-conjunto-de-dados-do-titanic"><span class="header-section-number">7.3.1</span> Lendo o conjunto de dados do Titanic</h3>
 <p>Vamos buscar o arquivo csv do repositório. Após iremos excluir as variáveis a não serem utilizadas e separar o dataset em treino e teste.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>df_titanic_tree <span class="ot">&lt;-</span> </span>
@@ -1376,8 +1382,8 @@ dbl (7): passengerid, survived, pclass, age, sibsp, parch, fare
 <li><code>fare</code>: tarifa paga pelo passageiro.</li>
 </ul>
 </section>
-<section id="criando-uma-árvore-de-decisão-com-todo-o-dataset" class="level3" data-number="6.3.2">
-<h3 data-number="6.3.2" class="anchored" data-anchor-id="criando-uma-árvore-de-decisão-com-todo-o-dataset"><span class="header-section-number">6.3.2</span> Criando uma árvore de decisão com todo o <em>dataset</em></h3>
+<section id="criando-uma-árvore-de-decisão-com-todo-o-dataset" class="level3" data-number="7.3.2">
+<h3 data-number="7.3.2" class="anchored" data-anchor-id="criando-uma-árvore-de-decisão-com-todo-o-dataset"><span class="header-section-number">7.3.2</span> Criando uma árvore de decisão com todo o <em>dataset</em></h3>
 <p>Primeiro, apenas para fins didáticos, vamos contruir uma árvore de decisão para todo o <em>dataset</em>, ou seja, não iremos considerar o processo de <em>machine learning</em> de treinar e testar o modelo.</p>
 <p>Na árvore a seguir, cada nós mostra: - a predição binária da classe (não sobreviveu = 0; sobreviveu = 1); - a probabilidade predita de sobrevivência (de 0 a 1); - a porcentagem de observações no nós.</p>
 <div class="cell">
@@ -1397,8 +1403,8 @@ dbl (7): passengerid, survived, pclass, age, sibsp, parch, fare
 </div>
 </div>
 </section>
-<section id="divindo-em-treino-e-teste" class="level3" data-number="6.3.3">
-<h3 data-number="6.3.3" class="anchored" data-anchor-id="divindo-em-treino-e-teste"><span class="header-section-number">6.3.3</span> Divindo em treino e teste</h3>
+<section id="divindo-em-treino-e-teste" class="level3" data-number="7.3.3">
+<h3 data-number="7.3.3" class="anchored" data-anchor-id="divindo-em-treino-e-teste"><span class="header-section-number">7.3.3</span> Divindo em treino e teste</h3>
 <p>Agora sim, iremos dividir o conjunto de dados em treino e teste.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Separar os dados em treino e teste</span></span>
@@ -1426,8 +1432,8 @@ dbl (7): passengerid, survived, pclass, age, sibsp, parch, fare
 </div>
 <p><strong>Exercício</strong>. Troque o seed para outros valores aleatórios e verifique como a estrutura da árvore muda.</p>
 </section>
-<section id="fazendo-as-predições" class="level3" data-number="6.3.4">
-<h3 data-number="6.3.4" class="anchored" data-anchor-id="fazendo-as-predições"><span class="header-section-number">6.3.4</span> Fazendo as predições</h3>
+<section id="fazendo-as-predições" class="level3" data-number="7.3.4">
+<h3 data-number="7.3.4" class="anchored" data-anchor-id="fazendo-as-predições"><span class="header-section-number">7.3.4</span> Fazendo as predições</h3>
 <p>Aplicando a função <code>preditc()</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>pred_num <span class="ot">&lt;-</span> <span class="fu">predict</span>(rtree_fit,  <span class="at">newdata =</span> data<span class="sc">$</span>test)[,<span class="dv">2</span>] <span class="co"># segunda coluna para pegar apenas survived = 1</span></span>
@@ -1477,8 +1483,8 @@ Prediction   0   1
 </div>
 </div>
 </section>
-<section id="roc-curve-1" class="level3" data-number="6.3.5">
-<h3 data-number="6.3.5" class="anchored" data-anchor-id="roc-curve-1"><span class="header-section-number">6.3.5</span> ROC Curve</h3>
+<section id="roc-curve-1" class="level3" data-number="7.3.5">
+<h3 data-number="7.3.5" class="anchored" data-anchor-id="roc-curve-1"><span class="header-section-number">7.3.5</span> ROC Curve</h3>
 <p>Veja a curva ROC do modelo estimado.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="co">#library(pROC)</span></span>
@@ -1501,8 +1507,8 @@ Prediction   0   1
 </div>
 </div>
 </section>
-<section id="fontes-1" class="level3" data-number="6.3.6">
-<h3 data-number="6.3.6" class="anchored" data-anchor-id="fontes-1"><span class="header-section-number">6.3.6</span> Fontes</h3>
+<section id="fontes-1" class="level3" data-number="7.3.6">
+<h3 data-number="7.3.6" class="anchored" data-anchor-id="fontes-1"><span class="header-section-number">7.3.6</span> Fontes</h3>
 <ul>
 <li>Detalhes sobre árvores de decisão no <code>R</code>:
 <ul>
@@ -1511,8 +1517,8 @@ Prediction   0   1
 </ul>
 </section>
 </section>
-<section id="random-forest" class="level2" data-number="6.4">
-<h2 data-number="6.4" class="anchored" data-anchor-id="random-forest"><span class="header-section-number">6.4</span> Random Forest</h2>
+<section id="random-forest" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="random-forest"><span class="header-section-number">7.4</span> Random Forest</h2>
 <p>Um dos pontos negativos das árvores de decisão é a variância nos seus resultados. Duas árvores treinadas no mesmo conjunto podem apresentar resultados bastante distintos. Com isso, uma <em>random forest</em> (ou floresta aleatória) é um grande número de árvores de decisão rodadas em paralelo.</p>
 <p>Com este grande número de árvores cria-se uma espécie de “comitês” em que os caminhos mais votados pelas diversas árvores tornam-se o resultado do modelo de <em>random forest</em>. Por esta característica pode-se dizer que <em>random forest</em> é um tipo de algoritmo de <em>ensemble learning</em>.</p>
 <blockquote class="blockquote">
@@ -1522,8 +1528,8 @@ Prediction   0   1
 <blockquote class="blockquote">
 <p><strong><em>Ensemble learning</em></strong>, em geral, trata de um modelo que faz predições baseadas em um número de modelos diferentes. Ao combinar modelos individuais, o modelo <em>ensemble</em> tende a ser mais flexível (com <strong>menos viés</strong>) e menos <em>data-sensitive</em> (com <strong>menos variância</strong>). <br> Os dois mais populares métodos de <em>ensemble</em> são <em>bagging</em> e <em>boosting</em>.<br> - <strong><em>Bagging</em></strong>: treina um grupo de modelos individuais <strong>em paralelo</strong>. Cada modelo é treinado com base em <em>subsets</em> aleatórios dos dados.<br> - <strong><em>Boosting</em></strong>: treina um grupo de modelos individuais <strong>de forma sequencial</strong>. Cada modelo é treinado de forma a aprender com os erros feitos pelo modelo anterior. <a href="https://towardsdatascience.com/basic-ensemble-learning-random-forest-adaboost-gradient-boosting-step-by-step-explained-95d49d1e2725">Fonte</a>.</p>
 </blockquote>
-<section id="exemplo-do-uso-de-random-forest-para-prever-a-saída-de-colaboradores" class="level3" data-number="6.4.1">
-<h3 data-number="6.4.1" class="anchored" data-anchor-id="exemplo-do-uso-de-random-forest-para-prever-a-saída-de-colaboradores"><span class="header-section-number">6.4.1</span> Exemplo do uso de <em>random forest</em> para prever a saída de colaboradores</h3>
+<section id="exemplo-do-uso-de-random-forest-para-prever-a-saída-de-colaboradores" class="level3" data-number="7.4.1">
+<h3 data-number="7.4.1" class="anchored" data-anchor-id="exemplo-do-uso-de-random-forest-para-prever-a-saída-de-colaboradores"><span class="header-section-number">7.4.1</span> Exemplo do uso de <em>random forest</em> para prever a saída de colaboradores</h3>
 <p>Carregando os pacotes básicos:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pacotes a serem utilizados</span></span>
@@ -1584,8 +1590,8 @@ dbl (26): Age, DailyRate, DistanceFromHome, Education, EmployeeCount, Employ...
 </div>
 </div>
 </section>
-<section id="dividindo-em-treino-e-teste" class="level3" data-number="6.4.2">
-<h3 data-number="6.4.2" class="anchored" data-anchor-id="dividindo-em-treino-e-teste"><span class="header-section-number">6.4.2</span> Dividindo em treino e teste</h3>
+<section id="dividindo-em-treino-e-teste" class="level3" data-number="7.4.2">
+<h3 data-number="7.4.2" class="anchored" data-anchor-id="dividindo-em-treino-e-teste"><span class="header-section-number">7.4.2</span> Dividindo em treino e teste</h3>
 <p>Aqui faremos a divisão do conjunto de dados entre treino e teste.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="do">## set the seed to make your partition reproducible</span></span>
@@ -1607,8 +1613,8 @@ YearsWithCurrManager)`</code></pre>
 </div>
 </div>
 </section>
-<section id="modelando-as-random-forests" class="level3" data-number="6.4.3">
-<h3 data-number="6.4.3" class="anchored" data-anchor-id="modelando-as-random-forests"><span class="header-section-number">6.4.3</span> Modelando as <em>random forests</em></h3>
+<section id="modelando-as-random-forests" class="level3" data-number="7.4.3">
+<h3 data-number="7.4.3" class="anchored" data-anchor-id="modelando-as-random-forests"><span class="header-section-number">7.4.3</span> Modelando as <em>random forests</em></h3>
 <p>Iremos utilizar o pacote <code>ranger</code>, da linguagem <code>R</code>. Este pacote é amplamente utilizado e muito bem implementado. A <a href="https://www.rdocumentation.org/packages/ranger/versions/0.12.1/topics/ranger">documentação</a> é toda embasada em artigos científicos, o que dá maior credbilidade às funções utilizadas.</p>
 <p>Os parâmetros que iremos utilizar são:</p>
 <ul>
@@ -1658,8 +1664,8 @@ YearsWithCurrManager)`</code></pre>
 <span id="cb85-35"><a href="#cb85-35" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="importância-das-variáveis" class="level3" data-number="6.4.4">
-<h3 data-number="6.4.4" class="anchored" data-anchor-id="importância-das-variáveis"><span class="header-section-number">6.4.4</span> Importância das variáveis</h3>
+<section id="importância-das-variáveis" class="level3" data-number="7.4.4">
+<h3 data-number="7.4.4" class="anchored" data-anchor-id="importância-das-variáveis"><span class="header-section-number">7.4.4</span> Importância das variáveis</h3>
 <p>No gráfico a seguir as variáveis mais relevantes para realizar as classificações são elencadas. No caso de árvores de decisão (e também <em>random forests</em>) o gráfico mostra as variáveis ordenadas por nível de ganho informacional gerado após os splits nos dado (que geram os nós das árvores).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
@@ -1778,8 +1784,8 @@ importance values found, inaccurate p-values. Consider the 'altmann' approach.</
 </div>
 </div>
 </section>
-<section id="avaliando-a-floresta-alatória" class="level3" data-number="6.4.5">
-<h3 data-number="6.4.5" class="anchored" data-anchor-id="avaliando-a-floresta-alatória"><span class="header-section-number">6.4.5</span> Avaliando a floresta alatória</h3>
+<section id="avaliando-a-floresta-alatória" class="level3" data-number="7.4.5">
+<h3 data-number="7.4.5" class="anchored" data-anchor-id="avaliando-a-floresta-alatória"><span class="header-section-number">7.4.5</span> Avaliando a floresta alatória</h3>
 <p>Aplicando a função <code>preditc()</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Para confusion matrix</span></span>
@@ -1836,12 +1842,12 @@ Prediction  No Yes
 </div>
 </div>
 </section>
-<section id="considerações-1" class="level3" data-number="6.4.6">
-<h3 data-number="6.4.6" class="anchored" data-anchor-id="considerações-1"><span class="header-section-number">6.4.6</span> Considerações</h3>
+<section id="considerações-1" class="level3" data-number="7.4.6">
+<h3 data-number="7.4.6" class="anchored" data-anchor-id="considerações-1"><span class="header-section-number">7.4.6</span> Considerações</h3>
 <p>Este modelo apresenta um problema: uma alta taxa de falso negativo. Ou seja, para um número considerável de colaboradores foi predito que não sairíam da empresa, mas saíram. Além disso, neste caso o custo de um falso negativo é alto!</p>
 </section>
-<section id="fontes-2" class="level3" data-number="6.4.7">
-<h3 data-number="6.4.7" class="anchored" data-anchor-id="fontes-2"><span class="header-section-number">6.4.7</span> Fontes</h3>
+<section id="fontes-2" class="level3" data-number="7.4.7">
+<h3 data-number="7.4.7" class="anchored" data-anchor-id="fontes-2"><span class="header-section-number">7.4.7</span> Fontes</h3>
 <ul>
 <li>Detalhes sobre <em>random forest</em>:
 <ul>
@@ -1858,8 +1864,8 @@ Prediction  No Yes
 </ul>
 </section>
 </section>
-<section id="redes-neurais-artificiais-e-deep-learning" class="level2" data-number="6.5">
-<h2 data-number="6.5" class="anchored" data-anchor-id="redes-neurais-artificiais-e-deep-learning"><span class="header-section-number">6.5</span> Redes Neurais Artificiais e <em>Deep Learning</em></h2>
+<section id="redes-neurais-artificiais-e-deep-learning" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="redes-neurais-artificiais-e-deep-learning"><span class="header-section-number">7.5</span> Redes Neurais Artificiais e <em>Deep Learning</em></h2>
 <p><em>Deep learning</em> é uma forma de aplicação de <strong>redes neurais artificiais (RNA)</strong>, em que há <strong>mais de uma camada</strong> (geralmente são inúmeras) entre a camada de entrada (<em>input</em>) e a camada de saída (<em>output</em>). É também chamada de <strong><em>Deep Neural Network</em></strong>.</p>
 <p>Uma rede neural é “mais profunda” dependendo da quantidade de camadas que possui. Estas camadas são chamadas de <em>hidden layers</em>. Quanto maior o número de <em>hidden layers</em> mais “black-box” fica o modelo, se tornando praticamente impossível dar uma explicação “real” aos parâmetros que o modelo define ao longo das entradas e saídas das diversas camadas.</p>
 <p>Vale ainda ressaltar, conforme será explicado na sequência, que a complexidade de uma rede neural não é devida somente à quantidade de camadas de um modelo, mas também está relacionada ao montante de neurônios que estarão contidos em cada camada.</p>
@@ -2100,8 +2106,8 @@ Prediction  No Yes
 <p>O gráfico acima demonstra como é possível construir uma rede neural bastante complexa e de difícil interpretação, mesmo sobre um conjunto de dados simples. Vale ressaltar que o ponto mais relevante ao aplicar redes neurais não é obter redes complexas, mas sim um melhor o resultado das predições.</p>
 <p>A definição da quantidade de <em>hidden layers</em> ou os seus tamanhos não possuem regras gerais de configuração. Basicamente, a melhor configuração será encontrada por experimentação, utilizando diversas configurações e comparando para as métricas de cada modelo. Por isso que o processo de <em>grid search</em> é muito importante para a utilização de redes neurais. Uma vez que as possibilidades de configurações são infinitas (quantidade de camadas e número de neurônios para cada uma), normalmente é feito um levantamento aleatório de inúmeras possibilidades de configurações.</p>
 </section>
-<section id="funções-de-ativação" class="level3" data-number="6.5.1">
-<h3 data-number="6.5.1" class="anchored" data-anchor-id="funções-de-ativação"><span class="header-section-number">6.5.1</span> Funções de Ativação</h3>
+<section id="funções-de-ativação" class="level3" data-number="7.5.1">
+<h3 data-number="7.5.1" class="anchored" data-anchor-id="funções-de-ativação"><span class="header-section-number">7.5.1</span> Funções de Ativação</h3>
 <p>Até esta parte do documento, os exemplos foram apresentados utilizando função de ativação logística. Porém, a função de ativação mais utilizada em <em>deep learning</em> chama-se ReLU (<em>Rectified Linear Unit</em>), ou simplesmente <em>Rectifier</em>. Para ser possível explicar a função <em>Rectifier</em> é preciso explicar primeiramente a função <em>Tanh</em>, que é base para a <em>Rectifier</em>, bem como as razões pelas quais não é recomendado utliizar a função logística em <em>deep learning</em>.</p>
 <p>Antes de entrar em detalhes das funções de ativação é importante ressaltar que os modelos de <em>deep learning</em>, especificamente do <em>framework</em> H2O (utilizado neste projeto), são treinados com <a href="https://papers.nips.cc/paper/4390-hogwild-a-lock-free-approach-to-parallelizing-stochastic-gradient-descent.pdf"><em>gradient descent</em></a> usando <a href="https://hmkcode.com/ai/backpropagation-step-by-step/"><em>back propagation</em></a> (mecanismo que atualiza os pesos de uma rede neural com base em alguma otimização, que no caso é <em>gradient descent</em>). Dito isto, voltamos às funções.</p>
 <p>A <strong>função logística</strong> tem uma curva na forma de “S” e conta com a seguinte equação:</p>
@@ -2129,8 +2135,8 @@ Prediction  No Yes
 <p>Resumindo, a função mais comum em termos de uso e de implementação nos <em>frameworks</em> de <em>deep learning</em> é a <strong>função ReLu</strong>, pois seu processamento é rápido e sua performance tem se demonstrado melhor que as funções logística e <em>tanh</em>.</p>
 <p>Veja mais sobre as funções de ativação <a href="https://towardsdatascience.com/analyzing-different-types-of-activation-functions-in-neural-networks-which-one-to-prefer-e11649256209">neste link</a>.</p>
 </section>
-<section id="termos-úteis-para-setup-de-deep-neural-networks" class="level3" data-number="6.5.2">
-<h3 data-number="6.5.2" class="anchored" data-anchor-id="termos-úteis-para-setup-de-deep-neural-networks"><span class="header-section-number">6.5.2</span> Termos Úteis para <em>Setup</em> de <em>Deep Neural Networks</em></h3>
+<section id="termos-úteis-para-setup-de-deep-neural-networks" class="level3" data-number="7.5.2">
+<h3 data-number="7.5.2" class="anchored" data-anchor-id="termos-úteis-para-setup-de-deep-neural-networks"><span class="header-section-number">7.5.2</span> Termos Úteis para <em>Setup</em> de <em>Deep Neural Networks</em></h3>
 <p>Além da função de ativação, existem diversos parâmetros de <em>setup</em> que precisam ser definidos para rodar um <em>deep learning</em>. A maioria dos <em>frameworks</em> já possuem parâmetros <em>default</em> que atendem a maior parte dos casos. Porém, para casos em que há necessidade de ajustes (por exemplo, pelo tempo excessivo de processamento), seguem as descrições dos principais parâmetros:</p>
 <ul>
 <li><code>Backpropagation</code>. Técnica que objetiva reduzir o erro geral de uma rede neural por meio de ajustes nos pesos. Para isso utiliza a <a href="https://ml-cheatsheet.readthedocs.io/en/latest/calculus.html#chain-rule">regra da cadeia</a> para calcular as derivadas de funções compostas. Se reduzirmos iterativamente o erro de cada peso, teremos uma série de pesos para produzir boas previsões. Ver <a href="https://ml-cheatsheet.readthedocs.io/en/latest/backpropagation.html">detalhes</a>.</li>
@@ -2139,8 +2145,8 @@ Prediction  No Yes
 <li><code>Iterações</code>: é o número de <em>batchs</em> necessários para completar uma época (<em>epoch</em>).</li>
 </ul>
 </section>
-<section id="exemplo-de-redes-neurais.-lendo-o-conjunto-de-dados-do-titanic" class="level3" data-number="6.5.3">
-<h3 data-number="6.5.3" class="anchored" data-anchor-id="exemplo-de-redes-neurais.-lendo-o-conjunto-de-dados-do-titanic"><span class="header-section-number">6.5.3</span> Exemplo de Redes Neurais. Lendo o conjunto de dados do Titanic</h3>
+<section id="exemplo-de-redes-neurais.-lendo-o-conjunto-de-dados-do-titanic" class="level3" data-number="7.5.3">
+<h3 data-number="7.5.3" class="anchored" data-anchor-id="exemplo-de-redes-neurais.-lendo-o-conjunto-de-dados-do-titanic"><span class="header-section-number">7.5.3</span> Exemplo de Redes Neurais. Lendo o conjunto de dados do Titanic</h3>
 <p>Vamos buscar o arquivo csv do repositório. Após iremos excluir as variáveis a não serem utilizadas e separar o dataset em treino e teste.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb108"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Caso de estar sem internet e precisar puxar o dado localmente</span></span>
@@ -2188,8 +2194,8 @@ dbl (7): passengerid, survived, pclass, age, sibsp, parch, fare
 <li><code>parch</code>: número de pais e filhos (<em>parents and children</em>) a bordo;</li>
 <li><code>fare</code>: tarifa paga pelo passageiro.</li>
 </ul>
-<section id="criando-dummies-binarização-para-fatores-variáveis-categóricas" class="level4" data-number="6.5.3.1">
-<h4 data-number="6.5.3.1" class="anchored" data-anchor-id="criando-dummies-binarização-para-fatores-variáveis-categóricas"><span class="header-section-number">6.5.3.1</span> Criando <code>dummies</code> (binarização) para fatores (variáveis categóricas)</h4>
+<section id="criando-dummies-binarização-para-fatores-variáveis-categóricas" class="level4" data-number="7.5.3.1">
+<h4 data-number="7.5.3.1" class="anchored" data-anchor-id="criando-dummies-binarização-para-fatores-variáveis-categóricas"><span class="header-section-number">7.5.3.1</span> Criando <code>dummies</code> (binarização) para fatores (variáveis categóricas)</h4>
 <p>Os algortimos de redes neurais não trabalham com fatores (variáveis categóricas) diretamente. O passo que é realizado para que o algoritmo consiga trabalhar é criar <code>n</code> variáveis binárias (chamadas de <code>dummies</code>). Teremos então que cada <code>dummy</code> representará um nível de uma variável categórica.</p>
 <p>Por exemplo, ao utilizarmos a variável <code>sex</code> dos dados do titanic, obteremos duas <code>dummies</code>: <code>sex.male</code> e <code>sex.female</code>.</p>
 <p>Para fins matemáticos, evitando viés do modelo, de formar geral não recomenda-se que um conjunto de <code>dummies</code> forme uma matriz de soma 1 para cada linha. Por isso, uma categoria chave é escolhida para cada variável categórica e excluída do modelo. Exemplo: as <code>dummies</code> <code>sex.male</code> e <code>sex.female</code> sempre somarão 1 em cada linha, sendo assim, optamos por desconsiderar a variável <code>sex.female</code>, uma vez que informação do gênero feminino já está inclusa no caso de <code>sex.male = 0</code>.</p>
@@ -2199,8 +2205,8 @@ dbl (7): passengerid, survived, pclass, age, sibsp, parch, fare
 <span id="cb112-3"><a href="#cb112-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cbind</span>(<span class="fu">as_tibble</span>(<span class="fu">model.matrix</span>(<span class="sc">~</span> sex <span class="sc">-</span> <span class="dv">1</span> , <span class="at">data =</span> .))) <span class="co"># Criando dummies para a variável sex</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="divindo-em-treino-e-teste-1" class="level4" data-number="6.5.3.2">
-<h4 data-number="6.5.3.2" class="anchored" data-anchor-id="divindo-em-treino-e-teste-1"><span class="header-section-number">6.5.3.2</span> Divindo em treino e teste</h4>
+<section id="divindo-em-treino-e-teste-1" class="level4" data-number="7.5.3.2">
+<h4 data-number="7.5.3.2" class="anchored" data-anchor-id="divindo-em-treino-e-teste-1"><span class="header-section-number">7.5.3.2</span> Divindo em treino e teste</h4>
 <p>Agora sim, iremos dividir o conjunto de dados em treino e teste.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb113"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="do">## set the seed to make your partition reproducible</span></span>
@@ -2212,8 +2218,8 @@ dbl (7): passengerid, survived, pclass, age, sibsp, parch, fare
 <span id="cb113-7"><a href="#cb113-7" aria-hidden="true" tabindex="-1"></a>test  <span class="ot">&lt;-</span> <span class="fu">anti_join</span>(df_titanic, train, <span class="at">by =</span> <span class="st">'passengerid'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="rodando-os-modelos" class="level4" data-number="6.5.3.3">
-<h4 data-number="6.5.3.3" class="anchored" data-anchor-id="rodando-os-modelos"><span class="header-section-number">6.5.3.3</span> Rodando os modelos</h4>
+<section id="rodando-os-modelos" class="level4" data-number="7.5.3.3">
+<h4 data-number="7.5.3.3" class="anchored" data-anchor-id="rodando-os-modelos"><span class="header-section-number">7.5.3.3</span> Rodando os modelos</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb114"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(neuralnet)</span>
 <span id="cb114-2"><a href="#cb114-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
@@ -2247,7 +2253,7 @@ dbl (7): passengerid, survived, pclass, age, sibsp, parch, fare
 <div class="cell">
 <div class="sourceCode cell-code" id="cb115"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a>t2<span class="sc">-</span>t1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Time difference of 0.03007102 secs</code></pre>
+<pre><code>Time difference of 0.0305438 secs</code></pre>
 </div>
 </div>
 <p>Veja que o pacote <code>neuralnet</code> nos permite também aumentar o número de neurônios e de <em>hidden layers</em>. Veja como fica:</p>
@@ -2282,13 +2288,13 @@ dbl (7): passengerid, survived, pclass, age, sibsp, parch, fare
 <div class="cell">
 <div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a>t4<span class="sc">-</span>t3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Time difference of 7.18474 secs</code></pre>
+<pre><code>Time difference of 6.898422 secs</code></pre>
 </div>
 </div>
 </section>
 </section>
-<section id="avaliação-dos-modelos" class="level3" data-number="6.5.4">
-<h3 data-number="6.5.4" class="anchored" data-anchor-id="avaliação-dos-modelos"><span class="header-section-number">6.5.4</span> Avaliação dos modelos</h3>
+<section id="avaliação-dos-modelos" class="level3" data-number="7.5.4">
+<h3 data-number="7.5.4" class="anchored" data-anchor-id="avaliação-dos-modelos"><span class="header-section-number">7.5.4</span> Avaliação dos modelos</h3>
 <section id="modelo-1---rede-neural-com-apenas-um-neurônio-na-hidden-layer" class="level4 unnumbered">
 <h4 class="unnumbered anchored" data-anchor-id="modelo-1---rede-neural-com-apenas-um-neurônio-na-hidden-layer">Modelo 1 - Rede neural com apenas um neurônio na <em>hidden layer</em></h4>
 <p>Aplicando a função <code>preditc()</code>.</p>
@@ -2332,8 +2338,8 @@ dbl (7): passengerid, survived, pclass, age, sibsp, parch, fare
 </div>
 </section>
 </section>
-<section id="modelo-2---rede-neural-com-diversos-neurônios-e-2-hidden-layers" class="level3" data-number="6.5.5">
-<h3 data-number="6.5.5" class="anchored" data-anchor-id="modelo-2---rede-neural-com-diversos-neurônios-e-2-hidden-layers"><span class="header-section-number">6.5.5</span> Modelo 2 - Rede neural com diversos neurônios e 2 <em>hidden layers</em></h3>
+<section id="modelo-2---rede-neural-com-diversos-neurônios-e-2-hidden-layers" class="level3" data-number="7.5.5">
+<h3 data-number="7.5.5" class="anchored" data-anchor-id="modelo-2---rede-neural-com-diversos-neurônios-e-2-hidden-layers"><span class="header-section-number">7.5.5</span> Modelo 2 - Rede neural com diversos neurônios e 2 <em>hidden layers</em></h3>
 <p>Aplicando a função <code>preditc()</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb125"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb125-1"><a href="#cb125-1" aria-hidden="true" tabindex="-1"></a>pred2 <span class="ot">&lt;-</span> <span class="fu">predict</span>(net2,</span>
@@ -2374,8 +2380,8 @@ dbl (7): passengerid, survived, pclass, age, sibsp, parch, fare
 </div>
 </div>
 </section>
-<section id="comparando-a-curva-roc-dos-dois-modelos" class="level3" data-number="6.5.6">
-<h3 data-number="6.5.6" class="anchored" data-anchor-id="comparando-a-curva-roc-dos-dois-modelos"><span class="header-section-number">6.5.6</span> Comparando a curva ROC dos dois modelos</h3>
+<section id="comparando-a-curva-roc-dos-dois-modelos" class="level3" data-number="7.5.6">
+<h3 data-number="7.5.6" class="anchored" data-anchor-id="comparando-a-curva-roc-dos-dois-modelos"><span class="header-section-number">7.5.6</span> Comparando a curva ROC dos dois modelos</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb130"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb130-1"><a href="#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">pty =</span> <span class="st">"s"</span>)</span>
 <span id="cb130-2"><a href="#cb130-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(roc1, <span class="at">print.auc =</span> <span class="cn">TRUE</span>, <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">main =</span> <span class="st">"ROC"</span>, <span class="at">legacy.axes =</span> <span class="cn">TRUE</span>, </span>
@@ -2409,8 +2415,8 @@ AUC of roc1 AUC of roc2
 </div>
 </div>
 </section>
-<section id="considerações-2" class="level3" data-number="6.5.7">
-<h3 data-number="6.5.7" class="anchored" data-anchor-id="considerações-2"><span class="header-section-number">6.5.7</span> Considerações</h3>
+<section id="considerações-2" class="level3" data-number="7.5.7">
+<h3 data-number="7.5.7" class="anchored" data-anchor-id="considerações-2"><span class="header-section-number">7.5.7</span> Considerações</h3>
 <p>Entre os modelos treinados, nem sempre é nítida a diferença entre o melhor apenas observando a curva ROC. Sendo assim, o teste de DeLong permite terum parâmetro objetivo para ajudar na escolha do melhor modelo. O teste possui a hipótese nula (<span class="math inline">\(H_0\)</span>) de que a AUC dos testes são iguais.</p>
 <p>Veja também que <strong>nem sempre o aumento do porder computacional exigido traz resultados proporcionalmente melhores!</strong></p>
 <p>O grande <em>trade-off</em> das redes neurais (e principalmente das <em>deep learnings</em>, que usam diversas <em>hidden layers</em>) é justamente este: <strong>até que ponto a necessidade exponencial de maior poder computacional gera de fato um ganho preditivo no modelo que está sendo treinado?</strong></p>
@@ -2419,8 +2425,8 @@ AUC of roc1 AUC of roc2
 <!--# *Deep Learning* -->
 </section>
 </section>
-<section id="avaliação-de-modelos-supervisionados" class="level2" data-number="6.6">
-<h2 data-number="6.6" class="anchored" data-anchor-id="avaliação-de-modelos-supervisionados"><span class="header-section-number">6.6</span> Avaliação de modelos supervisionados</h2>
+<section id="avaliação-de-modelos-supervisionados" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="avaliação-de-modelos-supervisionados"><span class="header-section-number">7.6</span> Avaliação de modelos supervisionados</h2>
 <p>É comum que na prática sejam aplicados <strong>modelos com variadas parametrizações</strong> e também <strong>diferentes famílias de modelos</strong> sobre um mesmo conjunto de dados de treino.</p>
 <p>Com isso, o tema <strong>avaliação de modelos de <em>machine learning</em></strong> possui uma grande relevância, além de possuir temas bastante complexos e ser um tema extenso.</p>
 <p>A seguir alguns dos pontos principais são elencados acerca deste tópico.</p>
@@ -3044,7 +3050,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./teste_de_hipoteses.html" class="pagination-link" aria-label="Análise de Hipóteses">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Análise de Hipóteses</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Análise de Hipóteses</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

@@ -1,0 +1,171 @@
+# Qualidade de Dados
+
+A qualidade dos dados é um pilar fundamental em qualquer projeto de ciência de dados. Dados de baixa qualidade podem comprometer a integridade das análises e levar a decisões equivocadas. Portanto, garantir a qualidade dos dados deve ser um processo contínuo e sistemático em qualquer projeto de data science. Este capítulo apresenta uma abordagem prática para avaliar e melhorar a qualidade dos dados, dividindo a análise por tipo de variável: categórica, numérica, textual e temporal.
+
+## Pacotes que vamos utilizar
+
+Para realizar as análises de qualidade de dados, utilizaremos os seguintes pacotes no R, que oferecem ferramentas poderosas para manipulação, visualização e limpeza de dados:
+
+```{r, echo=TRUE, warning=FALSE, message=FALSE}
+# Carregando os pacotes necessários
+library(dplyr) # Manipulação de dados
+library(ggplot2) # Visualização de dados
+library(janitor) # Limpeza e resumo dos dados
+library(lubridate) # Manipulação de datas
+library(naniar) # Visualização de dados faltantes
+library(stringr) # Manipulação de textos
+library(tidyr) # Para transformar os dados
+```
+
+## Qualidade de Dados Categóricos
+
+A análise de dados categóricos é crucial para entender a distribuição das classes e identificar possíveis desequilíbrios. Um bom balanceamento de classes é essencial para garantir que os modelos de aprendizado de máquina não sejam tendenciosos. Além disso, é importante verificar o percentual de dados ausentes, pois a falta de dados categóricos pode distorcer a análise.
+
+```{r, echo=TRUE}
+# Carregando o dataset 'iris' e criando dados ausentes para demonstração
+data("iris")
+set.seed(1234) # Para reprodutibilidade
+
+# Introduzindo NA's aleatoriamente em algumas observações da coluna Species
+iris$Species[sample(51:150, 25)] <- NA 
+
+# Análise de balanceamento de classes com 'tabyl' do 'janitor'
+iris_tabyl <- iris |> 
+  janitor::tabyl(Species)
+
+# Exibindo análise
+iris_tabyl
+```
+
+## Qualidade de Dados Numéricos
+
+Para dados numéricos, calcular estatísticas descritivas como média, mediana, desvio padrão, mínimo e máximo é fundamental para entender a distribuição dos dados. Além disso, verificar o percentual de dados ausentes ajuda a identificar problemas que podem afetar a análise. Dados numéricos de baixa qualidade podem levar a modelos preditivos imprecisos.
+
+```{r, echo=TRUE}
+# Carregando o dataset 'airquality'
+data("airquality")
+
+# Calculando as estatísticas descritivas e percentual de dados faltantes
+stats <- airquality |>
+  dplyr::select(-c("Month", "Day")) |> # Retiradas variáveis que,
+  # apesar de numéricas, sua análise deve ser feita como categoria.
+  dplyr::summarise(
+    dplyr::across(
+      dplyr::where(is.numeric),
+      list(
+        mean = ~mean(., na.rm = TRUE),
+        median = ~median(., na.rm = TRUE),
+        sd = ~sd(., na.rm = TRUE),
+        min = ~min(., na.rm = TRUE),
+        max = ~max(., na.rm = TRUE),
+        na_percentage = ~sum(is.na(.)) / n() * 100
+      ),
+      .names = "{.col}-{.fn}"  # Usando hífen como separador
+    )
+  ) |>
+  tidyr::pivot_longer(
+    cols = everything(), 
+    names_to = c("Variable", ".value"), 
+    names_sep = "-"  # Alinhando o separador com o usado acima
+  )
+
+# Exibindo as estatísticas descritivas
+stats
+```
+
+## Qualidade de Dados Tipo Texto
+
+A análise de dados textuais envolve verificar o comprimento dos textos, o percentual de campos ausentes e identificar padrões comuns ou preenchimentos preguiçosos. Dados textuais são frequentemente utilizados para análises qualitativas e sentimentais, e a qualidade desses dados pode impactar significativamente os resultados.
+
+```{r, echo=TRUE}
+# Lendo o dataset
+customer_satisfaction_df <- read.csv("data/customer_satisfaction.csv")
+
+# Análise de variáveis texto (coluna Feedback)
+text_analysis <- customer_satisfaction_df |>
+  summarise(
+    average_length = mean(str_length(Feedback), na.rm = TRUE),
+    max_length = max(str_length(Feedback), na.rm = TRUE),
+    min_length = min(str_length(Feedback), na.rm = TRUE),
+    na_empty_percent = sum(is.na(Feedback) | Feedback == "") / n() * 100,
+    unique_char_lines = sum(str_detect(Feedback, "^([a-zA-Z0-9])\\1*$"), na.rm = TRUE),
+    n = n()
+  )
+
+# Exibindo resultados
+text_analysis
+```
+
+## Qualidade de Dados Temporais
+
+Para dados temporais, é essencial identificar as datas mínimas e máximas e o percentual de dados ausentes. Dados temporais são frequentemente utilizados para análises de séries temporais e previsões, e a qualidade desses dados é crucial para a precisão das análises.
+
+```{r, echo=TRUE}
+# Tendo certeza que 'Data_Entrada' é do tipo data
+str(customer_satisfaction_df$Data_Entrada)
+```
+
+```{r, echo=TRUE}
+# Convertendo 'Data_Entrada' para o tipo data com ymd
+# Registros incorretos serão convertidos em NA
+customer_satisfaction_df$Data_Entrada <- ymd(customer_satisfaction_df$Data_Entrada)
+str(customer_satisfaction_df$Data_Entrada)
+```
+
+```{r, echo=TRUE}
+# Análise de variáveis data
+date_analysis <- customer_satisfaction_df %>%
+  summarise(
+    min_date = min(Data_Entrada, na.rm = TRUE),
+    max_date = max(Data_Entrada, na.rm = TRUE),
+    na_percentage = sum(is.na(Data_Entrada)) / n() * 100
+  )
+
+# Exibindo resultados
+date_analysis
+```
+
+## Dados Faltantes e Remoção de Outliers
+
+### Tratamento dos Dados Faltantes
+
+Dados faltantes são um desafio comum em qualquer análise de dados. Eles podem ser tratados através de remoção ou imputação. A escolha do método depende do contexto e da quantidade de dados ausentes. Remover dados faltantes pode ser apropriado quando a perda de informações é mínima, enquanto a imputação pode ser mais adequada quando se deseja preservar o máximo de dados possível.
+
+#### Remoção
+
+```{r, echo=TRUE, eval=FALSE}
+# Removendo linhas com dados faltantes
+airquality |> na.omit()
+```
+
+#### Imputação
+
+Imputação pode ser feita pela média ou por regressão, dependendo da complexidade desejada. A imputação pela média é simples e mantém a média geral dos dados, enquanto a imputação por regressão pode capturar melhor as relações entre variáveis.
+
+```{r, echo=TRUE}
+# Imputação dos dados faltantes com a média
+airquality_imputed <- airquality |>
+  mutate(across(where(is.numeric), ~ ifelse(is.na(.), mean(., na.rm = TRUE), .)))
+```
+
+### Tratamento de Outliers
+
+Outliers são valores que se desviam significativamente dos outros dados e podem distorcer análises e modelos. A remoção de outliers pode ser feita usando o método do IQR, que é robusto a valores extremos e fornece um método confiável para identificá-los.
+
+```{r, echo=TRUE}
+# Calculando o IQR para 'Ozone'
+ozone_IQR <- IQR(airquality$Ozone, na.rm = TRUE)
+ozone_IQR
+```
+
+```{r, echo=TRUE}
+# Definindo limites para outliers
+lower_bound <- quantile(airquality$Ozone, 0.25, na.rm = TRUE) - 1.5 * ozone_IQR
+upper_bound <- quantile(airquality$Ozone, 0.75, na.rm = TRUE) + 1.5 * ozone_IQR
+
+# Filtrando outliers
+airquality_no_outliers <- airquality |>
+  dplyr::filter(Ozone > lower_bound & Ozone < upper_bound)
+```
+
+Garantir a qualidade dos dados é um processo contínuo e essencial para o sucesso de qualquer projeto de ciência de dados. Ao dividir a análise por tipo de variável e aplicar técnicas específicas para cada uma, podemos melhorar significativamente a integridade e a confiabilidade dos dados, resultando em análises mais precisas e decisões mais informadas.
