@@ -1,0 +1,201 @@
+ID_Cliente,Data_Entrada,Plano,Nota,Feedback
+1,20222-01-27,semestral,3.0,"Não estou satisfeito, vou cancelar em breve."
+2,202-05-18,semestral,,"Excelente serviço, recomendo a todos!"
+3,2002-02-14,anual,0.0,"Serviço razoável, mas pode melhorar."
+4, ,mensal,2.0,"Não estou satisfeito, vou cancelar em breve."
+5, ,semestral,1.0,"O serviço é bom, mas poderia ser mais barato."
+6,"Dezembro de 2022",mensal,3.0,"Serviço razoável, mas pode melhorar."
+7,2022-01-20,semestral,5.0,
+8,2022-07-14,semestral,5.0,"O serviço é bom, mas poderia ser mais barato."
+9,2022-10-02,semestral,0.0,
+10,2022-10-15,mensal,1.0,aaaaaaa
+11,2022-06-20,semestral,0.0,kkkkk
+12,2022-06-24,mensal,3.0,"Regular, às vezes tem problemas de conexão."
+13,2022-01-27,semestral,,zzzzzzz
+14,2022-03-23,anual,2.0,"Regular, às vezes tem problemas de conexão."
+15,2022-03-11,semestral,4.0,b
+16,2022-06-22,anual,4.0,b
+17,2022-10-15,anual,0.0,a
+18,2022-06-20,semestral,3.0,Muito satisfeito com o serviço!
+19,2022-12-26,semestral,4.0,"Excelente serviço, recomendo a todos!"
+20,2022-05-06,semestral,2.0,"Serviço razoável, mas pode melhorar."
+21,2022-03-25,mensal,2.0,b
+22,2022-01-01,semestral,2.0,
+23,2022-08-12,anual,1.0,a
+24,2022-02-14,anual,3.0,"Não estou satisfeito, vou cancelar em breve."
+25,2022-11-02,mensal,0.0,.
+26,2022-07-13,mensal,0.0,"Regular, às vezes tem problemas de conexão."
+27,2022-02-05,anual,4.0,"Serviço razoável, mas pode melhorar."
+28,2022-01-04,semestral,,Muito satisfeito com o serviço!
+29,2022-06-11,mensal,,"Serviço razoável, mas pode melhorar."
+30,2022-08-18,anual,0.0,"Serviço razoável, mas pode melhorar."
+31,2022-02-22,anual,4.0,b
+32,2022-01-23,semestral,5.0,
+33,2022-02-17,anual,2.0,"Serviço razoável, mas pode melhorar."
+34,2022-12-08,mensal,5.0,"O serviço é bom, mas poderia ser mais barato."
+35,2022-03-14,semestral,0.0,Muito satisfeito com o serviço!
+36,2022-03-06,mensal,,
+37,2022-01-11,anual,5.0,b
+38,2022-05-30,mensal,1.0,
+39,2022-08-09,mensal,3.0,a
+40,2022-10-21,semestral,1.0,
+41,2022-09-02,semestral,3.0,
+42,2022-05-16,semestral,1.0,"Não estou satisfeito, vou cancelar em breve."
+43,2022-08-29,mensal,3.0,b
+44,2022-01-19,anual,1.0,
+45,2022-06-06,anual,,"Não estou satisfeito, vou cancelar em breve."
+46,2022-06-25,semestral,,"Regular, às vezes tem problemas de conexão."
+47,2022-09-25,anual,0.0,a
+48,2022-09-05,mensal,1.0,Muito satisfeito com o serviço!
+49,2022-04-16,semestral,,a
+50,2022-11-08,mensal,,a
+51,2022-11-24,mensal,0.0,.
+52,2022-09-27,mensal,2.0,"Excelente serviço, recomendo a todos!"
+53,2022-10-17,mensal,0.0,"Regular, às vezes tem problemas de conexão."
+54,2022-06-11,semestral,0.0,.
+55,2022-01-07,semestral,1.0,a
+56,2022-07-23,mensal,1.0,
+57,2022-11-27,mensal,3.0,"O serviço é bom, mas poderia ser mais barato."
+58,2022-09-20,mensal,3.0,"Excelente serviço, recomendo a todos!"
+59,2022-08-11,semestral,1.0,"O serviço é bom, mas poderia ser mais barato."
+60,2022-12-17,anual,5.0,"Excelente serviço, recomendo a todos!"
+61,2022-10-03,semestral,3.0,zzzzzz
+62,2022-11-23,anual,0.0,"Serviço razoável, mas pode melhorar."
+63,2022-12-08,semestral,0.0,
+64,2022-11-02,semestral,1.0,Muito satisfeito com o serviço!
+65,2022-09-06,semestral,0.0,a
+66,2022-09-24,semestral,3.0,Muito satisfeito com o serviço!
+67,2022-12-09,mensal,5.0,"Serviço razoável, mas pode melhorar."
+68,2022-08-03,semestral,0.0,a
+69,2022-07-11,mensal,1.0,"Excelente serviço, recomendo a todos!"
+70,2022-09-19,anual,5.0,"O serviço é bom, mas poderia ser mais barato."
+71,2022-01-17,semestral,0.0,b
+72,2022-11-27,semestral,2.0,"Serviço razoável, mas pode melhorar."
+73,2022-04-03,semestral,3.0,
+74,2022-02-12,mensal,,"Não estou satisfeito, vou cancelar em breve."
+75,2022-09-07,mensal,,b
+76,2022-12-03,semestral,1.0,"Excelente serviço, recomendo a todos!"
+77,2022-05-15,anual,,b
+78,2022-03-29,semestral,1.0,"Serviço razoável, mas pode melhorar."
+79,2022-06-21,mensal,1.0,"Serviço razoável, mas pode melhorar."
+80,2022-06-22,anual,,
+81,2022-10-11,semestral,3.0,"Não estou satisfeito, vou cancelar em breve."
+82,2022-07-20,anual,2.0,b
+83,2022-02-07,anual,5.0,zzzzzz
+84,2022-08-22,anual,1.0,"Serviço razoável, mas pode melhorar."
+85,2022-07-18,anual,0.0,"Excelente serviço, recomendo a todos!"
+86,2022-10-21,anual,5.0,
+87,2022-06-22,anual,0.0,Muito satisfeito com o serviço!
+88,2022-01-09,semestral,2.0,"Regular, às vezes tem problemas de conexão."
+89,2022-04-07,mensal,2.0,"O serviço é bom, mas poderia ser mais barato."
+90,2022-10-28,mensal,5.0,Muito satisfeito com o serviço!
+91,2022-02-15,anual,3.0,a
+92,2022-11-18,anual,2.0,b
+93,2022-07-06,semestral,,"Regular, às vezes tem problemas de conexão."
+94,2022-01-07,anual,1.0,b
+95,2022-06-30,mensal,,zzzzzz
+96,2022-04-28,anual,0.0,Muito satisfeito com o serviço!
+97,2022-07-27,semestral,0.0,b
+98,2022-09-30,mensal,4.0,zzzzzz
+99,2022-09-14,semestral,0.0,"Regular, às vezes tem problemas de conexão."
+100,2022-01-31,anual,0.0,
+101,2022-11-24,semestral,1.0,
+102,2022-05-28,semestral,2.0,"Não estou satisfeito, vou cancelar em breve."
+103,2022-09-11,mensal,1.0,"Serviço razoável, mas pode melhorar."
+104,2022-11-19,semestral,1.0,Muito satisfeito com o serviço!
+105,2022-04-30,mensal,4.0,b
+106,2022-10-06,anual,,zzzzzz
+107,2022-09-05,semestral,0.0,"Serviço razoável, mas pode melhorar."
+108,2022-04-01,anual,,"Excelente serviço, recomendo a todos!"
+109,2022-03-20,anual,4.0,"Serviço razoável, mas pode melhorar."
+110,2022-10-02,anual,,Muito satisfeito com o serviço!
+111,2022-08-16,mensal,5.0,
+112,2022-07-13,semestral,,a
+113,2022-08-25,mensal,,"Não estou satisfeito, vou cancelar em breve."
+114,2022-01-23,semestral,4.0,"O serviço é bom, mas poderia ser mais barato."
+115,2022-01-06,anual,2.0,"Excelente serviço, recomendo a todos!"
+116,2022-03-10,mensal,3.0,"Excelente serviço, recomendo a todos!"
+117,2022-08-22,mensal,4.0,"Regular, às vezes tem problemas de conexão."
+118,2022-04-09,semestral,2.0,a
+119,2022-01-11,anual,2.0,
+120,2022-05-12,semestral,5.0,a
+121,2022-06-30,semestral,1.0,Muito satisfeito com o serviço!
+122,2022-12-17,semestral,,"Serviço razoável, mas pode melhorar."
+123,2022-05-20,semestral,3.0,Muito satisfeito com o serviço!
+124,2022-08-11,anual,0.0,b
+125,2022-11-21,semestral,4.0,"Regular, às vezes tem problemas de conexão."
+126,2022-08-04,mensal,2.0,"Não estou satisfeito, vou cancelar em breve."
+127,2022-01-01,mensal,2.0,Muito satisfeito com o serviço!
+128,2022-02-25,mensal,2.0,"Excelente serviço, recomendo a todos!"
+129,2022-11-13,mensal,5.0,ccccc
+130,2022-02-02,semestral,,"Regular, às vezes tem problemas de conexão."
+131,2022-09-19,semestral,0.0,ccccc
+132,2022-07-01,anual,,"Não estou satisfeito, vou cancelar em breve."
+133,2022-12-29,semestral,2.0,"Excelente serviço, recomendo a todos!"
+134,2022-02-15,semestral,4.0,b
+135,2022-02-12,anual,,b
+136,2022-08-10,mensal,0.0,"Não estou satisfeito, vou cancelar em breve."
+137,2022-01-05,anual,5.0,"Excelente serviço, recomendo a todos!"
+138,2022-10-02,mensal,2.0,
+139,2022-07-13,semestral,0.0,"O serviço é bom, mas poderia ser mais barato."
+140,2022-02-07,mensal,3.0,"O serviço é bom, mas poderia ser mais barato."
+141,2022-10-07,semestral,5.0,b
+142,2022-12-22,semestral,1.0,"Serviço razoável, mas pode melhorar."
+143,2022-11-22,semestral,4.0,
+144,2022-07-26,semestral,2.0,
+145,2022-01-15,semestral,3.0,"Excelente serviço, recomendo a todos!"
+146,2022-06-15,anual,,"Não estou satisfeito, vou cancelar em breve."
+147,2022-05-15,mensal,0.0,
+148,2022-08-30,anual,5.0,"O serviço é bom, mas poderia ser mais barato."
+149,2022-01-17,semestral,4.0,a
+150,2022-10-15,semestral,5.0,a
+151,2022-06-21,semestral,4.0,b
+152,2022-08-01,anual,1.0,"O serviço é bom, mas poderia ser mais barato."
+153,2022-06-28,mensal,3.0,Muito satisfeito com o serviço!
+154,2022-01-13,semestral,5.0,"Serviço razoável, mas pode melhorar."
+155,2022-11-24,mensal,5.0,a
+156,2022-11-22,mensal,0.0,a
+157,2022-03-25,semestral,1.0,
+158,2022-08-03,mensal,1.0,
+159,2022-02-02,anual,5.0,"Regular, às vezes tem problemas de conexão."
+160,2022-12-14,semestral,2.0,b
+161,2022-03-15,anual,3.0,"Regular, às vezes tem problemas de conexão."
+162,2022-07-10,mensal,,"Não estou satisfeito, vou cancelar em breve."
+163,2022-12-09,mensal,3.0,"Não estou satisfeito, vou cancelar em breve."
+164,2022-05-01,anual,2.0,"Não estou satisfeito, vou cancelar em breve."
+165,2022-02-10,semestral,5.0,Muito satisfeito com o serviço!
+166,2022-11-18,anual,4.0,"Não estou satisfeito, vou cancelar em breve."
+167,2022-01-30,semestral,4.0,"Não estou satisfeito, vou cancelar em breve."
+168,2022-09-23,semestral,1.0,"O serviço é bom, mas poderia ser mais barato."
+169,2022-07-18,semestral,3.0,a
+170,2022-10-03,anual,0.0,Muito satisfeito com o serviço!
+171,2022-06-06,anual,2.0,Muito satisfeito com o serviço!
+172,2022-03-16,semestral,5.0,a
+173,2022-12-02,anual,0.0,
+174,2022-05-30,semestral,,
+175,2022-07-19,anual,5.0,Muito satisfeito com o serviço!
+176,2022-07-08,mensal,5.0,Muito satisfeito com o serviço!
+177,2022-03-06,semestral,1.0,"Não estou satisfeito, vou cancelar em breve."
+178,2022-10-01,anual,,a
+179,2022-06-22,anual,1.0,"Excelente serviço, recomendo a todos!"
+180,2022-09-22,mensal,2.0,"Regular, às vezes tem problemas de conexão."
+181,2022-03-03,semestral,1.0,"Excelente serviço, recomendo a todos!"
+182,2022-11-19,semestral,0.0,"O serviço é bom, mas poderia ser mais barato."
+183,2022-03-27,anual,1.0,"Excelente serviço, recomendo a todos!"
+184,2022-10-29,mensal,5.0,
+185,2022-07-17,anual,4.0,"Não estou satisfeito, vou cancelar em breve."
+186,2022-08-10,anual,0.0,ccccc
+187,2022-02-01,mensal,2.0,Muito satisfeito com o serviço!
+188,2022-03-11,mensal,0.0,
+189,2022-08-21,anual,0.0,"Regular, às vezes tem problemas de conexão."
+190,2022-12-09,mensal,2.0,b
+191,2022-01-11,semestral,0.0,"Não estou satisfeito, vou cancelar em breve."
+192,2022-06-28,anual,2.0,a
+193,2022-08-19,mensal,2.0,"Não estou satisfeito, vou cancelar em breve."
+194,2022-12-31,mensal,1.0,ccccc
+195,2022-12-09,semestral,2.0,a
+196,2022-08-19,semestral,3.0,a
+197,2022-06-05,semestral,0.0,ccccc
+198,2022-08-08,anual,4.0,"Não estou satisfeito, vou cancelar em breve."
+199,2022-01-15,semestral,2.0,a
+200,2022-03-23,anual,4.0,"O serviço é bom, mas poderia ser mais barato."
