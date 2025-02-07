@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>3&nbsp; Análise de Hipóteses – O manual do Cientista de Dados</title>
+<title>4&nbsp; Análise de Hipóteses – O manual do Cientista de Dados</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,7 +31,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./machine_learning.html" rel="next">
-<link href="./o_que_e_ds.html" rel="prev">
+<link href="./qualidade_de_dados.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -110,7 +110,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./teste_de_hipoteses.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Análise de Hipóteses</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./teste_de_hipoteses.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Análise de Hipóteses</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -155,14 +155,20 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./qualidade_de_dados.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Qualidade de Dados</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./teste_de_hipoteses.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Análise de Hipóteses</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Análise de Hipóteses</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./machine_learning.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title"><em>Machine Learning</em> para negócios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title"><em>Machine Learning</em> para negócios</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -181,7 +187,7 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#conceitos-importantes-sobre-os-testes-de-hipóteses" id="toc-conceitos-importantes-sobre-os-testes-de-hipóteses" class="nav-link active" data-scroll-target="#conceitos-importantes-sobre-os-testes-de-hipóteses"><span class="header-section-number">3.1</span> Conceitos Importantes sobre os Testes de Hipóteses</a>
+  <li><a href="#conceitos-importantes-sobre-os-testes-de-hipóteses" id="toc-conceitos-importantes-sobre-os-testes-de-hipóteses" class="nav-link active" data-scroll-target="#conceitos-importantes-sobre-os-testes-de-hipóteses"><span class="header-section-number">4.1</span> Conceitos Importantes sobre os Testes de Hipóteses</a>
   <ul class="collapse">
   <li><a href="#hipótese-nula-e-hipótese-alternativa" id="toc-hipótese-nula-e-hipótese-alternativa" class="nav-link" data-scroll-target="#hipótese-nula-e-hipótese-alternativa">Hipótese Nula e Hipótese Alternativa</a></li>
   <li><a href="#qual-a-decisão-em-um-teste-de-hipótese" id="toc-qual-a-decisão-em-um-teste-de-hipótese" class="nav-link" data-scroll-target="#qual-a-decisão-em-um-teste-de-hipótese">Qual a Decisão em um Teste de Hipótese?</a></li>
@@ -196,7 +202,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Análise de Hipóteses</span></h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Análise de Hipóteses</span></h1>
 </div>
 
 
@@ -232,8 +238,8 @@ window.Quarto = {
 <p>Por exemplo, uma organização quer saber se os homens possuem salário superior às mulheres em um determinado cargo. A tabela dinâmica vai trazer o resultado, que pode ser expresso através da média dos salários daquele cargo em cada gênero (masculino ou feminino). Porém, o resultado da média pode mostrar apenas uma diferença pequena entre os salários de homens e mulheres, o que acaba deixando no ar a dúvida inicial e nenhuma conclusão pode ser tomada.</p>
 <p>Um teste de hipótese estatística é capaz de dizer (quando bem aplicado) que o salário das mulheres é de fato menor ou maior naquele caso, e que o resultado mostrado na média não é uma simples obra do acaso.</p>
 </section>
-<section id="conceitos-importantes-sobre-os-testes-de-hipóteses" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="conceitos-importantes-sobre-os-testes-de-hipóteses"><span class="header-section-number">3.1</span> Conceitos Importantes sobre os Testes de Hipóteses</h2>
+<section id="conceitos-importantes-sobre-os-testes-de-hipóteses" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="conceitos-importantes-sobre-os-testes-de-hipóteses"><span class="header-section-number">4.1</span> Conceitos Importantes sobre os Testes de Hipóteses</h2>
 <p>Uma hipótese estatística, formalmente, é uma afirmação sobre alguma característica da população. Um teste de hipótese, por sua vez, <strong>é um procedimento estatístico para dizer se uma afirmação sobre a população é verdadeira</strong>.</p>
 <p>Se a probabilidade de ocorrência de um evento atrelado à hipótese for baixa, então a hipótese é assumida como não verdadeira.</p>
 <section id="hipótese-nula-e-hipótese-alternativa" class="level3 unnumbered">
@@ -285,11 +291,11 @@ window.Quarto = {
 <p>Para validar esta hipótese é necessário um teste não pareado sobre as notas dos líderes em cada área.</p>
 </div>
 <p>Vale ainda ressaltar que, em testes para dados pareados, obrigatoriamente o tamanho das amostras deve ser igual (afinal, as amostras devem ser “pares”). Já em testes não pareados os tamanhos das amostras podem ser diferentes.</p>
-<section id="tipos-de-testes" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="tipos-de-testes"><span class="header-section-number">3.2</span> Tipos de Testes</h2>
+<section id="tipos-de-testes" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="tipos-de-testes"><span class="header-section-number">4.2</span> Tipos de Testes</h2>
 <p>Existem diversos testes de hipóteses, sendo que cada um é mais adequado para uma situação específica. A seguir são apresentados alguns testes (não todos, pois existem diversos) que servem para a maior parte das situações que envolvem testes de hipóteses.</p>
-<section id="testes-de-proporções" class="level3" data-number="3.2.1">
-<h3 data-number="3.2.1" class="anchored" data-anchor-id="testes-de-proporções"><span class="header-section-number">3.2.1</span> Testes de Proporções</h3>
+<section id="testes-de-proporções" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="testes-de-proporções"><span class="header-section-number">4.2.1</span> Testes de Proporções</h3>
 <p>Os testes de proporções são adequados quando se têm <strong>variáveis binárias ou categóricas</strong> (ou numéricas divididas em faixas, como renda, idade ou número de funcionários), e se deseja saber se determinada característica é mais ou menos presente em um certo tratamento. Alguns exemplos de hipóteses alternativas a serem verificadas com testes de proporções:</p>
 <ul>
 <li>O <em>turnover</em> voluntário é maior em colaboradores do gênero masculino do que feminino;</li>
@@ -314,8 +320,8 @@ window.Quarto = {
 <p>Na linguagem R, o teste de Fisher pode ser facilmente implementado utilizando a função <code>fisher.test</code>, que necessita como input uma tabela de continguência ou a especificação de duas variáveis categorias de uma base de dados, que serão então utilizadas pelo teste para identificar a existência ou não de associações entre elas.</p>
 </section>
 </section>
-<section id="testes-para-diferenças-com-uma-amostra-one-sample" class="level3" data-number="3.2.2">
-<h3 data-number="3.2.2" class="anchored" data-anchor-id="testes-para-diferenças-com-uma-amostra-one-sample"><span class="header-section-number">3.2.2</span> Testes para Diferenças com uma Amostra (<em>one sample</em>)</h3>
+<section id="testes-para-diferenças-com-uma-amostra-one-sample" class="level3" data-number="4.2.2">
+<h3 data-number="4.2.2" class="anchored" data-anchor-id="testes-para-diferenças-com-uma-amostra-one-sample"><span class="header-section-number">4.2.2</span> Testes para Diferenças com uma Amostra (<em>one sample</em>)</h3>
 <p>São testes aplicados para <strong>variáveis contínuas</strong> em caso de se ter apenas uma amostra de dados e desejar testar se há diferença desta amostra contra parâmetros hipotéticos. Por exemplo:</p>
 <p><span class="math inline">\(H_0\)</span>: os colaboradores recém promovidos recebem em torno de 100% da faixa.</p>
 <p><span class="math inline">\(H_1\)</span>: os colaboradores recém promovidos recebem mais de 100% da faixa.</p>
@@ -329,8 +335,8 @@ window.Quarto = {
 <p>É um teste <strong>não paramétrico</strong> para uma amostra contra uma mediana hipotética. Foi proposto no mesmo artigo que o teste Wilcoxon Rank Sum, aplicável para duas amostras. Na linguagem R, utiliza-se a função <code>wilcox.test()</code>.</p>
 </section>
 </section>
-<section id="testes-para-diferenças-entre-dois-grupos-two-sample" class="level3" data-number="3.2.3">
-<h3 data-number="3.2.3" class="anchored" data-anchor-id="testes-para-diferenças-entre-dois-grupos-two-sample"><span class="header-section-number">3.2.3</span> Testes para Diferenças entre Dois Grupos (<em>two sample</em>)</h3>
+<section id="testes-para-diferenças-entre-dois-grupos-two-sample" class="level3" data-number="4.2.3">
+<h3 data-number="4.2.3" class="anchored" data-anchor-id="testes-para-diferenças-entre-dois-grupos-two-sample"><span class="header-section-number">4.2.3</span> Testes para Diferenças entre Dois Grupos (<em>two sample</em>)</h3>
 <p>Quando se têm <strong>variáveis contínuas</strong> e se deseja verificar uma possível diferença entre duas amostras utiliza-se um teste para verificar se há diferenças entre as distribuições.</p>
 <section id="teste-t-two-sample" class="level4 unnumbered">
 <h4 class="unnumbered anchored" data-anchor-id="teste-t-two-sample">Teste T Two Sample</h4>
@@ -389,8 +395,8 @@ window.Quarto = {
 </ul>
 </section>
 </section>
-<section id="testes-para-diferenças-entre-mais-de-dois-grupos" class="level3" data-number="3.2.4">
-<h3 data-number="3.2.4" class="anchored" data-anchor-id="testes-para-diferenças-entre-mais-de-dois-grupos"><span class="header-section-number">3.2.4</span> Testes para Diferenças entre mais de Dois Grupos</h3>
+<section id="testes-para-diferenças-entre-mais-de-dois-grupos" class="level3" data-number="4.2.4">
+<h3 data-number="4.2.4" class="anchored" data-anchor-id="testes-para-diferenças-entre-mais-de-dois-grupos"><span class="header-section-number">4.2.4</span> Testes para Diferenças entre mais de Dois Grupos</h3>
 <section id="anova" class="level4 unnumbered">
 <h4 class="unnumbered anchored" data-anchor-id="anova">ANOVA</h4>
 <p>Análise de Variância (ANOVA, do inglês <em>Analisys of Variance</em>), compreende uma família de testes que permitem verificar diferenças entre séries de dados. A ideia central da ANOVA é testar se há <strong>diferença entre as médias</strong> (a ANOVA pertence aos <strong>testes paramétricos</strong>) das amostras analisadas, permitindo trabalhar com <strong>3 ou mais amostras</strong>. A Análise de Variância é muito utilizada em ambientes experimentais, para verificar a existência de diferenças entre variados tratamentos aplicados em grupos distintos.</p>
@@ -407,8 +413,8 @@ window.Quarto = {
 </section>
 </section>
 </section>
-<section id="qual-teste-utilizar-em-cada-caso" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="qual-teste-utilizar-em-cada-caso"><span class="header-section-number">3.3</span> Qual teste utilizar em cada caso?</h2>
+<section id="qual-teste-utilizar-em-cada-caso" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="qual-teste-utilizar-em-cada-caso"><span class="header-section-number">4.3</span> Qual teste utilizar em cada caso?</h2>
 <p>Dado que existem diversos testes de hipótese e que cada um é mais adequado para um determinado tipo de situação, a seguir é apresentado um fluxograma que auxilia na escolha do teste.</p>
 <p><img src="images/teste_hipoteses_fluxo.png" class="img-fluid"></p>
 <p>Por fim, a tabela a seguir sintetiza o que foi abordado neste documento acerca de testes de hipóteses. Existem diversos outros testes, porém, os que são apresentados na sequência viabilizam a verificação estatística da maior parte das hipóteses de negócio levantas em projetos de análise de dados.</p>
@@ -921,13 +927,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./o_que_e_ds.html" class="pagination-link" aria-label="O que é Ciência de Dados (Data Science)?">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">O que é Ciência de Dados (Data Science)?</span></span>
+      <a href="./qualidade_de_dados.html" class="pagination-link" aria-label="Qualidade de Dados">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Qualidade de Dados</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./machine_learning.html" class="pagination-link" aria-label="*Machine Learning* para negócios">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title"><em>Machine Learning</em> para negócios</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title"><em>Machine Learning</em> para negócios</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
