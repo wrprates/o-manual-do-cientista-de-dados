@@ -2,6 +2,32 @@
 
 A qualidade dos dados é um pilar fundamental em qualquer projeto de ciência de dados. Dados de baixa qualidade podem comprometer a integridade das análises e levar a decisões equivocadas. Portanto, garantir a qualidade dos dados deve ser um processo contínuo e sistemático em qualquer projeto de data science. Este capítulo apresenta uma abordagem prática para avaliar e melhorar a qualidade dos dados, dividindo a análise por tipo de variável: categórica, numérica, textual e temporal.
 
+## Abordagem Estruturada para Análise de Qualidade de Dados
+
+A análise de qualidade de dados é estruturada de acordo com os tipos de variáveis, cada uma exigindo técnicas específicas para garantir a integridade e a confiabilidade dos dados:
+
+- **Variáveis Numéricas**: A análise de dados numéricos foca em calcular estatísticas descritivas, como média, mediana, desvio padrão, mínimo e máximo, para entender a distribuição dos dados. Além disso, a identificação de outliers e a análise de distribuição são cruciais para garantir que os modelos preditivos não sejam influenciados por valores extremos.
+
+- **Variáveis Categóricas**: Para dados categóricos, a ênfase está no balanceamento de classes e na frequência das categorias. Um bom balanceamento de classes é essencial para garantir que os modelos de aprendizado de máquina não sejam tendenciosos. Além disso, é importante verificar o percentual de dados ausentes, pois a falta de dados categóricos pode distorcer a análise.
+
+- **Dados Temporais**: A análise de dados temporais envolve a verificação de formatos, intervalos e dados faltantes. Dados temporais são frequentemente utilizados para análises de séries temporais e previsões, e a qualidade desses dados é crucial para a precisão das análises.
+
+- **Dados Textuais**: A análise de dados textuais envolve verificar o comprimento dos textos, a diversidade de valores e o percentual de campos ausentes. Dados textuais são frequentemente utilizados para análises qualitativas e sentimentais, e a qualidade desses dados pode impactar significativamente os resultados.
+
+## Tópicos Importantes
+
+Vários tópicos são fundamentais para a análise de qualidade de dados:
+
+- **Identificação de Dados Ausentes ou Nulos**: Detectar e tratar dados ausentes é essencial para evitar que análises sejam comprometidas por falta de informações.
+
+- **Detecção de Valores Atípicos**: Outliers podem distorcer análises e modelos, e sua identificação é crucial para garantir a precisão dos resultados.
+
+- **Verificação de Consistência e Integridade**: Garantir que os dados sejam consistentes e íntegros é fundamental para a confiabilidade das análises.
+
+- **Identificação de Duplicatas**: Dados duplicados podem inflar artificialmente os resultados e devem ser identificados e tratados adequadamente.
+
+Garantir a qualidade dos dados é um processo contínuo e essencial para o sucesso de qualquer projeto de ciência de dados. Ao dividir a análise por tipo de variável e aplicar técnicas específicas para cada uma, podemos melhorar significativamente a integridade e a confiabilidade dos dados, resultando em análises mais precisas e decisões mais informadas.
+
 ## Pacotes que vamos utilizar
 
 Para realizar as análises de qualidade de dados, utilizaremos os seguintes pacotes no R, que oferecem ferramentas poderosas para manipulação, visualização e limpeza de dados:
@@ -17,25 +43,6 @@ library(stringr) # Manipulação de textos
 library(tidyr) # Para transformar os dados
 ```
 
-## Qualidade de Dados Categóricos
-
-A análise de dados categóricos é crucial para entender a distribuição das classes e identificar possíveis desequilíbrios. Um bom balanceamento de classes é essencial para garantir que os modelos de aprendizado de máquina não sejam tendenciosos. Além disso, é importante verificar o percentual de dados ausentes, pois a falta de dados categóricos pode distorcer a análise.
-
-```{r, echo=TRUE}
-# Carregando o dataset 'iris' e criando dados ausentes para demonstração
-data("iris")
-set.seed(1234) # Para reprodutibilidade
-
-# Introduzindo NA's aleatoriamente em algumas observações da coluna Species
-iris$Species[sample(51:150, 25)] <- NA 
-
-# Análise de balanceamento de classes com 'tabyl' do 'janitor'
-iris_tabyl <- iris |> 
-  janitor::tabyl(Species)
-
-# Exibindo análise
-iris_tabyl
-```
 
 ## Qualidade de Dados Numéricos
 
@@ -73,6 +80,78 @@ stats <- airquality |>
 stats
 ```
 
+### Visualização de Dados Numéricos
+
+Visualizar dados numéricos é essencial para entender suas distribuições e identificar possíveis outliers. Aqui, apresentamos três tipos de gráficos: boxplot, densidade e histograma, aplicados ao dataset `airquality`.
+
+```{r, echo=TRUE, fig.width=7, fig.height=5}
+# Boxplot para Ozone, Solar.R e Wind
+ggplot(airquality, aes(x = factor(0), y = Ozone)) +
+  geom_boxplot() +
+  labs(title = "Boxplot de Ozone", x = "", y = "Ozone") +
+  theme_minimal()
+```
+
+```{r, echo=TRUE, fig.width=7, fig.height=5}
+# Densidade para Ozone, Solar.R e Wind
+ggplot(airquality, aes(x = Ozone)) +
+  geom_density(fill = "blue", alpha = 0.5) +
+  labs(title = "Densidade de Ozone", x = "Ozone", y = "Densidade") +
+  theme_minimal()
+```
+
+```{r, echo=TRUE, fig.width=7, fig.height=5}
+# Histograma para Ozone, Solar.R e Wind
+ggplot(airquality, aes(x = Ozone)) +
+  geom_histogram(binwidth = 10, fill = "blue", color = "black", alpha = 0.7) +
+  labs(title = "Histograma de Ozone", x = "Ozone", y = "Frequência") +
+  theme_minimal()
+```
+
+## Qualidade de Dados Categóricos
+
+A análise de dados categóricos é crucial para entender a distribuição das classes e identificar possíveis desequilíbrios. Um bom balanceamento de classes é essencial para garantir que os modelos de aprendizado de máquina não sejam tendenciosos. Além disso, é importante verificar o percentual de dados ausentes, pois a falta de dados categóricos pode distorcer a análise.
+
+```{r, echo=TRUE}
+# Carregando o dataset 'iris' e criando dados ausentes para demonstração
+data("iris")
+set.seed(1234) # Para reprodutibilidade
+
+# Introduzindo NA's aleatoriamente em algumas observações da coluna Species
+iris$Species[sample(51:150, 25)] <- NA 
+
+# Análise de balanceamento de classes com 'tabyl' do 'janitor'
+iris_tabyl <- iris |> 
+  janitor::tabyl(Species)
+
+# Exibindo análise
+iris_tabyl
+```
+
+### Visualização de Dados Categóricos
+
+A visualização de dados categóricos é uma etapa crucial para entender a distribuição das classes e identificar possíveis desequilíbrios. Um gráfico de barras é uma ferramenta eficaz para representar a proporção de cada nível de uma variável categórica. No exemplo abaixo, utilizamos o dataset `iris` para ilustrar a proporção de cada espécie de flor.
+
+```{r, echo=TRUE, fig.width=7, fig.height=5}
+# Calculando a proporção de cada nível da variável 'Species'
+species_proportion <- iris |> 
+  count(Species) |>
+  mutate(proportion = n / sum(n)) |>
+  arrange(desc(proportion))
+
+# Criando o gráfico de barras
+ggplot(species_proportion, aes(x = reorder(Species, -proportion), y = proportion, fill = Species)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Proporção de Cada Espécie no Dataset Iris",
+       x = "Espécie",
+       y = "Proporção") +
+  theme_minimal() +
+  scale_y_continuous(labels = scales::percent_format()) +
+  theme(legend.position = "none")
+```
+
+Neste gráfico, cada barra representa uma espécie de flor, e a altura da barra indica a proporção dessa espécie em relação ao total de observações no dataset. As barras são ordenadas da maior para a menor proporção, facilitando a identificação de quais espécies são mais ou menos representadas. Essa visualização ajuda a detectar desequilíbrios que podem impactar análises subsequentes, como modelos de aprendizado de máquina, que podem ser tendenciosos se as classes não estiverem balanceadas.
+
 ## Qualidade de Dados Tipo Texto
 
 A análise de dados textuais envolve verificar o comprimento dos textos, o percentual de campos ausentes e identificar padrões comuns ou preenchimentos preguiçosos. Dados textuais são frequentemente utilizados para análises qualitativas e sentimentais, e a qualidade desses dados pode impactar significativamente os resultados.
@@ -98,7 +177,7 @@ text_analysis
 
 ## Qualidade de Dados Temporais
 
-Para dados temporais, é essencial identificar as datas mínimas e máximas e o percentual de dados ausentes. Dados temporais são frequentemente utilizados para análises de séries temporais e previsões, e a qualidade desses dados é crucial para a precisão das análises.
+Para dados temporais, é possível identificar as datas mínimas e máximas e o percentual de dados ausentes. Dados temporais são frequentemente utilizados para análises de séries temporais e previsões, e a qualidade desses dados é crucial para a precisão das análises.
 
 ```{r, echo=TRUE}
 # Tendo certeza que 'Data_Entrada' é do tipo data
@@ -129,28 +208,28 @@ date_analysis
 
 ### Tratamento dos Dados Faltantes
 
-Dados faltantes são um desafio comum em qualquer análise de dados. Eles podem ser tratados através de remoção ou imputação. A escolha do método depende do contexto e da quantidade de dados ausentes. Remover dados faltantes pode ser apropriado quando a perda de informações é mínima, enquanto a imputação pode ser mais adequada quando se deseja preservar o máximo de dados possível.
-
-#### Remoção
-
-```{r, echo=TRUE, eval=FALSE}
-# Removendo linhas com dados faltantes
-airquality |> na.omit()
-```
-
-#### Imputação
-
-Imputação pode ser feita pela média ou por regressão, dependendo da complexidade desejada. A imputação pela média é simples e mantém a média geral dos dados, enquanto a imputação por regressão pode capturar melhor as relações entre variáveis.
+Dados faltantes são um desafio comum em qualquer análise de dados. A remoção de dados faltantes pode ser perigosa, pois ao remover uma linha inteira, perdemos informações valiosas em outras variáveis que não tinham dados faltantes. Remover uma coluna inteira, caso ela tenha uma proporção muito alta de faltantes, também pode ser uma decisão drástica. Portanto, a recomendação geral é não remover nada precipitadamente. O papel da análise de qualidade de dados é apresentar o percentual de dados faltantes, permitindo que decisões informadas sejam tomadas em etapas posteriores da análise, como em testes de hipóteses. Em alguns modelos de aprendizado de máquina, manter os dados faltantes pode até aumentar o nível de informação que o modelo utiliza para fazer predições.
 
 ```{r, echo=TRUE}
-# Imputação dos dados faltantes com a média
+# Exibindo o percentual de dados faltantes
+missing_data_percentage <- airquality |>
+  summarise(across(everything(), ~ sum(is.na(.)) / n() * 100))
+missing_data_percentage
+```
+
+### Imputação
+
+A imputação de dados faltantes requer ainda mais cuidado. Imputar dados é, em essência, "inventar dados", independentemente do método utilizado. Na maioria dos casos reais, a imputação pode não fazer sentido prático de negócio, pois adiciona dados onde eles deveriam estar vazios. Geralmente, há uma explicação plausível para os NA's, como falta de preenchimento em certas categorias ou limitações de sistema. Portanto, a decisão de imputar deve ser cuidadosamente considerada e justificada.
+
+```{r, echo=TRUE}
+# Imputação dos dados faltantes com a média (exemplo, mas não recomendado sem justificativa)
 airquality_imputed <- airquality |>
   mutate(across(where(is.numeric), ~ ifelse(is.na(.), mean(., na.rm = TRUE), .)))
 ```
 
 ### Tratamento de Outliers
 
-Outliers são valores que se desviam significativamente dos outros dados e podem distorcer análises e modelos. A remoção de outliers pode ser feita usando o método do IQR, que é robusto a valores extremos e fornece um método confiável para identificá-los.
+Outliers são valores que se desviam significativamente dos outros dados e podem distorcer análises e modelos. A remoção de outliers pode ser feita usando o método do IQR, que é robusto a valores extremos e fornece um método confiável para identificá-los. No entanto, a decisão de remover outliers deve ser baseada em uma compreensão clara do contexto dos dados e do impacto potencial na análise.
 
 ```{r, echo=TRUE}
 # Calculando o IQR para 'Ozone'
