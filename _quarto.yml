@@ -13,7 +13,7 @@ book:
     - versionamento.qmd
     - qualidade_de_dados.qmd
     - teste_de_hipoteses.qmd
-    # - machine_learning.qmd
+    - machine_learning.qmd
     - references.qmd
 
 bibliography: references.bib

@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -144,6 +178,12 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./machine_learning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title"><em>Machine Learning</em> para negócios</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -158,7 +198,52 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#git" id="toc-git" class="nav-link active" data-scroll-target="#git"><span class="header-section-number">3.1</span> GIT</a></li>
+  <li><a href="#git" id="toc-git" class="nav-link active" data-scroll-target="#git"><span class="header-section-number">3.1</span> Git</a></li>
+  <li><a href="#instalando-o-git" id="toc-instalando-o-git" class="nav-link" data-scroll-target="#instalando-o-git"><span class="header-section-number">3.2</span> Instalando o Git</a>
+  <ul class="collapse">
+  <li><a href="#windows" id="toc-windows" class="nav-link" data-scroll-target="#windows"><span class="header-section-number">3.2.1</span> Windows</a></li>
+  <li><a href="#mac" id="toc-mac" class="nav-link" data-scroll-target="#mac"><span class="header-section-number">3.2.2</span> Mac</a></li>
+  <li><a href="#linux" id="toc-linux" class="nav-link" data-scroll-target="#linux"><span class="header-section-number">3.2.3</span> Linux</a></li>
+  <li><a href="#configuração-inicial" id="toc-configuração-inicial" class="nav-link" data-scroll-target="#configuração-inicial"><span class="header-section-number">3.2.4</span> Configuração inicial</a></li>
+  </ul></li>
+  <li><a href="#fluxo-de-estados-do-git" id="toc-fluxo-de-estados-do-git" class="nav-link" data-scroll-target="#fluxo-de-estados-do-git"><span class="header-section-number">3.3</span> Fluxo de Estados do Git</a></li>
+  <li><a href="#comandos-do-dia-a-dia" id="toc-comandos-do-dia-a-dia" class="nav-link" data-scroll-target="#comandos-do-dia-a-dia"><span class="header-section-number">3.4</span> Comandos do Dia a Dia</a>
+  <ul class="collapse">
+  <li><a href="#exemplo-prático" id="toc-exemplo-prático" class="nav-link" data-scroll-target="#exemplo-prático"><span class="header-section-number">3.4.1</span> Exemplo prático</a></li>
+  </ul></li>
+  <li><a href="#branches" id="toc-branches" class="nav-link" data-scroll-target="#branches"><span class="header-section-number">3.5</span> Branches</a>
+  <ul class="collapse">
+  <li><a href="#comandos-de-branches" id="toc-comandos-de-branches" class="nav-link" data-scroll-target="#comandos-de-branches"><span class="header-section-number">3.5.1</span> Comandos de branches</a></li>
+  <li><a href="#exemplo-prático-1" id="toc-exemplo-prático-1" class="nav-link" data-scroll-target="#exemplo-prático-1"><span class="header-section-number">3.5.2</span> Exemplo prático</a></li>
+  </ul></li>
+  <li><a href="#git-workflow-com-feature-branches" id="toc-git-workflow-com-feature-branches" class="nav-link" data-scroll-target="#git-workflow-com-feature-branches"><span class="header-section-number">3.6</span> Git Workflow com Feature Branches</a>
+  <ul class="collapse">
+  <li><a href="#fluxo-básico-times-pequenos" id="toc-fluxo-básico-times-pequenos" class="nav-link" data-scroll-target="#fluxo-básico-times-pequenos"><span class="header-section-number">3.6.1</span> Fluxo básico (times pequenos)</a></li>
+  <li><a href="#fluxo-com-múltiplos-ambientes" id="toc-fluxo-com-múltiplos-ambientes" class="nav-link" data-scroll-target="#fluxo-com-múltiplos-ambientes"><span class="header-section-number">3.6.2</span> Fluxo com múltiplos ambientes</a></li>
+  <li><a href="#convenções-de-nomes-de-branches" id="toc-convenções-de-nomes-de-branches" class="nav-link" data-scroll-target="#convenções-de-nomes-de-branches"><span class="header-section-number">3.6.3</span> Convenções de nomes de branches</a></li>
+  </ul></li>
+  <li><a href="#resolução-de-conflitos" id="toc-resolução-de-conflitos" class="nav-link" data-scroll-target="#resolução-de-conflitos"><span class="header-section-number">3.7</span> Resolução de Conflitos</a>
+  <ul class="collapse">
+  <li><a href="#exemplo-passo-a-passo" id="toc-exemplo-passo-a-passo" class="nav-link" data-scroll-target="#exemplo-passo-a-passo"><span class="header-section-number">3.7.1</span> Exemplo passo a passo</a></li>
+  <li><a href="#boas-práticas-para-evitar-conflitos" id="toc-boas-práticas-para-evitar-conflitos" class="nav-link" data-scroll-target="#boas-práticas-para-evitar-conflitos"><span class="header-section-number">3.7.2</span> Boas práticas para evitar conflitos</a></li>
+  </ul></li>
+  <li><a href="#comandos-de-emergência" id="toc-comandos-de-emergência" class="nav-link" data-scroll-target="#comandos-de-emergência"><span class="header-section-number">3.8</span> Comandos de Emergência</a>
+  <ul class="collapse">
+  <li><a href="#navegar-para-commits-específicos" id="toc-navegar-para-commits-específicos" class="nav-link" data-scroll-target="#navegar-para-commits-específicos"><span class="header-section-number">3.8.1</span> Navegar para commits específicos</a></li>
+  </ul></li>
+  <li><a href="#gitignore-para-data-science" id="toc-gitignore-para-data-science" class="nav-link" data-scroll-target="#gitignore-para-data-science"><span class="header-section-number">3.9</span> .gitignore para Data Science</a>
+  <ul class="collapse">
+  <li><a href="#exemplo-para-projetos-em-r" id="toc-exemplo-para-projetos-em-r" class="nav-link" data-scroll-target="#exemplo-para-projetos-em-r"><span class="header-section-number">3.9.1</span> Exemplo para projetos em R</a></li>
+  <li><a href="#exemplo-para-projetos-em-python" id="toc-exemplo-para-projetos-em-python" class="nav-link" data-scroll-target="#exemplo-para-projetos-em-python"><span class="header-section-number">3.9.2</span> Exemplo para projetos em Python</a></li>
+  <li><a href="#exemplo-combinado-r-python" id="toc-exemplo-combinado-r-python" class="nav-link" data-scroll-target="#exemplo-combinado-r-python"><span class="header-section-number">3.9.3</span> Exemplo combinado (R + Python)</a></li>
+  </ul></li>
+  <li><a href="#github-e-gitlab" id="toc-github-e-gitlab" class="nav-link" data-scroll-target="#github-e-gitlab"><span class="header-section-number">3.10</span> GitHub e GitLab</a>
+  <ul class="collapse">
+  <li><a href="#conectar-repositório-local-ao-remoto" id="toc-conectar-repositório-local-ao-remoto" class="nav-link" data-scroll-target="#conectar-repositório-local-ao-remoto"><span class="header-section-number">3.10.1</span> Conectar repositório local ao remoto</a></li>
+  <li><a href="#comandos-para-trabalhar-com-remoto" id="toc-comandos-para-trabalhar-com-remoto" class="nav-link" data-scroll-target="#comandos-para-trabalhar-com-remoto"><span class="header-section-number">3.10.2</span> Comandos para trabalhar com remoto</a></li>
+  <li><a href="#pull-requests-merge-requests" id="toc-pull-requests-merge-requests" class="nav-link" data-scroll-target="#pull-requests-merge-requests"><span class="header-section-number">3.10.3</span> Pull Requests / Merge Requests</a></li>
+  </ul></li>
+  <li><a href="#boas-práticas-para-cientistas-de-dados" id="toc-boas-práticas-para-cientistas-de-dados" class="nav-link" data-scroll-target="#boas-práticas-para-cientistas-de-dados"><span class="header-section-number">3.11</span> Boas Práticas para Cientistas de Dados</a></li>
   </ul>
 </nav>
     </div>
@@ -184,17 +269,509 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Nasci e sempre vivi no sul do Brasil. Acostumado a comer churrasco quase todo domingo. Quando comentamos com os amigos durante a semana sobre como o churrasco estava bom no fim de semana falamos apenas do ponto da carne e do corte de carne que foi assada. Ninguém fala “nossa, como o arroz estava bem cozido”. Mas todos sabemos que um churrasco tradicional de domingo precisa ter arroz, farofa e maionese com batatas. Esse é o básico, mas ninguém fala sobre estes acompanhamentos.</p>
-<p>Da mesma forma, em muitas vagas para Cientista de Dados - quase todas - você não vai ver que precisa ter conhecimento de <strong>versionamento de código</strong>, que vai incluir conhecimentos de GIT e de ferramentas como GitHub ou Gitlab. Porém, este é um <strong>conhecimento básico e essencial para todo mundo que programa em qualquer linguagem de programação e para qualquer fim</strong> (seja para <em>Data Science</em> ou para trabalhar com desenvolvimento de <em>software</em>).</p>
-<p>Aqui neste módulo você terá uma explicação muito lúdica e prática sobre este tema. Vou te explicar da forma que eu, com formação em negócios e não em TI, fixei esses conhecimentos por meio de aprendizado na prática e de bastante experiência trabalhando com times de altíssima qualidade e com muito rigor técnico.</p>
-<p>Por já estar envolvido no tema de <em>Data Science</em>, eu imagino que você já tenha ouvido falar pelo menos no GitHub. Mas permita-me explicar, com minhas palavras o que é GIT e seus termos associados - inicialmente peço licença para o rigor ténico quanto aos conceitos formais.</p>
+<p>Em muitas vagas para Cientista de Dados você não vai ver que precisa ter conhecimento de <strong>versionamento de código</strong>, que vai incluir conhecimentos de Git e de ferramentas como GitHub ou GitLab. Porém, este é um <strong>conhecimento básico e essencial para todo mundo que programa</strong> em qualquer linguagem de programação e para qualquer fim, seja para Data Science ou para desenvolvimento de software.</p>
 <section id="git" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="git"><span class="header-section-number">3.1</span> GIT</h2>
-<p>É um motor que cria versões do seu código. É um programa de computador, que você precisa instalar normalemnte em seu computador como você instala qualquer outra coisa.</p>
-<p>Entenda o sistema de versionamento de códigos do GIT como uma “máquina fotográfica” que bate fotos de diversos “momentos” do seu código.</p>
-<p>Os códigos de qualquer linguagem de programação são apenas arquivos de texto. Claro que um arquivo em Python ou em R não terão a extensão <code>.txt</code>, mas sim suas próprias extensões: <code>.py</code> e <code>.R</code>, respectivamente. Mas o conteúdo de arquivos escritos em linguagens de programação não passa de texto, independente da extensão do arquivo.</p>
-<p>O que faz um arquivo de uma linguagem ser executado é que para “rodar” um código você precisa ter a linguagem instalada em seu computador também, e é a linguagem que vai processar o código e gerar os resultados esperados. Porém, <strong>não estamos interessados em executar códigos neste momento</strong>. O GIT está interessados apenas no código em si.</p>
-<p>Com um comando do GIT chamado <code>git commit</code> eu consigo “bater essas fotos” e “salvar” uma nova versão do nosso código. Mas veja que essa foto inclui todos os arquivos de código que estão presentes em um projeto (por projeto aqui entenda que é meramente uma pasta no seu computador onde estão todos os arquivos de códigos, incluinfo estrutura de subpastas e arquivos em diferentes linguagens de programação).</p>
+<h2 data-number="3.1" class="anchored" data-anchor-id="git"><span class="header-section-number">3.1</span> Git</h2>
+<p>Git é um <strong>sistema de controle de versão</strong>. Ele rastreia todas as mudanças feitas no seu código ao longo do tempo, permitindo que você:</p>
+<ul>
+<li>Volte para versões anteriores do código quando necessário</li>
+<li>Trabalhe em equipe sem sobrescrever o trabalho dos outros</li>
+<li>Mantenha um histórico completo de todas as alterações feitas</li>
+</ul>
+<p>Os códigos de qualquer linguagem de programação são apenas arquivos de texto. Um arquivo em Python ou em R não terão a extensão <code>.txt</code>, mas sim suas próprias extensões: <code>.py</code> e <code>.R</code>, respectivamente. O Git está interessado apenas nesses arquivos de texto, não na execução deles.</p>
+<p>Um <strong>repositório</strong> (ou “repo”) é simplesmente uma pasta no seu computador onde o Git está rastreando as mudanças. Dentro dessa pasta existe uma subpasta oculta chamada <code>.git</code> que contém todo o histórico de versões.</p>
+</section>
+<section id="instalando-o-git" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="instalando-o-git"><span class="header-section-number">3.2</span> Instalando o Git</h2>
+<section id="windows" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="windows"><span class="header-section-number">3.2.1</span> Windows</h3>
+<ol type="1">
+<li>Baixe o instalador em <a href="https://git-scm.com/download/win">git-scm.com</a></li>
+<li>Execute o instalador e siga as opções padrão</li>
+<li>Após instalar, você terá acesso ao <strong>Git Bash</strong>, um terminal para usar o Git</li>
+</ol>
+</section>
+<section id="mac" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="mac"><span class="header-section-number">3.2.2</span> Mac</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Opção 1: via Homebrew</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install git</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Opção 2: Xcode Command Line Tools (instala Git junto)</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">xcode-select</span> <span class="at">--install</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="linux" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="linux"><span class="header-section-number">3.2.3</span> Linux</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ubuntu/Debian</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install git</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Fedora/CentOS</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> yum install git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="configuração-inicial" class="level3" data-number="3.2.4">
+<h3 data-number="3.2.4" class="anchored" data-anchor-id="configuração-inicial"><span class="header-section-number">3.2.4</span> Configuração inicial</h3>
+<p>Após instalar, configure seu nome e email. Essas informações aparecem em cada commit que você fizer:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">"Seu Nome"</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">"seu@email.com"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="fluxo-de-estados-do-git" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="fluxo-de-estados-do-git"><span class="header-section-number">3.3</span> Fluxo de Estados do Git</h2>
+<p>O Git organiza seus arquivos em três estados:</p>
+<ol type="1">
+<li><strong>Working Directory</strong>: arquivos modificados, mas ainda não preparados</li>
+<li><strong>Staging Area</strong>: arquivos preparados para o próximo commit</li>
+<li><strong>Repository</strong>: histórico de versões salvas (commits)</li>
+</ol>
+<p>O fluxo funciona assim:</p>
+<pre><code>Working Directory  →  Staging Area  →  Repository
+                  git add         git commit</code></pre>
+<p>Você modifica arquivos, usa <code>git add</code> para prepará-los, e <code>git commit</code> para salvar uma versão.</p>
+</section>
+<section id="comandos-do-dia-a-dia" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="comandos-do-dia-a-dia"><span class="header-section-number">3.4</span> Comandos do Dia a Dia</h2>
+<p>Estes são os comandos que você vai usar na maior parte do tempo:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 45%">
+<col style="width: 55%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Comando</th>
+<th>O que faz</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>git init</code></td>
+<td>Cria um novo repositório na pasta atual</td>
+</tr>
+<tr class="even">
+<td><code>git status</code></td>
+<td>Mostra o estado atual (arquivos modificados, preparados, etc.)</td>
+</tr>
+<tr class="odd">
+<td><code>git add arquivo</code></td>
+<td>Prepara um arquivo para commit</td>
+</tr>
+<tr class="even">
+<td><code>git add .</code></td>
+<td>Prepara todos os arquivos modificados</td>
+</tr>
+<tr class="odd">
+<td><code>git commit -m "mensagem"</code></td>
+<td>Salva uma versão com uma mensagem descritiva</td>
+</tr>
+<tr class="even">
+<td><code>git log</code></td>
+<td>Mostra o histórico de commits</td>
+</tr>
+<tr class="odd">
+<td><code>git diff</code></td>
+<td>Mostra as mudanças que ainda não foram preparadas</td>
+</tr>
+</tbody>
+</table>
+<section id="exemplo-prático" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="exemplo-prático"><span class="header-section-number">3.4.1</span> Exemplo prático</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Criar um repositório</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> init</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Ver o estado atual</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Modificar um arquivo e ver as mudanças</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> diff</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Preparar arquivos para commit</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add analise.R</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add modelo.py</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Ou preparar todos de uma vez</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Salvar a versão</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"adiciona análise exploratória e primeiro modelo"</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Ver o histórico</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="branches" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="branches"><span class="header-section-number">3.5</span> Branches</h2>
+<p>Branches são <strong>linhas de desenvolvimento paralelas</strong>. Elas permitem que você trabalhe em uma nova funcionalidade sem afetar o código principal.</p>
+<p>Por padrão, todo repositório começa com uma branch chamada <code>main</code> (ou <code>master</code> em repos mais antigos).</p>
+<section id="comandos-de-branches" class="level3" data-number="3.5.1">
+<h3 data-number="3.5.1" class="anchored" data-anchor-id="comandos-de-branches"><span class="header-section-number">3.5.1</span> Comandos de branches</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Listar branches</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Criar uma nova branch</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch nome-da-branch</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Mudar para outra branch</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout nome-da-branch</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># ou</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch nome-da-branch</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Criar e mudar para uma nova branch (atalho)</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout <span class="at">-b</span> nome-da-branch</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Juntar uma branch na atual</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge nome-da-branch</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="exemplo-prático-1" class="level3" data-number="3.5.2">
+<h3 data-number="3.5.2" class="anchored" data-anchor-id="exemplo-prático-1"><span class="header-section-number">3.5.2</span> Exemplo prático</h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Estou na main, quero criar uma feature</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout <span class="at">-b</span> feat/novo-grafico</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Faço minhas alterações...</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"adiciona gráfico de dispersão"</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Volto para main e junto as alterações</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout main</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge feat/novo-grafico</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="git-workflow-com-feature-branches" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="git-workflow-com-feature-branches"><span class="header-section-number">3.6</span> Git Workflow com Feature Branches</h2>
+<section id="fluxo-básico-times-pequenos" class="level3" data-number="3.6.1">
+<h3 data-number="3.6.1" class="anchored" data-anchor-id="fluxo-básico-times-pequenos"><span class="header-section-number">3.6.1</span> Fluxo básico (times pequenos)</h3>
+<p>Para projetos pessoais ou times pequenos, o fluxo é simples:</p>
+<ol type="1">
+<li>Branch principal (<code>main</code>) sempre estável</li>
+<li>Criar branch para cada feature: <code>feat/nome-da-feature</code></li>
+<li>Commits pequenos e frequentes</li>
+<li>Push para remoto</li>
+<li>Pull Request / Merge Request</li>
+<li>Code review</li>
+<li>Merge para main</li>
+</ol>
+</section>
+<section id="fluxo-com-múltiplos-ambientes" class="level3" data-number="3.6.2">
+<h3 data-number="3.6.2" class="anchored" data-anchor-id="fluxo-com-múltiplos-ambientes"><span class="header-section-number">3.6.2</span> Fluxo com múltiplos ambientes</h3>
+<p>Quando há ambientes separados (desenvolvimento, homologação, produção), o fluxo fica mais estruturado:</p>
+<p><strong>Branches de ambiente:</strong></p>
+<ul>
+<li><code>main</code> ou <code>prod</code> → código em <strong>produção</strong> (o que está rodando de verdade)</li>
+<li><code>stg</code> ou <code>uat</code> → ambiente de <strong>homologação</strong> (testes finais antes de ir pra prod)</li>
+<li><code>dev</code> ou <code>develop</code> → ambiente de <strong>desenvolvimento</strong> (integração das features)</li>
+</ul>
+<p><strong>Fluxo:</strong></p>
+<pre><code>feat/minha-feature → dev → stg → main (prod)</code></pre>
+<ol type="1">
+<li>Desenvolvedor cria branch a partir de <code>dev</code></li>
+<li>Faz as mudanças e abre PR para <code>dev</code></li>
+<li>Após code review, merge para <code>dev</code></li>
+<li>Quando <code>dev</code> está pronto para testes, merge para <code>stg</code></li>
+<li>QA testa em staging</li>
+<li>Após aprovação, merge de <code>stg</code> para <code>main</code> (deploy em produção)</li>
+</ol>
+<p><strong>Exemplo prático:</strong></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Criar feature a partir de dev</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout dev</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull origin dev</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout <span class="at">-b</span> feat/novo-modelo</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Trabalhar...</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"adiciona modelo de classificação"</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin feat/novo-modelo</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Abrir PR de feat/novo-modelo → dev</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Após aprovação e merge, o CI/CD faz deploy em ambiente dev</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Quando pronto para staging</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout stg</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull origin stg</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge dev</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin stg</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co"># CI/CD faz deploy em staging para QA testar</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Quando aprovado, vai para produção</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout main</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull origin main</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge stg</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin main</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="co"># CI/CD faz deploy em produção</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Quando usar cada modelo:</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 34%">
+<col style="width: 65%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Cenário</th>
+<th>Modelo sugerido</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Projeto pessoal / time de 1-2 pessoas</td>
+<td>Só <code>main</code> + feature branches</td>
+</tr>
+<tr class="even">
+<td>Time pequeno (3-5 pessoas)</td>
+<td><code>main</code> + <code>dev</code> + feature branches</td>
+</tr>
+<tr class="odd">
+<td>Time maior / produto em produção</td>
+<td><code>main</code> + <code>stg</code> + <code>dev</code> + feature branches</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="convenções-de-nomes-de-branches" class="level3" data-number="3.6.3">
+<h3 data-number="3.6.3" class="anchored" data-anchor-id="convenções-de-nomes-de-branches"><span class="header-section-number">3.6.3</span> Convenções de nomes de branches</h3>
+<ul>
+<li><code>feat/</code> - nova funcionalidade</li>
+<li><code>fix/</code> - correção de bug</li>
+<li><code>docs/</code> - documentação</li>
+<li><code>refactor/</code> - refatoração</li>
+<li><code>hotfix/</code> - correção urgente direto para produção</li>
+</ul>
+</section>
+</section>
+<section id="resolução-de-conflitos" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="resolução-de-conflitos"><span class="header-section-number">3.7</span> Resolução de Conflitos</h2>
+<p>Conflitos acontecem quando duas pessoas editam o mesmo trecho de código. O Git não sabe qual versão manter e pede para você decidir.</p>
+<section id="exemplo-passo-a-passo" class="level3" data-number="3.7.1">
+<h3 data-number="3.7.1" class="anchored" data-anchor-id="exemplo-passo-a-passo"><span class="header-section-number">3.7.1</span> Exemplo passo a passo</h3>
+<ol type="1">
+<li>Você tenta fazer merge e vê a mensagem de conflito:</li>
+</ol>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge feat/outra-feature</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Auto-merging analise.R</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># CONFLICT (content): Merge conflict in analise.R</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="2" type="1">
+<li>Abre o arquivo com conflito e vê as marcações:</li>
+</ol>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># analise.R</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="sc">&lt;</span><span class="er">&lt;&lt;&lt;&lt;&lt;&lt;</span> HEAD</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"dados_v2.csv"</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="sc">==</span><span class="er">=====</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"dados_limpos.csv"</span>)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span><span class="er">&gt;&gt;&gt;&gt;&gt;&gt;</span> feat<span class="sc">/</span>outra<span class="sc">-</span>feature</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>resultado <span class="ot">&lt;-</span> dados <span class="sc">|&gt;</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(valor <span class="sc">&gt;</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="3" type="1">
+<li>O que significam as marcações:
+<ul>
+<li>Entre <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</code> e <code>=======</code>: seu código (branch atual)</li>
+<li>Entre <code>=======</code> e <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>: código da outra branch</li>
+</ul></li>
+<li>Decide o que manter. Pode ser um, outro, ou uma combinação:</li>
+</ol>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># analise.R</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"dados_limpos.csv"</span>)  <span class="co"># escolhi a versão da outra branch</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>resultado <span class="ot">&lt;-</span> dados <span class="sc">|&gt;</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(valor <span class="sc">&gt;</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="5" type="1">
+<li>Remove as marcações, salva o arquivo e finaliza:</li>
+</ol>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add analise.R</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"resolve conflito em analise.R"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="boas-práticas-para-evitar-conflitos" class="level3" data-number="3.7.2">
+<h3 data-number="3.7.2" class="anchored" data-anchor-id="boas-práticas-para-evitar-conflitos"><span class="header-section-number">3.7.2</span> Boas práticas para evitar conflitos</h3>
+<ul>
+<li>Faça commits frequentes</li>
+<li>Dê <code>git pull</code> antes de começar a trabalhar</li>
+<li>Mantenha branches de curta duração</li>
+</ul>
+</section>
+</section>
+<section id="comandos-de-emergência" class="level2" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="comandos-de-emergência"><span class="header-section-number">3.8</span> Comandos de Emergência</h2>
+<p>Quando algo dá errado, estes comandos podem salvar:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 52%">
+<col style="width: 47%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Situação</th>
+<th>Comando</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ver o que mudou</td>
+<td><code>git diff</code></td>
+</tr>
+<tr class="even">
+<td>Descartar mudanças não commitadas em um arquivo</td>
+<td><code>git checkout -- arquivo</code></td>
+</tr>
+<tr class="odd">
+<td>Guardar mudanças temporariamente</td>
+<td><code>git stash</code></td>
+</tr>
+<tr class="even">
+<td>Recuperar mudanças guardadas</td>
+<td><code>git stash pop</code></td>
+</tr>
+<tr class="odd">
+<td>Desfazer último commit (mantendo mudanças)</td>
+<td><code>git reset --soft HEAD~1</code></td>
+</tr>
+<tr class="even">
+<td>Desfazer último commit (descartando TUDO)</td>
+<td><code>git reset --hard HEAD</code></td>
+</tr>
+<tr class="odd">
+<td>Desfazer commit mantendo histórico</td>
+<td><code>git revert HEAD</code></td>
+</tr>
+</tbody>
+</table>
+<section id="navegar-para-commits-específicos" class="level3" data-number="3.8.1">
+<h3 data-number="3.8.1" class="anchored" data-anchor-id="navegar-para-commits-específicos"><span class="header-section-number">3.8.1</span> Navegar para commits específicos</h3>
+<p>Às vezes você precisa ver como o código estava em um commit antigo:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ver histórico resumido com hashes</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--oneline</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Ir para um commit específico</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout abc1234</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Voltar para a branch principal</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Quando você faz <code>git checkout</code> para um commit específico, entra em modo <strong>“detached HEAD”</strong>. Isso significa que você está em um commit, não em uma branch. É útil para investigar código antigo ou testar algo, mas não faça commits nesse estado. Sempre volte para uma branch antes de continuar trabalhando.</p>
+</section>
+</section>
+<section id="gitignore-para-data-science" class="level2" data-number="3.9">
+<h2 data-number="3.9" class="anchored" data-anchor-id="gitignore-para-data-science"><span class="header-section-number">3.9</span> .gitignore para Data Science</h2>
+<p>O arquivo <code>.gitignore</code> diz ao Git quais arquivos <strong>não</strong> devem ser versionados. Para projetos de Data Science, não versionamos:</p>
+<ul>
+<li>Dados grandes (<code>.csv</code>, <code>.parquet</code>, <code>.rds</code>, <code>.pkl</code>)</li>
+<li>Credenciais (<code>.env</code>, <code>.Renviron</code>)</li>
+<li>Ambientes virtuais (<code>venv/</code>, <code>renv/library/</code>)</li>
+<li>Cache e arquivos temporários</li>
+</ul>
+<section id="exemplo-para-projetos-em-r" class="level3" data-number="3.9.1">
+<h3 data-number="3.9.1" class="anchored" data-anchor-id="exemplo-para-projetos-em-r"><span class="header-section-number">3.9.1</span> Exemplo para projetos em R</h3>
+<pre><code># Dados
+*.csv
+*.parquet
+*.rds
+*.RData
+data/raw/
+
+# Ambiente e configurações locais
+.Renviron
+.Rprofile
+.Rhistory
+.RData
+
+# renv (pacotes instalados)
+renv/library/
+renv/staging/
+
+# Arquivos de sessão
+.Rproj.user/
+
+# Outputs de Quarto/RMarkdown
+*_cache/
+*_files/</code></pre>
+</section>
+<section id="exemplo-para-projetos-em-python" class="level3" data-number="3.9.2">
+<h3 data-number="3.9.2" class="anchored" data-anchor-id="exemplo-para-projetos-em-python"><span class="header-section-number">3.9.2</span> Exemplo para projetos em Python</h3>
+<pre><code># Dados
+*.csv
+*.parquet
+*.pkl
+*.h5
+data/raw/
+
+# Ambiente
+.env
+venv/
+.venv/
+
+# Cache
+__pycache__/
+*.pyc
+.cache/
+
+# Jupyter
+.ipynb_checkpoints/</code></pre>
+</section>
+<section id="exemplo-combinado-r-python" class="level3" data-number="3.9.3">
+<h3 data-number="3.9.3" class="anchored" data-anchor-id="exemplo-combinado-r-python"><span class="header-section-number">3.9.3</span> Exemplo combinado (R + Python)</h3>
+<pre><code># Dados (ambos)
+*.csv
+*.parquet
+data/raw/
+
+# R
+*.rds
+*.RData
+.Renviron
+.Rhistory
+renv/library/
+.Rproj.user/
+
+# Python
+*.pkl
+.env
+venv/
+__pycache__/
+.ipynb_checkpoints/</code></pre>
+</section>
+</section>
+<section id="github-e-gitlab" class="level2" data-number="3.10">
+<h2 data-number="3.10" class="anchored" data-anchor-id="github-e-gitlab"><span class="header-section-number">3.10</span> GitHub e GitLab</h2>
+<p><strong>Git</strong> é o sistema de versionamento que roda <strong>localmente</strong> no seu computador. <strong>GitHub</strong> e <strong>GitLab</strong> são serviços na nuvem que hospedam repositórios Git, permitindo colaboração e backup.</p>
+<section id="conectar-repositório-local-ao-remoto" class="level3" data-number="3.10.1">
+<h3 data-number="3.10.1" class="anchored" data-anchor-id="conectar-repositório-local-ao-remoto"><span class="header-section-number">3.10.1</span> Conectar repositório local ao remoto</h3>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Adicionar um repositório remoto</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add origin https://github.com/usuario/repo.git</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Enviar código para o remoto pela primeira vez</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="comandos-para-trabalhar-com-remoto" class="level3" data-number="3.10.2">
+<h3 data-number="3.10.2" class="anchored" data-anchor-id="comandos-para-trabalhar-com-remoto"><span class="header-section-number">3.10.2</span> Comandos para trabalhar com remoto</h3>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Enviar commits para o remoto</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Trazer atualizações do remoto</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Baixar um repositório existente</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/usuario/repo.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="pull-requests-merge-requests" class="level3" data-number="3.10.3">
+<h3 data-number="3.10.3" class="anchored" data-anchor-id="pull-requests-merge-requests"><span class="header-section-number">3.10.3</span> Pull Requests / Merge Requests</h3>
+<p>Pull Request (GitHub) ou Merge Request (GitLab) é a forma de propor mudanças de uma branch para outra. O fluxo típico é:</p>
+<ol type="1">
+<li>Você cria uma branch e faz commits</li>
+<li>Push da branch para o remoto</li>
+<li>Abre um PR/MR no site (GitHub ou GitLab)</li>
+<li>Colegas revisam o código</li>
+<li>Após aprovação, faz o merge</li>
+</ol>
+<p>Isso permite <strong>code review</strong> antes de integrar mudanças, o que melhora a qualidade do código e distribui conhecimento no time.</p>
+</section>
+</section>
+<section id="boas-práticas-para-cientistas-de-dados" class="level2" data-number="3.11">
+<h2 data-number="3.11" class="anchored" data-anchor-id="boas-práticas-para-cientistas-de-dados"><span class="header-section-number">3.11</span> Boas Práticas para Cientistas de Dados</h2>
+<ul>
+<li><strong>Commits frequentes com mensagens descritivas</strong>: prefira “adiciona modelo de regressão logística” em vez de “update”</li>
+<li><strong>Não versione dados brutos grandes</strong>: use links ou armazene em cloud storage (S3, GCS, Azure Blob)</li>
+<li><strong>Cuidado com notebooks</strong>: arquivos <code>.ipynb</code> geram diffs confusos. Considere limpar outputs antes de commitar ou use ferramentas como <code>nbstripout</code></li>
+<li><strong>Use branches para experimentos</strong>: quando for testar uma abordagem diferente, crie uma branch. Se não funcionar, é só descartar</li>
+<li><strong>README com instruções de setup</strong>: documente como configurar o ambiente, instalar dependências e rodar o projeto</li>
+</ul>
 
 
 </section>

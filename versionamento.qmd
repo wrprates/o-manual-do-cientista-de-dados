@@ -1,21 +1,457 @@
 # Versionamento de código
 
-Nasci e sempre vivi no sul do Brasil. Acostumado a comer churrasco quase todo domingo. Quando comentamos com os amigos durante a semana sobre como o churrasco estava bom no fim de semana falamos apenas do ponto da carne e do corte de carne que foi assada. Ninguém fala "nossa, como o arroz estava bem cozido". Mas todos sabemos que um churrasco tradicional de domingo precisa ter arroz, farofa e maionese com batatas. Esse é o básico, mas ninguém fala sobre estes acompanhamentos.
+Em muitas vagas para Cientista de Dados você não vai ver que precisa ter conhecimento de **versionamento de código**, que vai incluir conhecimentos de Git e de ferramentas como GitHub ou GitLab. Porém, este é um **conhecimento básico e essencial para todo mundo que programa** em qualquer linguagem de programação e para qualquer fim, seja para Data Science ou para desenvolvimento de software.
 
-Da mesma forma, em muitas vagas para Cientista de Dados - quase todas - você não vai ver que precisa ter conhecimento de **versionamento de código**, que vai incluir conhecimentos de GIT e de ferramentas como GitHub ou Gitlab. Porém, este é um **conhecimento básico e essencial para todo mundo que programa em qualquer linguagem de programação e para qualquer fim** (seja para *Data Science* ou para trabalhar com desenvolvimento de *software*).
+## Git
 
-Aqui neste módulo você terá uma explicação muito lúdica e prática sobre este tema. Vou te explicar da forma que eu, com formação em negócios e não em TI, fixei esses conhecimentos por meio de aprendizado na prática e de bastante experiência trabalhando com times de altíssima qualidade e com muito rigor técnico.
+Git é um **sistema de controle de versão**. Ele rastreia todas as mudanças feitas no seu código ao longo do tempo, permitindo que você:
 
-Por já estar envolvido no tema de *Data Science*, eu imagino que você já tenha ouvido falar pelo menos no GitHub. Mas permita-me explicar, com minhas palavras o que é GIT e seus termos associados - inicialmente peço licença para o rigor ténico quanto aos conceitos formais.
+- Volte para versões anteriores do código quando necessário
+- Trabalhe em equipe sem sobrescrever o trabalho dos outros
+- Mantenha um histórico completo de todas as alterações feitas
 
-## GIT
-É um motor que cria versões do seu código. É um programa de computador, que você precisa instalar normalemnte em seu computador como você instala qualquer outra coisa.
+Os códigos de qualquer linguagem de programação são apenas arquivos de texto. Um arquivo em Python ou em R não terão a extensão `.txt`, mas sim suas próprias extensões: `.py` e `.R`, respectivamente. O Git está interessado apenas nesses arquivos de texto, não na execução deles.
 
-Entenda o sistema de versionamento de códigos do GIT como uma "máquina fotográfica" que bate fotos de diversos "momentos" do seu código. 
+Um **repositório** (ou "repo") é simplesmente uma pasta no seu computador onde o Git está rastreando as mudanças. Dentro dessa pasta existe uma subpasta oculta chamada `.git` que contém todo o histórico de versões.
 
-Os códigos de qualquer linguagem de programação são apenas arquivos de texto. Claro que um arquivo em Python ou em R não terão a extensão `.txt`, mas sim suas próprias extensões: `.py` e `.R`, respectivamente. Mas o conteúdo de arquivos escritos em linguagens de programação não passa de texto, independente da extensão do arquivo.
+## Instalando o Git
 
-O que faz um arquivo de uma linguagem ser executado é que para "rodar" um código você precisa ter a linguagem instalada em seu computador também, e é a linguagem que vai processar o código e gerar os resultados esperados. Porém, **não estamos interessados em executar códigos neste momento**. O GIT está interessados apenas no código em si.
+### Windows
 
-Com um comando do GIT chamado `git commit` eu consigo "bater essas fotos" e "salvar" uma nova versão do nosso código. Mas veja que essa foto inclui todos os arquivos de código que estão presentes em um projeto (por projeto aqui entenda que é meramente uma pasta no seu computador onde estão todos os arquivos de códigos, incluinfo estrutura de subpastas e arquivos em diferentes linguagens de programação).
+1. Baixe o instalador em [git-scm.com](https://git-scm.com/download/win)
+2. Execute o instalador e siga as opções padrão
+3. Após instalar, você terá acesso ao **Git Bash**, um terminal para usar o Git
 
+### Mac
+
+```bash
+# Opção 1: via Homebrew
+brew install git
+
+# Opção 2: Xcode Command Line Tools (instala Git junto)
+xcode-select --install
+```
+
+### Linux
+
+```bash
+# Ubuntu/Debian
+sudo apt install git
+
+# Fedora/CentOS
+sudo yum install git
+```
+
+### Configuração inicial
+
+Após instalar, configure seu nome e email. Essas informações aparecem em cada commit que você fizer:
+
+```bash
+git config --global user.name "Seu Nome"
+git config --global user.email "seu@email.com"
+```
+
+## Fluxo de Estados do Git
+
+O Git organiza seus arquivos em três estados:
+
+1. **Working Directory**: arquivos modificados, mas ainda não preparados
+2. **Staging Area**: arquivos preparados para o próximo commit
+3. **Repository**: histórico de versões salvas (commits)
+
+O fluxo funciona assim:
+
+```
+Working Directory  →  Staging Area  →  Repository
+                  git add         git commit
+```
+
+Você modifica arquivos, usa `git add` para prepará-los, e `git commit` para salvar uma versão.
+
+## Comandos do Dia a Dia
+
+Estes são os comandos que você vai usar na maior parte do tempo:
+
+| Comando | O que faz |
+|---------|-----------|
+| `git init` | Cria um novo repositório na pasta atual |
+| `git status` | Mostra o estado atual (arquivos modificados, preparados, etc.) |
+| `git add arquivo` | Prepara um arquivo para commit |
+| `git add .` | Prepara todos os arquivos modificados |
+| `git commit -m "mensagem"` | Salva uma versão com uma mensagem descritiva |
+| `git log` | Mostra o histórico de commits |
+| `git diff` | Mostra as mudanças que ainda não foram preparadas |
+
+### Exemplo prático
+
+```bash
+# Criar um repositório
+git init
+
+# Ver o estado atual
+git status
+
+# Modificar um arquivo e ver as mudanças
+git diff
+
+# Preparar arquivos para commit
+git add analise.R
+git add modelo.py
+
+# Ou preparar todos de uma vez
+git add .
+
+# Salvar a versão
+git commit -m "adiciona análise exploratória e primeiro modelo"
+
+# Ver o histórico
+git log
+```
+
+## Branches
+
+Branches são **linhas de desenvolvimento paralelas**. Elas permitem que você trabalhe em uma nova funcionalidade sem afetar o código principal.
+
+Por padrão, todo repositório começa com uma branch chamada `main` (ou `master` em repos mais antigos).
+
+### Comandos de branches
+
+```bash
+# Listar branches
+git branch
+
+# Criar uma nova branch
+git branch nome-da-branch
+
+# Mudar para outra branch
+git checkout nome-da-branch
+# ou
+git switch nome-da-branch
+
+# Criar e mudar para uma nova branch (atalho)
+git checkout -b nome-da-branch
+
+# Juntar uma branch na atual
+git merge nome-da-branch
+```
+
+### Exemplo prático
+
+```bash
+# Estou na main, quero criar uma feature
+git checkout -b feat/novo-grafico
+
+# Faço minhas alterações...
+git add .
+git commit -m "adiciona gráfico de dispersão"
+
+# Volto para main e junto as alterações
+git checkout main
+git merge feat/novo-grafico
+```
+
+## Git Workflow com Feature Branches
+
+### Fluxo básico (times pequenos)
+
+Para projetos pessoais ou times pequenos, o fluxo é simples:
+
+1. Branch principal (`main`) sempre estável
+2. Criar branch para cada feature: `feat/nome-da-feature`
+3. Commits pequenos e frequentes
+4. Push para remoto
+5. Pull Request / Merge Request
+6. Code review
+7. Merge para main
+
+### Fluxo com múltiplos ambientes
+
+Quando há ambientes separados (desenvolvimento, homologação, produção), o fluxo fica mais estruturado:
+
+**Branches de ambiente:**
+
+- `main` ou `prod` → código em **produção** (o que está rodando de verdade)
+- `stg` ou `uat` → ambiente de **homologação** (testes finais antes de ir pra prod)
+- `dev` ou `develop` → ambiente de **desenvolvimento** (integração das features)
+
+**Fluxo:**
+
+```
+feat/minha-feature → dev → stg → main (prod)
+```
+
+1. Desenvolvedor cria branch a partir de `dev`
+2. Faz as mudanças e abre PR para `dev`
+3. Após code review, merge para `dev`
+4. Quando `dev` está pronto para testes, merge para `stg`
+5. QA testa em staging
+6. Após aprovação, merge de `stg` para `main` (deploy em produção)
+
+**Exemplo prático:**
+
+```bash
+# Criar feature a partir de dev
+git checkout dev
+git pull origin dev
+git checkout -b feat/novo-modelo
+
+# Trabalhar...
+git add .
+git commit -m "adiciona modelo de classificação"
+git push -u origin feat/novo-modelo
+
+# Abrir PR de feat/novo-modelo → dev
+# Após aprovação e merge, o CI/CD faz deploy em ambiente dev
+
+# Quando pronto para staging
+git checkout stg
+git pull origin stg
+git merge dev
+git push origin stg
+# CI/CD faz deploy em staging para QA testar
+
+# Quando aprovado, vai para produção
+git checkout main
+git pull origin main
+git merge stg
+git push origin main
+# CI/CD faz deploy em produção
+```
+
+**Quando usar cada modelo:**
+
+| Cenário | Modelo sugerido |
+|---------|-----------------|
+| Projeto pessoal / time de 1-2 pessoas | Só `main` + feature branches |
+| Time pequeno (3-5 pessoas) | `main` + `dev` + feature branches |
+| Time maior / produto em produção | `main` + `stg` + `dev` + feature branches |
+
+### Convenções de nomes de branches
+
+- `feat/` - nova funcionalidade
+- `fix/` - correção de bug
+- `docs/` - documentação
+- `refactor/` - refatoração
+- `hotfix/` - correção urgente direto para produção
+
+## Resolução de Conflitos
+
+Conflitos acontecem quando duas pessoas editam o mesmo trecho de código. O Git não sabe qual versão manter e pede para você decidir.
+
+### Exemplo passo a passo
+
+1. Você tenta fazer merge e vê a mensagem de conflito:
+
+```bash
+git merge feat/outra-feature
+# Auto-merging analise.R
+# CONFLICT (content): Merge conflict in analise.R
+```
+
+2. Abre o arquivo com conflito e vê as marcações:
+
+```r
+# analise.R
+library(dplyr)
+
+<<<<<<< HEAD
+dados <- read.csv("dados_v2.csv")
+=======
+dados <- read.csv("dados_limpos.csv")
+>>>>>>> feat/outra-feature
+
+resultado <- dados |>
+  filter(valor > 0)
+```
+
+3. O que significam as marcações:
+   - Entre `<<<<<<< HEAD` e `=======`: seu código (branch atual)
+   - Entre `=======` e `>>>>>>>`: código da outra branch
+
+4. Decide o que manter. Pode ser um, outro, ou uma combinação:
+
+```r
+# analise.R
+library(dplyr)
+
+dados <- read.csv("dados_limpos.csv")  # escolhi a versão da outra branch
+
+resultado <- dados |>
+  filter(valor > 0)
+```
+
+5. Remove as marcações, salva o arquivo e finaliza:
+
+```bash
+git add analise.R
+git commit -m "resolve conflito em analise.R"
+```
+
+### Boas práticas para evitar conflitos
+
+- Faça commits frequentes
+- Dê `git pull` antes de começar a trabalhar
+- Mantenha branches de curta duração
+
+## Comandos de Emergência
+
+Quando algo dá errado, estes comandos podem salvar:
+
+| Situação | Comando |
+|----------|---------|
+| Ver o que mudou | `git diff` |
+| Descartar mudanças não commitadas em um arquivo | `git checkout -- arquivo` |
+| Guardar mudanças temporariamente | `git stash` |
+| Recuperar mudanças guardadas | `git stash pop` |
+| Desfazer último commit (mantendo mudanças) | `git reset --soft HEAD~1` |
+| Desfazer último commit (descartando TUDO) | `git reset --hard HEAD` |
+| Desfazer commit mantendo histórico | `git revert HEAD` |
+
+### Navegar para commits específicos
+
+Às vezes você precisa ver como o código estava em um commit antigo:
+
+```bash
+# Ver histórico resumido com hashes
+git log --oneline
+
+# Ir para um commit específico
+git checkout abc1234
+
+# Voltar para a branch principal
+git checkout main
+```
+
+Quando você faz `git checkout` para um commit específico, entra em modo **"detached HEAD"**. Isso significa que você está em um commit, não em uma branch. É útil para investigar código antigo ou testar algo, mas não faça commits nesse estado. Sempre volte para uma branch antes de continuar trabalhando.
+
+## .gitignore para Data Science
+
+O arquivo `.gitignore` diz ao Git quais arquivos **não** devem ser versionados. Para projetos de Data Science, não versionamos:
+
+- Dados grandes (`.csv`, `.parquet`, `.rds`, `.pkl`)
+- Credenciais (`.env`, `.Renviron`)
+- Ambientes virtuais (`venv/`, `renv/library/`)
+- Cache e arquivos temporários
+
+### Exemplo para projetos em R
+
+```
+# Dados
+*.csv
+*.parquet
+*.rds
+*.RData
+data/raw/
+
+# Ambiente e configurações locais
+.Renviron
+.Rprofile
+.Rhistory
+.RData
+
+# renv (pacotes instalados)
+renv/library/
+renv/staging/
+
+# Arquivos de sessão
+.Rproj.user/
+
+# Outputs de Quarto/RMarkdown
+*_cache/
+*_files/
+```
+
+### Exemplo para projetos em Python
+
+```
+# Dados
+*.csv
+*.parquet
+*.pkl
+*.h5
+data/raw/
+
+# Ambiente
+.env
+venv/
+.venv/
+
+# Cache
+__pycache__/
+*.pyc
+.cache/
+
+# Jupyter
+.ipynb_checkpoints/
+```
+
+### Exemplo combinado (R + Python)
+
+```
+# Dados (ambos)
+*.csv
+*.parquet
+data/raw/
+
+# R
+*.rds
+*.RData
+.Renviron
+.Rhistory
+renv/library/
+.Rproj.user/
+
+# Python
+*.pkl
+.env
+venv/
+__pycache__/
+.ipynb_checkpoints/
+```
+
+## GitHub e GitLab
+
+**Git** é o sistema de versionamento que roda **localmente** no seu computador. **GitHub** e **GitLab** são serviços na nuvem que hospedam repositórios Git, permitindo colaboração e backup.
+
+### Conectar repositório local ao remoto
+
+```bash
+# Adicionar um repositório remoto
+git remote add origin https://github.com/usuario/repo.git
+
+# Enviar código para o remoto pela primeira vez
+git push -u origin main
+```
+
+### Comandos para trabalhar com remoto
+
+```bash
+# Enviar commits para o remoto
+git push
+
+# Trazer atualizações do remoto
+git pull
+
+# Baixar um repositório existente
+git clone https://github.com/usuario/repo.git
+```
+
+### Pull Requests / Merge Requests
+
+Pull Request (GitHub) ou Merge Request (GitLab) é a forma de propor mudanças de uma branch para outra. O fluxo típico é:
+
+1. Você cria uma branch e faz commits
+2. Push da branch para o remoto
+3. Abre um PR/MR no site (GitHub ou GitLab)
+4. Colegas revisam o código
+5. Após aprovação, faz o merge
+
+Isso permite **code review** antes de integrar mudanças, o que melhora a qualidade do código e distribui conhecimento no time.
+
+## Boas Práticas para Cientistas de Dados
+
+- **Commits frequentes com mensagens descritivas**: prefira "adiciona modelo de regressão logística" em vez de "update"
+- **Não versione dados brutos grandes**: use links ou armazene em cloud storage (S3, GCS, Azure Blob)
+- **Cuidado com notebooks**: arquivos `.ipynb` geram diffs confusos. Considere limpar outputs antes de commitar ou use ferramentas como `nbstripout`
+- **Use branches para experimentos**: quando for testar uma abordagem diferente, crie uma branch. Se não funcionar, é só descartar
+- **README com instruções de setup**: documente como configurar o ambiente, instalar dependências e rodar o projeto
