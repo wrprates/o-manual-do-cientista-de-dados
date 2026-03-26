@@ -1,0 +1,21 @@
+# Versionamento de código
+
+Nasci e sempre vivi no sul do Brasil. Acostumado a comer churrasco quase todo domingo. Quando comentamos com os amigos durante a semana sobre como o churrasco estava bom no fim de semana falamos apenas do ponto da carne e do corte de carne que foi assada. Ninguém fala "nossa, como o arroz estava bem cozido". Mas todos sabemos que um churrasco tradicional de domingo precisa ter arroz, farofa e maionese com batatas. Esse é o básico, mas ninguém fala sobre estes acompanhamentos.
+
+Da mesma forma, em muitas vagas para Cientista de Dados - quase todas - você não vai ver que precisa ter conhecimento de **versionamento de código**, que vai incluir conhecimentos de GIT e de ferramentas como GitHub ou Gitlab. Porém, este é um **conhecimento básico e essencial para todo mundo que programa em qualquer linguagem de programação e para qualquer fim** (seja para *Data Science* ou para trabalhar com desenvolvimento de *software*).
+
+Aqui neste módulo você terá uma explicação muito lúdica e prática sobre este tema. Vou te explicar da forma que eu, com formação em negócios e não em TI, fixei esses conhecimentos por meio de aprendizado na prática e de bastante experiência trabalhando com times de altíssima qualidade e com muito rigor técnico.
+
+Por já estar envolvido no tema de *Data Science*, eu imagino que você já tenha ouvido falar pelo menos no GitHub. Mas permita-me explicar, com minhas palavras o que é GIT e seus termos associados - inicialmente peço licença para o rigor ténico quanto aos conceitos formais.
+
+## GIT
+É um motor que cria versões do seu código. É um programa de computador, que você precisa instalar normalemnte em seu computador como você instala qualquer outra coisa.
+
+Entenda o sistema de versionamento de códigos do GIT como uma "máquina fotográfica" que bate fotos de diversos "momentos" do seu código. 
+
+Os códigos de qualquer linguagem de programação são apenas arquivos de texto. Claro que um arquivo em Python ou em R não terão a extensão `.txt`, mas sim suas próprias extensões: `.py` e `.R`, respectivamente. Mas o conteúdo de arquivos escritos em linguagens de programação não passa de texto, independente da extensão do arquivo.
+
+O que faz um arquivo de uma linguagem ser executado é que para "rodar" um código você precisa ter a linguagem instalada em seu computador também, e é a linguagem que vai processar o código e gerar os resultados esperados. Porém, **não estamos interessados em executar códigos neste momento**. O GIT está interessados apenas no código em si.
+
+Com um comando do GIT chamado `git commit` eu consigo "bater essas fotos" e "salvar" uma nova versão do nosso código. Mas veja que essa foto inclui todos os arquivos de código que estão presentes em um projeto (por projeto aqui entenda que é meramente uma pasta no seu computador onde estão todos os arquivos de códigos, incluinfo estrutura de subpastas e arquivos em diferentes linguagens de programação).
+

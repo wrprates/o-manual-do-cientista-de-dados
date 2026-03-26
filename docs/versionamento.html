@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>References – O manual do Cientista de Dados</title>
+<title>3&nbsp; Versionamento de código – O manual do Cientista de Dados</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,26 +20,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -49,7 +30,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./teste_de_hipoteses.html" rel="prev">
+<link href="./qualidade_de_dados.html" rel="next">
+<link href="./o_que_e_ds.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -99,7 +81,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./references.html">References</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./versionamento.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Versionamento de código</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -144,7 +126,7 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./versionamento.html" class="sidebar-item-text sidebar-link">
+  <a href="./versionamento.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Versionamento de código</span></span></a>
   </div>
 </li>
@@ -162,7 +144,7 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link active">
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
@@ -171,15 +153,21 @@ div.csl-indent {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#git" id="toc-git" class="nav-link active" data-scroll-target="#git"><span class="header-section-number">3.1</span> GIT</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">References</h1>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Versionamento de código</span></h1>
 </div>
 
 
@@ -196,14 +184,20 @@ div.csl-indent {
 </header>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-provost2016data" class="csl-entry" role="listitem">
-Provost, F., T. Fawcett, and M. Boscato. 2016. <em>Data Science Para
-Neg<span>ó</span>cios</em>. ALTA BOOKS. <a href="https://books.google.com.br/books?id=c4lAvgAACAAJ">https://books.google.com.br/books?id=c4lAvgAACAAJ</a>.
-</div>
-</div>
+<p>Nasci e sempre vivi no sul do Brasil. Acostumado a comer churrasco quase todo domingo. Quando comentamos com os amigos durante a semana sobre como o churrasco estava bom no fim de semana falamos apenas do ponto da carne e do corte de carne que foi assada. Ninguém fala “nossa, como o arroz estava bem cozido”. Mas todos sabemos que um churrasco tradicional de domingo precisa ter arroz, farofa e maionese com batatas. Esse é o básico, mas ninguém fala sobre estes acompanhamentos.</p>
+<p>Da mesma forma, em muitas vagas para Cientista de Dados - quase todas - você não vai ver que precisa ter conhecimento de <strong>versionamento de código</strong>, que vai incluir conhecimentos de GIT e de ferramentas como GitHub ou Gitlab. Porém, este é um <strong>conhecimento básico e essencial para todo mundo que programa em qualquer linguagem de programação e para qualquer fim</strong> (seja para <em>Data Science</em> ou para trabalhar com desenvolvimento de <em>software</em>).</p>
+<p>Aqui neste módulo você terá uma explicação muito lúdica e prática sobre este tema. Vou te explicar da forma que eu, com formação em negócios e não em TI, fixei esses conhecimentos por meio de aprendizado na prática e de bastante experiência trabalhando com times de altíssima qualidade e com muito rigor técnico.</p>
+<p>Por já estar envolvido no tema de <em>Data Science</em>, eu imagino que você já tenha ouvido falar pelo menos no GitHub. Mas permita-me explicar, com minhas palavras o que é GIT e seus termos associados - inicialmente peço licença para o rigor ténico quanto aos conceitos formais.</p>
+<section id="git" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="git"><span class="header-section-number">3.1</span> GIT</h2>
+<p>É um motor que cria versões do seu código. É um programa de computador, que você precisa instalar normalemnte em seu computador como você instala qualquer outra coisa.</p>
+<p>Entenda o sistema de versionamento de códigos do GIT como uma “máquina fotográfica” que bate fotos de diversos “momentos” do seu código.</p>
+<p>Os códigos de qualquer linguagem de programação são apenas arquivos de texto. Claro que um arquivo em Python ou em R não terão a extensão <code>.txt</code>, mas sim suas próprias extensões: <code>.py</code> e <code>.R</code>, respectivamente. Mas o conteúdo de arquivos escritos em linguagens de programação não passa de texto, independente da extensão do arquivo.</p>
+<p>O que faz um arquivo de uma linguagem ser executado é que para “rodar” um código você precisa ter a linguagem instalada em seu computador também, e é a linguagem que vai processar o código e gerar os resultados esperados. Porém, <strong>não estamos interessados em executar códigos neste momento</strong>. O GIT está interessados apenas no código em si.</p>
+<p>Com um comando do GIT chamado <code>git commit</code> eu consigo “bater essas fotos” e “salvar” uma nova versão do nosso código. Mas veja que essa foto inclui todos os arquivos de código que estão presentes em um projeto (por projeto aqui entenda que é meramente uma pasta no seu computador onde estão todos os arquivos de códigos, incluinfo estrutura de subpastas e arquivos em diferentes linguagens de programação).</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -625,11 +619,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./teste_de_hipoteses.html" class="pagination-link" aria-label="Análise de Hipóteses">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Análise de Hipóteses</span></span>
+      <a href="./o_que_e_ds.html" class="pagination-link" aria-label="O que é Ciência de Dados (Data Science)?">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">O que é Ciência de Dados (Data Science)?</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./qualidade_de_dados.html" class="pagination-link" aria-label="Qualidade de Dados">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Qualidade de Dados</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
