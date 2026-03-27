@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.40">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>3&nbsp; Versionamento de código – O manual do Cientista de Dados</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./qualidade_de_dados.html" rel="next">
+<link href="./o_que_e_ds.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-8ea72dc5fed832574809a9c94082fbbb.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-2dd718d80a4912ee1963dd49595f4abf.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-fa97cd739ae4520a9ee02bf5a2c635fd.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./versionamento.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Versionamento de código</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">O manual do Cientista de Dados</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prefácio</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introdução</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./o_que_e_ds.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">O que é Ciência de Dados (Data Science)?</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./versionamento.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Versionamento de código</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./qualidade_de_dados.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Qualidade de Dados</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./teste_de_hipoteses.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Análise de Hipóteses</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./machine_learning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title"><em>Machine Learning</em> para negócios</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#git" id="toc-git" class="nav-link active" data-scroll-target="#git"><span class="header-section-number">3.1</span> Git</a></li>
+  <li><a href="#instalando-o-git" id="toc-instalando-o-git" class="nav-link" data-scroll-target="#instalando-o-git"><span class="header-section-number">3.2</span> Instalando o Git</a>
+  <ul class="collapse">
+  <li><a href="#windows" id="toc-windows" class="nav-link" data-scroll-target="#windows"><span class="header-section-number">3.2.1</span> Windows</a></li>
+  <li><a href="#mac" id="toc-mac" class="nav-link" data-scroll-target="#mac"><span class="header-section-number">3.2.2</span> Mac</a></li>
+  <li><a href="#linux" id="toc-linux" class="nav-link" data-scroll-target="#linux"><span class="header-section-number">3.2.3</span> Linux</a></li>
+  <li><a href="#configuração-inicial" id="toc-configuração-inicial" class="nav-link" data-scroll-target="#configuração-inicial"><span class="header-section-number">3.2.4</span> Configuração inicial</a></li>
+  </ul></li>
+  <li><a href="#fluxo-de-estados-do-git" id="toc-fluxo-de-estados-do-git" class="nav-link" data-scroll-target="#fluxo-de-estados-do-git"><span class="header-section-number">3.3</span> Fluxo de Estados do Git</a></li>
+  <li><a href="#comandos-do-dia-a-dia" id="toc-comandos-do-dia-a-dia" class="nav-link" data-scroll-target="#comandos-do-dia-a-dia"><span class="header-section-number">3.4</span> Comandos do Dia a Dia</a>
+  <ul class="collapse">
+  <li><a href="#exemplo-prático" id="toc-exemplo-prático" class="nav-link" data-scroll-target="#exemplo-prático"><span class="header-section-number">3.4.1</span> Exemplo prático</a></li>
+  </ul></li>
+  <li><a href="#branches" id="toc-branches" class="nav-link" data-scroll-target="#branches"><span class="header-section-number">3.5</span> Branches</a>
+  <ul class="collapse">
+  <li><a href="#comandos-de-branches" id="toc-comandos-de-branches" class="nav-link" data-scroll-target="#comandos-de-branches"><span class="header-section-number">3.5.1</span> Comandos de branches</a></li>
+  <li><a href="#exemplo-prático-1" id="toc-exemplo-prático-1" class="nav-link" data-scroll-target="#exemplo-prático-1"><span class="header-section-number">3.5.2</span> Exemplo prático</a></li>
+  </ul></li>
+  <li><a href="#git-workflow-com-feature-branches" id="toc-git-workflow-com-feature-branches" class="nav-link" data-scroll-target="#git-workflow-com-feature-branches"><span class="header-section-number">3.6</span> Git Workflow com Feature Branches</a>
+  <ul class="collapse">
+  <li><a href="#fluxo-básico-times-pequenos" id="toc-fluxo-básico-times-pequenos" class="nav-link" data-scroll-target="#fluxo-básico-times-pequenos"><span class="header-section-number">3.6.1</span> Fluxo básico (times pequenos)</a></li>
+  <li><a href="#fluxo-com-múltiplos-ambientes" id="toc-fluxo-com-múltiplos-ambientes" class="nav-link" data-scroll-target="#fluxo-com-múltiplos-ambientes"><span class="header-section-number">3.6.2</span> Fluxo com múltiplos ambientes</a></li>
+  <li><a href="#convenções-de-nomes-de-branches" id="toc-convenções-de-nomes-de-branches" class="nav-link" data-scroll-target="#convenções-de-nomes-de-branches"><span class="header-section-number">3.6.3</span> Convenções de nomes de branches</a></li>
+  </ul></li>
+  <li><a href="#resolução-de-conflitos" id="toc-resolução-de-conflitos" class="nav-link" data-scroll-target="#resolução-de-conflitos"><span class="header-section-number">3.7</span> Resolução de Conflitos</a>
+  <ul class="collapse">
+  <li><a href="#exemplo-passo-a-passo" id="toc-exemplo-passo-a-passo" class="nav-link" data-scroll-target="#exemplo-passo-a-passo"><span class="header-section-number">3.7.1</span> Exemplo passo a passo</a></li>
+  <li><a href="#boas-práticas-para-evitar-conflitos" id="toc-boas-práticas-para-evitar-conflitos" class="nav-link" data-scroll-target="#boas-práticas-para-evitar-conflitos"><span class="header-section-number">3.7.2</span> Boas práticas para evitar conflitos</a></li>
+  </ul></li>
+  <li><a href="#comandos-de-emergência" id="toc-comandos-de-emergência" class="nav-link" data-scroll-target="#comandos-de-emergência"><span class="header-section-number">3.8</span> Comandos de Emergência</a>
+  <ul class="collapse">
+  <li><a href="#navegar-para-commits-específicos" id="toc-navegar-para-commits-específicos" class="nav-link" data-scroll-target="#navegar-para-commits-específicos"><span class="header-section-number">3.8.1</span> Navegar para commits específicos</a></li>
+  </ul></li>
+  <li><a href="#gitignore-para-data-science" id="toc-gitignore-para-data-science" class="nav-link" data-scroll-target="#gitignore-para-data-science"><span class="header-section-number">3.9</span> .gitignore para Data Science</a>
+  <ul class="collapse">
+  <li><a href="#exemplo-para-projetos-em-r" id="toc-exemplo-para-projetos-em-r" class="nav-link" data-scroll-target="#exemplo-para-projetos-em-r"><span class="header-section-number">3.9.1</span> Exemplo para projetos em R</a></li>
+  <li><a href="#exemplo-para-projetos-em-python" id="toc-exemplo-para-projetos-em-python" class="nav-link" data-scroll-target="#exemplo-para-projetos-em-python"><span class="header-section-number">3.9.2</span> Exemplo para projetos em Python</a></li>
+  <li><a href="#exemplo-combinado-r-python" id="toc-exemplo-combinado-r-python" class="nav-link" data-scroll-target="#exemplo-combinado-r-python"><span class="header-section-number">3.9.3</span> Exemplo combinado (R + Python)</a></li>
+  </ul></li>
+  <li><a href="#github-e-gitlab" id="toc-github-e-gitlab" class="nav-link" data-scroll-target="#github-e-gitlab"><span class="header-section-number">3.10</span> GitHub e GitLab</a>
+  <ul class="collapse">
+  <li><a href="#conectar-repositório-local-ao-remoto" id="toc-conectar-repositório-local-ao-remoto" class="nav-link" data-scroll-target="#conectar-repositório-local-ao-remoto"><span class="header-section-number">3.10.1</span> Conectar repositório local ao remoto</a></li>
+  <li><a href="#comandos-para-trabalhar-com-remoto" id="toc-comandos-para-trabalhar-com-remoto" class="nav-link" data-scroll-target="#comandos-para-trabalhar-com-remoto"><span class="header-section-number">3.10.2</span> Comandos para trabalhar com remoto</a></li>
+  <li><a href="#pull-requests-merge-requests" id="toc-pull-requests-merge-requests" class="nav-link" data-scroll-target="#pull-requests-merge-requests"><span class="header-section-number">3.10.3</span> Pull Requests / Merge Requests</a></li>
+  </ul></li>
+  <li><a href="#boas-práticas-para-cientistas-de-dados" id="toc-boas-práticas-para-cientistas-de-dados" class="nav-link" data-scroll-target="#boas-práticas-para-cientistas-de-dados"><span class="header-section-number">3.11</span> Boas Práticas para Cientistas de Dados</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Versionamento de código</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Em muitas vagas para Cientista de Dados você não vai ver que precisa ter conhecimento de <strong>versionamento de código</strong>, que vai incluir conhecimentos de Git e de ferramentas como GitHub ou GitLab. Porém, este é um <strong>conhecimento básico e essencial para todo mundo que programa</strong> em qualquer linguagem de programação e para qualquer fim, seja para Data Science ou para desenvolvimento de software.</p>
+<section id="git" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="git"><span class="header-section-number">3.1</span> Git</h2>
+<p>Git é um <strong>sistema de controle de versão</strong>. Ele rastreia todas as mudanças feitas no seu código ao longo do tempo, permitindo que você:</p>
+<ul>
+<li>Volte para versões anteriores do código quando necessário</li>
+<li>Trabalhe em equipe sem sobrescrever o trabalho dos outros</li>
+<li>Mantenha um histórico completo de todas as alterações feitas</li>
+</ul>
+<p>Os códigos de qualquer linguagem de programação são apenas arquivos de texto. Um arquivo em Python ou em R não terão a extensão <code>.txt</code>, mas sim suas próprias extensões: <code>.py</code> e <code>.R</code>, respectivamente. O Git está interessado apenas nesses arquivos de texto, não na execução deles.</p>
+<p>Um <strong>repositório</strong> (ou “repo”) é simplesmente uma pasta no seu computador onde o Git está rastreando as mudanças. Dentro dessa pasta existe uma subpasta oculta chamada <code>.git</code> que contém todo o histórico de versões.</p>
+</section>
+<section id="instalando-o-git" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="instalando-o-git"><span class="header-section-number">3.2</span> Instalando o Git</h2>
+<section id="windows" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="windows"><span class="header-section-number">3.2.1</span> Windows</h3>
+<ol type="1">
+<li>Baixe o instalador em <a href="https://git-scm.com/download/win">git-scm.com</a></li>
+<li>Execute o instalador e siga as opções padrão</li>
+<li>Após instalar, você terá acesso ao <strong>Git Bash</strong>, um terminal para usar o Git</li>
+</ol>
+</section>
+<section id="mac" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="mac"><span class="header-section-number">3.2.2</span> Mac</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Opção 1: via Homebrew</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">brew</span> install git</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Opção 2: Xcode Command Line Tools (instala Git junto)</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">xcode-select</span> <span class="at">--install</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="linux" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="linux"><span class="header-section-number">3.2.3</span> Linux</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ubuntu/Debian</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install git</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Fedora/CentOS</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> yum install git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="configuração-inicial" class="level3" data-number="3.2.4">
+<h3 data-number="3.2.4" class="anchored" data-anchor-id="configuração-inicial"><span class="header-section-number">3.2.4</span> Configuração inicial</h3>
+<p>Após instalar, configure seu nome e email. Essas informações aparecem em cada commit que você fizer:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">"Seu Nome"</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">"seu@email.com"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="fluxo-de-estados-do-git" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="fluxo-de-estados-do-git"><span class="header-section-number">3.3</span> Fluxo de Estados do Git</h2>
+<p>O Git organiza seus arquivos em três estados:</p>
+<ol type="1">
+<li><strong>Working Directory</strong>: arquivos modificados, mas ainda não preparados</li>
+<li><strong>Staging Area</strong>: arquivos preparados para o próximo commit</li>
+<li><strong>Repository</strong>: histórico de versões salvas (commits)</li>
+</ol>
+<div class="cell" data-fig-width="7" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+    A[Working Directory&lt;br/&gt;Arquivos modificados] --&gt;|git add| B[Staging Area&lt;br/&gt;Prontos para commit]
+    B --&gt;|git commit| C[Repository&lt;br/&gt;Histórico salvo]
+
+    style A fill:#ffcccc,stroke:#cc0000
+    style B fill:#ffffcc,stroke:#cccc00
+    style C fill:#ccffcc,stroke:#00cc00
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Você modifica arquivos, usa <code>git add</code> para prepará-los, e <code>git commit</code> para salvar uma versão.</p>
+</section>
+<section id="comandos-do-dia-a-dia" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="comandos-do-dia-a-dia"><span class="header-section-number">3.4</span> Comandos do Dia a Dia</h2>
+<p>Estes são os comandos que você vai usar na maior parte do tempo:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 45%">
+<col style="width: 55%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Comando</th>
+<th>O que faz</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>git init</code></td>
+<td>Cria um novo repositório na pasta atual</td>
+</tr>
+<tr class="even">
+<td><code>git status</code></td>
+<td>Mostra o estado atual (arquivos modificados, preparados, etc.)</td>
+</tr>
+<tr class="odd">
+<td><code>git add arquivo</code></td>
+<td>Prepara um arquivo para commit</td>
+</tr>
+<tr class="even">
+<td><code>git add .</code></td>
+<td>Prepara todos os arquivos modificados</td>
+</tr>
+<tr class="odd">
+<td><code>git commit -m "mensagem"</code></td>
+<td>Salva uma versão com uma mensagem descritiva</td>
+</tr>
+<tr class="even">
+<td><code>git log</code></td>
+<td>Mostra o histórico de commits</td>
+</tr>
+<tr class="odd">
+<td><code>git diff</code></td>
+<td>Mostra as mudanças que ainda não foram preparadas</td>
+</tr>
+</tbody>
+</table>
+<section id="exemplo-prático" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="exemplo-prático"><span class="header-section-number">3.4.1</span> Exemplo prático</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Criar um repositório</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> init</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Ver o estado atual</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Modificar um arquivo e ver as mudanças</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> diff</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Preparar arquivos para commit</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add analise.R</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add modelo.py</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Ou preparar todos de uma vez</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Salvar a versão</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"adiciona análise exploratória e primeiro modelo"</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Ver o histórico</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="branches" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="branches"><span class="header-section-number">3.5</span> Branches</h2>
+<p>Branches são <strong>linhas de desenvolvimento paralelas</strong>. Elas permitem que você trabalhe em uma nova funcionalidade sem afetar o código principal.</p>
+<div class="cell" data-fig-width="8" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">gitGraph
+    commit id: "inicial"
+    commit id: "v1"
+    branch feat/novo-grafico
+    commit id: "adiciona dados"
+    commit id: "cria gráfico"
+    checkout main
+    commit id: "fix typo"
+    merge feat/novo-grafico id: "merge"
+    commit id: "v2"
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Por padrão, todo repositório começa com uma branch chamada <code>main</code> (ou <code>master</code> em repos mais antigos).</p>
+<section id="comandos-de-branches" class="level3" data-number="3.5.1">
+<h3 data-number="3.5.1" class="anchored" data-anchor-id="comandos-de-branches"><span class="header-section-number">3.5.1</span> Comandos de branches</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Listar branches</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Criar uma nova branch</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch nome-da-branch</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Mudar para outra branch</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout nome-da-branch</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># ou</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch nome-da-branch</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Criar e mudar para uma nova branch (atalho)</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout <span class="at">-b</span> nome-da-branch</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Juntar uma branch na atual</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge nome-da-branch</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="exemplo-prático-1" class="level3" data-number="3.5.2">
+<h3 data-number="3.5.2" class="anchored" data-anchor-id="exemplo-prático-1"><span class="header-section-number">3.5.2</span> Exemplo prático</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Estou na main, quero criar uma feature</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout <span class="at">-b</span> feat/novo-grafico</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Faço minhas alterações...</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"adiciona gráfico de dispersão"</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Volto para main e junto as alterações</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout main</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge feat/novo-grafico</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="git-workflow-com-feature-branches" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="git-workflow-com-feature-branches"><span class="header-section-number">3.6</span> Git Workflow com Feature Branches</h2>
+<section id="fluxo-básico-times-pequenos" class="level3" data-number="3.6.1">
+<h3 data-number="3.6.1" class="anchored" data-anchor-id="fluxo-básico-times-pequenos"><span class="header-section-number">3.6.1</span> Fluxo básico (times pequenos)</h3>
+<p>Para projetos pessoais ou times pequenos, o fluxo é simples:</p>
+<ol type="1">
+<li>Branch principal (<code>main</code>) sempre estável</li>
+<li>Criar branch para cada feature: <code>feat/nome-da-feature</code></li>
+<li>Commits pequenos e frequentes</li>
+<li>Push para remoto</li>
+<li>Pull Request / Merge Request</li>
+<li>Code review</li>
+<li>Merge para main</li>
+</ol>
+</section>
+<section id="fluxo-com-múltiplos-ambientes" class="level3" data-number="3.6.2">
+<h3 data-number="3.6.2" class="anchored" data-anchor-id="fluxo-com-múltiplos-ambientes"><span class="header-section-number">3.6.2</span> Fluxo com múltiplos ambientes</h3>
+<p>Quando há ambientes separados (desenvolvimento, homologação, produção), o fluxo fica mais estruturado:</p>
+<p><strong>Branches de ambiente:</strong></p>
+<ul>
+<li><code>main</code> ou <code>prod</code> → código em <strong>produção</strong> (o que está rodando de verdade)</li>
+<li><code>stg</code> ou <code>uat</code> → ambiente de <strong>homologação</strong> (testes finais antes de ir pra prod)</li>
+<li><code>dev</code> ou <code>develop</code> → ambiente de <strong>desenvolvimento</strong> (integração das features)</li>
+</ul>
+<div class="cell" data-fig-width="9" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">gitGraph
+    commit id: "prod v1"
+    branch stg
+    commit id: "stg sync"
+    branch dev
+    commit id: "dev sync"
+    branch feat/novo-modelo
+    commit id: "modelo v1"
+    commit id: "ajustes"
+    checkout dev
+    merge feat/novo-modelo id: "merge dev"
+    checkout stg
+    merge dev id: "merge stg"
+    checkout main
+    merge stg id: "deploy prod"
+    commit id: "prod v2"
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<ol type="1">
+<li>Desenvolvedor cria branch a partir de <code>dev</code></li>
+<li>Faz as mudanças e abre PR para <code>dev</code></li>
+<li>Após code review, merge para <code>dev</code></li>
+<li>Quando <code>dev</code> está pronto para testes, merge para <code>stg</code></li>
+<li>QA testa em staging</li>
+<li>Após aprovação, merge de <code>stg</code> para <code>main</code> (deploy em produção)</li>
+</ol>
+<p><strong>Exemplo prático:</strong></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Criar feature a partir de dev</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout dev</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull origin dev</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout <span class="at">-b</span> feat/novo-modelo</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Trabalhar...</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"adiciona modelo de classificação"</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin feat/novo-modelo</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Abrir PR de feat/novo-modelo → dev</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Após aprovação e merge, o CI/CD faz deploy em ambiente dev</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Quando pronto para staging</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout stg</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull origin stg</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge dev</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin stg</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="co"># CI/CD faz deploy em staging para QA testar</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Quando aprovado, vai para produção</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout main</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull origin main</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge stg</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin main</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="co"># CI/CD faz deploy em produção</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Quando usar cada modelo:</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 34%">
+<col style="width: 65%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Cenário</th>
+<th>Modelo sugerido</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Projeto pessoal / time de 1-2 pessoas</td>
+<td>Só <code>main</code> + feature branches</td>
+</tr>
+<tr class="even">
+<td>Time pequeno (3-5 pessoas)</td>
+<td><code>main</code> + <code>dev</code> + feature branches</td>
+</tr>
+<tr class="odd">
+<td>Time maior / produto em produção</td>
+<td><code>main</code> + <code>stg</code> + <code>dev</code> + feature branches</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="convenções-de-nomes-de-branches" class="level3" data-number="3.6.3">
+<h3 data-number="3.6.3" class="anchored" data-anchor-id="convenções-de-nomes-de-branches"><span class="header-section-number">3.6.3</span> Convenções de nomes de branches</h3>
+<ul>
+<li><code>feat/</code> - nova funcionalidade</li>
+<li><code>fix/</code> - correção de bug</li>
+<li><code>docs/</code> - documentação</li>
+<li><code>refactor/</code> - refatoração</li>
+<li><code>hotfix/</code> - correção urgente direto para produção</li>
+</ul>
+</section>
+</section>
+<section id="resolução-de-conflitos" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="resolução-de-conflitos"><span class="header-section-number">3.7</span> Resolução de Conflitos</h2>
+<p>Conflitos acontecem quando duas pessoas editam o mesmo trecho de código. O Git não sabe qual versão manter e pede para você decidir.</p>
+<section id="exemplo-passo-a-passo" class="level3" data-number="3.7.1">
+<h3 data-number="3.7.1" class="anchored" data-anchor-id="exemplo-passo-a-passo"><span class="header-section-number">3.7.1</span> Exemplo passo a passo</h3>
+<ol type="1">
+<li>Você tenta fazer merge e vê a mensagem de conflito:</li>
+</ol>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge feat/outra-feature</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Auto-merging analise.R</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># CONFLICT (content): Merge conflict in analise.R</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="2" type="1">
+<li>Abre o arquivo com conflito e vê as marcações:</li>
+</ol>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># analise.R</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="sc">&lt;</span><span class="er">&lt;&lt;&lt;&lt;&lt;&lt;</span> HEAD</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"dados_v2.csv"</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="sc">==</span><span class="er">=====</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"dados_limpos.csv"</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span><span class="er">&gt;&gt;&gt;&gt;&gt;&gt;</span> feat<span class="sc">/</span>outra<span class="sc">-</span>feature</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>resultado <span class="ot">&lt;-</span> dados <span class="sc">|&gt;</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(valor <span class="sc">&gt;</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="3" type="1">
+<li>O que significam as marcações:
+<ul>
+<li>Entre <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</code> e <code>=======</code>: seu código (branch atual)</li>
+<li>Entre <code>=======</code> e <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>: código da outra branch</li>
+</ul></li>
+<li>Decide o que manter. Pode ser um, outro, ou uma combinação:</li>
+</ol>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># analise.R</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"dados_limpos.csv"</span>)  <span class="co"># escolhi a versão da outra branch</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>resultado <span class="ot">&lt;-</span> dados <span class="sc">|&gt;</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(valor <span class="sc">&gt;</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="5" type="1">
+<li>Remove as marcações, salva o arquivo e finaliza:</li>
+</ol>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add analise.R</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"resolve conflito em analise.R"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="boas-práticas-para-evitar-conflitos" class="level3" data-number="3.7.2">
+<h3 data-number="3.7.2" class="anchored" data-anchor-id="boas-práticas-para-evitar-conflitos"><span class="header-section-number">3.7.2</span> Boas práticas para evitar conflitos</h3>
+<ul>
+<li>Faça commits frequentes</li>
+<li>Dê <code>git pull</code> antes de começar a trabalhar</li>
+<li>Mantenha branches de curta duração</li>
+</ul>
+</section>
+</section>
+<section id="comandos-de-emergência" class="level2" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="comandos-de-emergência"><span class="header-section-number">3.8</span> Comandos de Emergência</h2>
+<p>Quando algo dá errado, estes comandos podem salvar:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 52%">
+<col style="width: 47%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Situação</th>
+<th>Comando</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ver o que mudou</td>
+<td><code>git diff</code></td>
+</tr>
+<tr class="even">
+<td>Descartar mudanças não commitadas em um arquivo</td>
+<td><code>git checkout -- arquivo</code></td>
+</tr>
+<tr class="odd">
+<td>Guardar mudanças temporariamente</td>
+<td><code>git stash</code></td>
+</tr>
+<tr class="even">
+<td>Recuperar mudanças guardadas</td>
+<td><code>git stash pop</code></td>
+</tr>
+<tr class="odd">
+<td>Desfazer último commit (mantendo mudanças)</td>
+<td><code>git reset --soft HEAD~1</code></td>
+</tr>
+<tr class="even">
+<td>Desfazer último commit (descartando TUDO)</td>
+<td><code>git reset --hard HEAD</code></td>
+</tr>
+<tr class="odd">
+<td>Desfazer commit mantendo histórico</td>
+<td><code>git revert HEAD</code></td>
+</tr>
+</tbody>
+</table>
+<section id="navegar-para-commits-específicos" class="level3" data-number="3.8.1">
+<h3 data-number="3.8.1" class="anchored" data-anchor-id="navegar-para-commits-específicos"><span class="header-section-number">3.8.1</span> Navegar para commits específicos</h3>
+<p>Às vezes você precisa ver como o código estava em um commit antigo:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ver histórico resumido com hashes</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--oneline</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Ir para um commit específico</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout abc1234</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Voltar para a branch principal</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Quando você faz <code>git checkout</code> para um commit específico, entra em modo <strong>“detached HEAD”</strong>. Isso significa que você está em um commit, não em uma branch. É útil para investigar código antigo ou testar algo, mas não faça commits nesse estado. Sempre volte para uma branch antes de continuar trabalhando.</p>
+</section>
+</section>
+<section id="gitignore-para-data-science" class="level2" data-number="3.9">
+<h2 data-number="3.9" class="anchored" data-anchor-id="gitignore-para-data-science"><span class="header-section-number">3.9</span> .gitignore para Data Science</h2>
+<p>O arquivo <code>.gitignore</code> diz ao Git quais arquivos <strong>não</strong> devem ser versionados. Para projetos de Data Science, não versionamos:</p>
+<ul>
+<li>Dados grandes (<code>.csv</code>, <code>.parquet</code>, <code>.rds</code>, <code>.pkl</code>)</li>
+<li>Credenciais (<code>.env</code>, <code>.Renviron</code>)</li>
+<li>Ambientes virtuais (<code>venv/</code>, <code>renv/library/</code>)</li>
+<li>Cache e arquivos temporários</li>
+</ul>
+<section id="exemplo-para-projetos-em-r" class="level3" data-number="3.9.1">
+<h3 data-number="3.9.1" class="anchored" data-anchor-id="exemplo-para-projetos-em-r"><span class="header-section-number">3.9.1</span> Exemplo para projetos em R</h3>
+<pre><code># Dados
+*.csv
+*.parquet
+*.rds
+*.RData
+data/raw/
+
+# Ambiente e configurações locais
+.Renviron
+.Rprofile
+.Rhistory
+.RData
+
+# renv (pacotes instalados)
+renv/library/
+renv/staging/
+
+# Arquivos de sessão
+.Rproj.user/
+
+# Outputs de Quarto/RMarkdown
+*_cache/
+*_files/</code></pre>
+</section>
+<section id="exemplo-para-projetos-em-python" class="level3" data-number="3.9.2">
+<h3 data-number="3.9.2" class="anchored" data-anchor-id="exemplo-para-projetos-em-python"><span class="header-section-number">3.9.2</span> Exemplo para projetos em Python</h3>
+<pre><code># Dados
+*.csv
+*.parquet
+*.pkl
+*.h5
+data/raw/
+
+# Ambiente
+.env
+venv/
+.venv/
+
+# Cache
+__pycache__/
+*.pyc
+.cache/
+
+# Jupyter
+.ipynb_checkpoints/</code></pre>
+</section>
+<section id="exemplo-combinado-r-python" class="level3" data-number="3.9.3">
+<h3 data-number="3.9.3" class="anchored" data-anchor-id="exemplo-combinado-r-python"><span class="header-section-number">3.9.3</span> Exemplo combinado (R + Python)</h3>
+<pre><code># Dados (ambos)
+*.csv
+*.parquet
+data/raw/
+
+# R
+*.rds
+*.RData
+.Renviron
+.Rhistory
+renv/library/
+.Rproj.user/
+
+# Python
+*.pkl
+.env
+venv/
+__pycache__/
+.ipynb_checkpoints/</code></pre>
+</section>
+</section>
+<section id="github-e-gitlab" class="level2" data-number="3.10">
+<h2 data-number="3.10" class="anchored" data-anchor-id="github-e-gitlab"><span class="header-section-number">3.10</span> GitHub e GitLab</h2>
+<p><strong>Git</strong> é o sistema de versionamento que roda <strong>localmente</strong> no seu computador. <strong>GitHub</strong> e <strong>GitLab</strong> são serviços na nuvem que hospedam repositórios Git, permitindo colaboração e backup.</p>
+<section id="conectar-repositório-local-ao-remoto" class="level3" data-number="3.10.1">
+<h3 data-number="3.10.1" class="anchored" data-anchor-id="conectar-repositório-local-ao-remoto"><span class="header-section-number">3.10.1</span> Conectar repositório local ao remoto</h3>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Adicionar um repositório remoto</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add origin https://github.com/usuario/repo.git</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Enviar código para o remoto pela primeira vez</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="comandos-para-trabalhar-com-remoto" class="level3" data-number="3.10.2">
+<h3 data-number="3.10.2" class="anchored" data-anchor-id="comandos-para-trabalhar-com-remoto"><span class="header-section-number">3.10.2</span> Comandos para trabalhar com remoto</h3>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Enviar commits para o remoto</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Trazer atualizações do remoto</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Baixar um repositório existente</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/usuario/repo.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="pull-requests-merge-requests" class="level3" data-number="3.10.3">
+<h3 data-number="3.10.3" class="anchored" data-anchor-id="pull-requests-merge-requests"><span class="header-section-number">3.10.3</span> Pull Requests / Merge Requests</h3>
+<p>Pull Request (GitHub) ou Merge Request (GitLab) é a forma de propor mudanças de uma branch para outra. O fluxo típico é:</p>
+<ol type="1">
+<li>Você cria uma branch e faz commits</li>
+<li>Push da branch para o remoto</li>
+<li>Abre um PR/MR no site (GitHub ou GitLab)</li>
+<li>Colegas revisam o código</li>
+<li>Após aprovação, faz o merge</li>
+</ol>
+<p>Isso permite <strong>code review</strong> antes de integrar mudanças, o que melhora a qualidade do código e distribui conhecimento no time.</p>
+</section>
+</section>
+<section id="boas-práticas-para-cientistas-de-dados" class="level2" data-number="3.11">
+<h2 data-number="3.11" class="anchored" data-anchor-id="boas-práticas-para-cientistas-de-dados"><span class="header-section-number">3.11</span> Boas Práticas para Cientistas de Dados</h2>
+<ul>
+<li><strong>Commits frequentes com mensagens descritivas</strong>: prefira “adiciona modelo de regressão logística” em vez de “update”</li>
+<li><strong>Não versione dados brutos grandes</strong>: use links ou armazene em cloud storage (S3, GCS, Azure Blob)</li>
+<li><strong>Cuidado com notebooks</strong>: arquivos <code>.ipynb</code> geram diffs confusos. Considere limpar outputs antes de commitar ou use ferramentas como <code>nbstripout</code></li>
+<li><strong>Use branches para experimentos</strong>: quando for testar uma abordagem diferente, crie uma branch. Se não funcionar, é só descartar</li>
+<li><strong>README com instruções de setup</strong>: documente como configurar o ambiente, instalar dependências e rodar o projeto</li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./o_que_e_ds.html" class="pagination-link" aria-label="O que é Ciência de Dados (Data Science)?">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">O que é Ciência de Dados (Data Science)?</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./qualidade_de_dados.html" class="pagination-link" aria-label="Qualidade de Dados">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Qualidade de Dados</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

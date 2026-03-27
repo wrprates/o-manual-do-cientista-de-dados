@@ -7,7 +7,7 @@ Bem-vindo ao repositório do "O Manual do Cientista de Dados". Este projeto é u
 Wlademir Ribeiro Prates é Cientista de Dados Senior, PhD em Finanças pela Universidade Federal de Santa Catarina (UFSC), e já atuou em diversas empresas, tanto com projetos de consultoria quanto sendo parte do time de dados de grandes organizações no Brasil e também no exterior.
 
 Vamos nos conhecer melhor nas redes sociais:
-- [LinkedIn](https://www.linkedin.com/in/wrprates/)
+- [LinkedIn](https://www.linkedin.com/in/wlademir-ribeiro-prates/)
 - [Instagram](https://instagram.com/datamundo.cientista/).
 
 ## Acesso ao Livro
