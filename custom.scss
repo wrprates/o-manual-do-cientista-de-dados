@@ -1,0 +1,13 @@
+/*-- scss:rules --*/
+
+// Estilos para tabela de testes de hipóteses
+.tabela-hipoteses {
+  table {
+    font-size: 0.85em;
+
+    th:first-child,
+    td:first-child {
+      min-width: 150px;
+    }
+  }
+}
