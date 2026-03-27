@@ -480,13 +480,15 @@ flowchart TD
 Por fim, a tabela a seguir sintetiza o que foi abordado neste documento acerca de testes de hipóteses. Existem diversos outros testes, porém, os que são apresentados na sequência viabilizam a verificação estatística da maior parte das hipóteses de negócio levantas em projetos de análise de dados.
 
 
+::: {.tabela-hipoteses}
 | Teste | Testa diferenças entre: | Paramétrico ou não? | Qtde de amostras que compara | Função no R / pacote | Observações |
 |-----------------|---------------------|----------------|---------------|-----------------|----------------------------|
-| Z | Proporções | Paramétrico | 2 | Necessário criar |  | 
-| [Chi-Squared](https://www.r-bloggers.com/comparison-of-two-proportions-parametric-z-test-and-non-parametric-chi-squared-methods/) | Proporções | Não paramétrico | 2 | prop.test() / Default |  | 
-| T one sample | Médias | Paramétrico | 2 | t.test() / Default | Pareado | 
-| T two sample | Médias | Paramétrico | 2 | t.test() / Default | Não pareado | 
-| [Wilcoxon one sample](http://www.sthda.com/english/wiki/one-sample-wilcoxon-signed-rank-test-in-r) | Distribuições | Não paramétrico |  | wilcox.test() / Default | Pareado, análogo ao teste T one sample. | 
-| [Wilcoxon rank sum test (ou Mann Whitney U Test)](http://www.sthda.com/english/wiki/unpaired-two-samples-wilcoxon-test-in-r) | Distribuições | Não paramétrico | 2 | wilcox.test() / Default | Não pareado, análogo ao teste T two sample. | 
-| [Kruskal-Wallis](https://www.inf.ufsc.br/~vera.carmo/Testes_de_Hipoteses/Teste_Nao_parametrico_Kruskal-Wallis.pdf) | Distribuições | Não paramétrico | 3 ou mais | kruskal.test / Default | Não pareado. Extensão do Wilcoxon rank sum. Se pelo menos dois grupos apresentarem diferença, então o p-valor é significativo. | 
-| [Dunn's Kruskal-Wallis](http://derekogle.com/FSA/reference/dunnTest.html) | Distribuições | Não paramétrico | Testa todas as combinações em pares | dunnTest() / FSA | Quando o Kruskal-Wallis é significativo, o Dunn's test verifica em quais combinações há diferença. | 
+| Z | Proporções | Paramétrico | 2 | Necessário criar |  |
+| [Chi-Squared](https://www.r-bloggers.com/comparison-of-two-proportions-parametric-z-test-and-non-parametric-chi-squared-methods/) | Proporções | Não paramétrico | 2 | prop.test() / Default |  |
+| T one sample | Médias | Paramétrico | 2 | t.test() / Default | Pareado |
+| T two sample | Médias | Paramétrico | 2 | t.test() / Default | Não pareado |
+| [Wilcoxon one sample](http://www.sthda.com/english/wiki/one-sample-wilcoxon-signed-rank-test-in-r) | Distribuições | Não paramétrico |  | wilcox.test() / Default | Pareado, análogo ao teste T one sample. |
+| [Wilcoxon rank sum test (ou Mann Whitney U Test)](http://www.sthda.com/english/wiki/unpaired-two-samples-wilcoxon-test-in-r) | Distribuições | Não paramétrico | 2 | wilcox.test() / Default | Não pareado, análogo ao teste T two sample. |
+| [Kruskal-Wallis](https://www.inf.ufsc.br/~vera.carmo/Testes_de_Hipoteses/Teste_Nao_parametrico_Kruskal-Wallis.pdf) | Distribuições | Não paramétrico | 3 ou mais | kruskal.test / Default | Não pareado. Extensão do Wilcoxon rank sum. Se pelo menos dois grupos apresentarem diferença, então o p-valor é significativo. |
+| [Dunn's Kruskal-Wallis](http://derekogle.com/FSA/reference/dunnTest.html) | Distribuições | Não paramétrico | Testa todas as combinações em pares | dunnTest() / FSA | Quando o Kruskal-Wallis é significativo, o Dunn's test verifica em quais combinações há diferença. |
+::: 
