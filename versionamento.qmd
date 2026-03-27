@@ -59,11 +59,15 @@ O Git organiza seus arquivos em três estados:
 2. **Staging Area**: arquivos preparados para o próximo commit
 3. **Repository**: histórico de versões salvas (commits)
 
-O fluxo funciona assim:
+```{mermaid}
+%%| fig-width: 7
+flowchart LR
+    A[Working Directory<br/>Arquivos modificados] -->|git add| B[Staging Area<br/>Prontos para commit]
+    B -->|git commit| C[Repository<br/>Histórico salvo]
 
-```
-Working Directory  →  Staging Area  →  Repository
-                  git add         git commit
+    style A fill:#ffcccc,stroke:#cc0000
+    style B fill:#ffffcc,stroke:#cccc00
+    style C fill:#ccffcc,stroke:#00cc00
 ```
 
 Você modifica arquivos, usa `git add` para prepará-los, e `git commit` para salvar uma versão.
@@ -111,6 +115,20 @@ git log
 ## Branches
 
 Branches são **linhas de desenvolvimento paralelas**. Elas permitem que você trabalhe em uma nova funcionalidade sem afetar o código principal.
+
+```{mermaid}
+%%| fig-width: 8
+gitGraph
+    commit id: "inicial"
+    commit id: "v1"
+    branch feat/novo-grafico
+    commit id: "adiciona dados"
+    commit id: "cria gráfico"
+    checkout main
+    commit id: "fix typo"
+    merge feat/novo-grafico id: "merge"
+    commit id: "v2"
+```
 
 Por padrão, todo repositório começa com uma branch chamada `main` (ou `master` em repos mais antigos).
 
@@ -174,10 +192,24 @@ Quando há ambientes separados (desenvolvimento, homologação, produção), o f
 - `stg` ou `uat` → ambiente de **homologação** (testes finais antes de ir pra prod)
 - `dev` ou `develop` → ambiente de **desenvolvimento** (integração das features)
 
-**Fluxo:**
-
-```
-feat/minha-feature → dev → stg → main (prod)
+```{mermaid}
+%%| fig-width: 9
+gitGraph
+    commit id: "prod v1"
+    branch stg
+    commit id: "stg sync"
+    branch dev
+    commit id: "dev sync"
+    branch feat/novo-modelo
+    commit id: "modelo v1"
+    commit id: "ajustes"
+    checkout dev
+    merge feat/novo-modelo id: "merge dev"
+    checkout stg
+    merge dev id: "merge stg"
+    checkout main
+    merge stg id: "deploy prod"
+    commit id: "prod v2"
 ```
 
 1. Desenvolvedor cria branch a partir de `dev`
