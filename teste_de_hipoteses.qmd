@@ -2,8 +2,9 @@
 
 ```{r, echo=FALSE, message=FALSE}
 library(dplyr)
-aux <- NULL
-aux$colors <- c("#aabbcc", "#ccbbaa", "#bbccaa")
+set.seed(42)  # reprodutibilidade
+aux <- list()
+aux$colors <- c("#4a90d9", "#e74c3c", "#2ecc71")  # azul, vermelho, verde
 ```
 
 Esta seção apresenta detalhes sobre os testes estatísticos aplicados para avaliar hipóteses de negócio levantadas a partir de interação com o cliente.
@@ -22,9 +23,8 @@ Basicamente os **passos para uma boa execução** de testes de hipóteses são:
 4. **Transformar os dados** para que estejam de acordo com o *input* exigido pelo teste escolhido;
 5. **Aplicar** o teste de hipótese.
 
-<div style="background:#f5f5f5; padding:20px; margin: 10px;">
-
-#### Por que Utilizar um Teste de Hipótese? {.unnumbered}
+::: {.callout-tip}
+## Por que Utilizar um Teste de Hipótese?
 
 Quando as tabelas dinâmicas do Excel já não são suficientes para que os resultados das análises sejam conclusivas é um bom indicativo de que já passou da hora de utilizar testes de hipóteses.
 
@@ -32,9 +32,8 @@ Um teste de hipótese auxilia a eliminar a incerteza que permanece mesmo após p
 
 Por exemplo, uma organização quer saber se os homens possuem salário superior às mulheres em um determinado cargo. A tabela dinâmica vai trazer o resultado, que pode ser expresso através da média dos salários daquele cargo em cada gênero (masculino ou feminino). Porém, o resultado da média pode mostrar apenas uma diferença pequena entre os salários de homens e mulheres, o que acaba deixando no ar a dúvida inicial e nenhuma conclusão pode ser tomada.
 
-Um teste de hipótese estatística é capaz de dizer (quando bem aplicado) que o salário das mulheres é de fato menor ou maior naquele caso, e que o resultado mostrado na média não é uma simples obra do acaso. 
-
-</div>
+Um teste de hipótese estatística é capaz de dizer (quando bem aplicado) que o salário das mulheres é de fato menor ou maior naquele caso, e que o resultado mostrado na média não é uma simples obra do acaso.
+:::
 
 ## Conceitos Importantes sobre os Testes de Hipóteses
 
@@ -86,36 +85,43 @@ A resposta é simples: se o dado a ser testado segue uma distribuição normal, 
 
 Quando o dado é normalmente distribuído então alguns testes podem trazer inferências sobre intervalos, pois já se conhece a distribuição. Já os testes não paramétricos não se baseiam na distribuição dos dados.
 
-Testar a normalidade de uma série de dado é bastante simples pela linguagem R. Uma das possibilidades é utilizar o teste [Shapiro-Wilk](https://en.wikipedia.org/wiki/Shapiro%E2%80%93Wilk_test) por meio da função `shapiro.test()`. O teste possui hipótese nula ($H_0$) de que o dado é normalmente distribuído, a qual recomenda-se ser rejeitada a um p-valor menor que 0,05. Em outras palavras, se o p-valor for maior que 0,05 então assumimos que o dado é normalmente distribuído e seguimos com testes paramétricos; caso contrário procuramos um teste adequado entre os não paramétricos.  
+Testar a normalidade de uma série de dado é bastante simples. Uma das possibilidades é utilizar o teste [Shapiro-Wilk](https://en.wikipedia.org/wiki/Shapiro%E2%80%93Wilk_test). O teste possui hipótese nula ($H_0$) de que o dado é normalmente distribuído, a qual recomenda-se ser rejeitada a um p-valor menor que 0,05. Em outras palavras, se o p-valor for maior que 0,05 então assumimos que o dado é normalmente distribuído e seguimos com testes paramétricos; caso contrário procuramos um teste adequado entre os não paramétricos.
+
+::: {.panel-tabset}
+## R
+```r
+shapiro.test(dados)
+```
+
+## Python
+```python
+from scipy.stats import shapiro
+stat, p_valor = shapiro(dados)
+```
+:::  
 
 ### Testes Pareados e não Pareados {.unnumbered}
 
 Em testes para **dados pareados** as amostras são **dependentes**. Aplicam-se, por exemplo, no caso das duas métricas que serão comparadas serem obtidas a partir do **mesmo indivíduo**, antes e após um tratamento. 
 
 
-<div style="background:#f5f5f5; padding:20px; margin: 10px;">
-<h5>**Exemplo** de teste pareado</h5>
+::: {.callout-note}
+## Exemplo de teste pareado
 
-Após um colaborador receber movimentação salarial por mérito, sua produtividade melhora.  
+**Hipótese:** Após um colaborador receber movimentação salarial por mérito, sua produtividade melhora.
 
-<hr>
-  
 Para validar esta hipótese um teste pareado sobre as observações de produtividade deveria ser executado com duas amostras do mesmo colaborador: uma antes e outra depois da movimentação salarial por mérito.
-
-</div>
+:::
 
 Em testes para **dados não pareados** os dados são coletados de **indivíduos distintos** e que pertencem a grupos também distintos. As amostras a serem testadas são **independentes**.
 
-<div style="background:#f5f5f5; padding:20px; margin: 10px;">
-<h5>**Exemplo** de teste não pareado</h5>
+::: {.callout-note}
+## Exemplo de teste não pareado
 
-As avaliações de lideranças na área de TI são inferiores às avaliações na área de Recursos Humanos .
+**Hipótese:** As avaliações de lideranças na área de TI são inferiores às avaliações na área de Recursos Humanos.
 
-<hr>
-  
 Para validar esta hipótese é necessário um teste não pareado sobre as notas dos líderes em cada área.
-  
-</div>
+:::
 
 
 Vale ainda ressaltar que, em testes para dados pareados, obrigatoriamente o tamanho das amostras deve ser igual (afinal, as amostras devem ser "pares"). Já em testes não pareados os tamanhos das amostras podem ser diferentes.
@@ -147,16 +153,53 @@ Veja, *turnover* é uma variável binária, que indica quando um colaborador é 
 
 [Usos e mau usos do Person's Chi-Squared Test](https://influentialpoints.com/Training/Pearsons_chi_square_test_of_independence_use_and_misuse.htm)
 
-Na linguagem R há uma função nativa para este teste, `prop.test()`, que necessita como input (i) a quantidade de ocorrências para cada evento e (ii) o total de casos. Assim, o próprio teste calcula as proporções. Além disso, é possível aplicar o teste também para verificar se há diferença entre **mais de duas amostras**, e também verificar se há **tendência nas proporções** entre os grupos, por meio da função `prop.trend.test()`.
+::: {.panel-tabset}
+## R
+```r
+# Teste de proporções
+prop.test(x = c(30, 45), n = c(100, 100))  # 30% vs 45%
+
+# Teste de tendência
+prop.trend.test(x, n)
+```
+
+## Python
+```python
+from scipy.stats import chi2_contingency
+import numpy as np
+
+# Tabela de contingência
+tabela = np.array([[30, 70], [45, 55]])
+stat, p_valor, dof, expected = chi2_contingency(tabela)
+```
+:::
 
 
 #### Teste de Fisher {.unnumbered}
 
 O teste exato de Fisher é um teste não paramétrico que tem o objetivo de testar a independência de duas ou mais variáveis categóricas. Ele é uma alternativa ao teste Qui-Quadrado e normalmente é utilizado para a tabela de contingência 2×2, ou quando as frequências esperadas de uma das células da tabela de contingência são menores do que 5.   
 
-A lógica do teste de Fisher é a mesma apresentada no teste Qui-Quadrado: identificar se as variáveis categóricas são independentes (o `H0`, hipótese nula do teste) ou se exsite alguma relação entre elas (o `H1`, hipótese alternativa do teste). 
+A lógica do teste de Fisher é a mesma apresentada no teste Qui-Quadrado: identificar se as variáveis categóricas são independentes (o `H0`, hipótese nula do teste) ou se existe alguma relação entre elas (o `H1`, hipótese alternativa do teste).
 
-Na linguagem R, o teste de Fisher pode ser facilmente implementado utilizando a função `fisher.test`, que necessita como input uma tabela de continguência ou a especificação de duas variáveis categorias de uma base de dados, que serão então utilizadas pelo teste para identificar a existência ou não de associações entre elas. 
+::: {.panel-tabset}
+## R
+```r
+# Com tabela de contingência
+fisher.test(tabela)
+
+# Com duas variáveis categóricas
+fisher.test(var1, var2)
+```
+
+## Python
+```python
+from scipy.stats import fisher_exact
+import numpy as np
+
+tabela = np.array([[10, 5], [3, 12]])
+odds_ratio, p_valor = fisher_exact(tabela)
+```
+::: 
 
 ### Testes para Diferenças com uma Amostra (*one sample*)
 
@@ -170,12 +213,39 @@ Neste caso, não se compara duas ou mais amostras, mas realiza-se o teste com ba
 
 #### Teste T One Sample {.unnumbered}
 
-O teste T para uma amostra é um teste **paramétrico** que permite verificar se a média de uma série de dados é diferente de uma média hipotética que se deseja testar. Para implementar o teste em R, utiliza-se `t.test(x, mu = 0)`, em que `x` representa o vetor com a amostra a ser testada, e `mu` é o parâmetro para definir a média esperada.
+O teste T para uma amostra é um teste **paramétrico** que permite verificar se a média de uma série de dados é diferente de uma média hipotética que se deseja testar.
+
+::: {.panel-tabset}
+## R
+```r
+t.test(x, mu = 100)  # testa se média de x é diferente de 100
+```
+
+## Python
+```python
+from scipy.stats import ttest_1samp
+stat, p_valor = ttest_1samp(x, popmean=100)
+```
+:::
 
 
 #### Wilcoxon Signed Rank {.unnumbered}
 
-É um teste **não paramétrico** para uma amostra contra uma mediana hipotética. Foi proposto no mesmo artigo que o teste Wilcoxon Rank Sum, aplicável para duas amostras. Na linguagem R, utiliza-se a função `wilcox.test()`.
+É um teste **não paramétrico** para uma amostra contra uma mediana hipotética. Foi proposto no mesmo artigo que o teste Wilcoxon Rank Sum, aplicável para duas amostras.
+
+::: {.panel-tabset}
+## R
+```r
+wilcox.test(x, mu = 100)  # testa se mediana de x é diferente de 100
+```
+
+## Python
+```python
+from scipy.stats import wilcoxon
+# Para one-sample, subtrai o valor hipotético e testa se a mediana é 0
+stat, p_valor = wilcoxon(x - 100)
+```
+:::
 
 
 ### Testes para Diferenças entre Dois Grupos (*two sample*)
@@ -215,7 +285,20 @@ hist(aux$exemplos$t_test_y, freq=TRUE, breaks=100, col=paste0("#00",gsub( "#", "
 </div></div> <br/>
 
 
-Para implementar o teste em R, utiliza-se `t.test(x,y)`, em que `x` e `y` representam vetores com as duas amostras a serem testadas. Para teste pareado, basta utilizar o parâmetro `paired = TRUE` dentro da função.
+::: {.panel-tabset}
+## R
+```r
+t.test(x, y)                # não pareado
+t.test(x, y, paired = TRUE) # pareado
+```
+
+## Python
+```python
+from scipy.stats import ttest_ind, ttest_rel
+stat, p_valor = ttest_ind(x, y)   # não pareado
+stat, p_valor = ttest_rel(x, y)   # pareado
+```
+:::
 
 
 #### Wilcoxon Rank Sum {.unnumbered}
@@ -226,7 +309,20 @@ Este é um teste que serve como alternativa **não paramétrica** ao teste T par
 
 O teste Rank Sum de Wilcoxon baseia-se na classificação das observações das duas amostras sendo testadas. À cada observação é atribuída uma classificação, sendo que a menor tem classificação 1, a segunda menor classificação 2, e assim por diante. A estatística de teste é calculada com base na soma das classificações de cada uma das amostras. Dessa forma o teste consegue dizer se a soma dos *rankings* associados a uma amostra é menor, igual ou maior que da outra, apontando se há diferenças nas amostras e também o sentido desta diferença. O resultado é similar ao do teste T, mas por utilizar um sistema de *ranking* não se presume nada acerca de como o dado é distribuído.
 
-Para aplicar o teste na linguagem R utiliza-se a função `wilcox.test(x, y)`, em que `x` e `y` representam vetores com as duas amostras a serem testadas. Para teste pareado basta utilizar o parâmetro `paired = TRUE`.
+::: {.panel-tabset}
+## R
+```r
+wilcox.test(x, y)                # não pareado (Rank Sum / Mann-Whitney)
+wilcox.test(x, y, paired = TRUE) # pareado (Signed Rank)
+```
+
+## Python
+```python
+from scipy.stats import mannwhitneyu, wilcoxon
+stat, p_valor = mannwhitneyu(x, y)   # não pareado
+stat, p_valor = wilcoxon(x, y)       # pareado
+```
+:::
 
 
 <div style="float: left; width: 100%; background:#f5f5f5; padding:20px; margin: 10px;">
@@ -273,33 +369,126 @@ Análise de Variância (ANOVA, do inglês *Analisys of Variance*), compreende um
 
 É, portanto, uma alternativa paramétrica ao teste T, para os casos com mais de duas amostras. Porém, por ser paramétrico possui seu uso restrito.
 
+::: {.panel-tabset}
+## R
+```r
+# ANOVA one-way
+modelo <- aov(valor ~ grupo, data = dados)
+summary(modelo)
+
+# Pós-teste de Tukey
+TukeyHSD(modelo)
+```
+
+## Python
+```python
+from scipy.stats import f_oneway
+from statsmodels.stats.multicomp import pairwise_tukeyhsd
+
+# ANOVA
+stat, p_valor = f_oneway(grupo1, grupo2, grupo3)
+
+# Pós-teste de Tukey
+tukey = pairwise_tukeyhsd(dados['valor'], dados['grupo'])
+```
+:::
+
 #### Kruskal-Wallis  {.unnumbered}
 
 Este é um teste **não paramétrico** que serve como alternativa à ANOVA, caso os critérios de normalidade e homoscedasticidade (igual variância entre as amostras) não sejam cumpridos. Kruskal-Wallis é uma extensão do teste Wilcoxon Rank Sum, sendo aplicável para casos com mais de duas amostras a serem comparadas. O resultado do teste indica se há diferença entre pelo menos duas das amostras testadas.
 
 O teste pode ser executado com amostras extremamente pequenas (a partir de 6 observações, sendo pelo menos duas para cada grupo). Também é um teste aplicável para amostras não balanceadas (tamanhos diferentes).
 
+::: {.panel-tabset}
+## R
+```r
+kruskal.test(valor ~ grupo, data = dados)
+```
+
+## Python
+```python
+from scipy.stats import kruskal
+stat, p_valor = kruskal(grupo1, grupo2, grupo3)
+```
+:::
+
 #### Kruskal-Wallis Dunn Test {.unnumbered}
 
 Quando a hipótese nula do teste Kruskal-Wallis é rejeitada, então sabe-se que pelo menos duas amostras são distintas (das 3 ou mais que foram testadas). Porém, na maioria dos casos ainda se deseja saber mais. A conclusão que de fato vai agregar valor é quais as combinações de grupos que diferem, e quais são os sinais destas diferenças. É para esta situação que utiliza-se o Dunn Test.
 
+::: {.panel-tabset}
+## R
+```r
+# Pacote FSA
+library(FSA)
+dunnTest(valor ~ grupo, data = dados, method = "bonferroni")
+```
+
+## Python
+```python
+# Pacote scikit-posthocs
+import scikit_posthocs as sp
+resultado = sp.posthoc_dunn(dados, val_col='valor', group_col='grupo')
+```
+:::
+
 ## Qual teste utilizar em cada caso?
 
-Dado que existem diversos testes de hipótese e que cada um é mais adequado para um determinado tipo de situação, a seguir é apresentado um fluxograma que auxilia na escolha do teste. 
+Dado que existem diversos testes de hipótese e que cada um é mais adequado para um determinado tipo de situação, a seguir é apresentado um fluxograma que auxilia na escolha do teste.
 
-![](images/teste_hipoteses_fluxo.png)
+```{mermaid}
+%%| fig-width: 10
+flowchart TD
+    Start{{"Qual tipo de dado?"}}
+    Start -->|CONTÍNUO| Grupos{{"Quantos grupos?"}}
+    Start -->|CATEGÓRICO| Prop["Testar diferenças<br/>de proporções"]
+
+    Grupos -->|1| G1["One Sample"]
+    Grupos -->|2| G2["Two Sample"]
+    Grupos -->|3+| G3["3 ou mais"]
+
+    G1 --> T1P["Teste T<br/>One Sample"]
+    G1 --> W1["Wilcoxon<br/>Signed Rank"]
+
+    G2 --> T2P["Teste T<br/>Two Sample"]
+    G2 --> W2["Wilcoxon<br/>Rank Sum"]
+
+    G3 --> ANOVA["ANOVA"]
+    G3 --> KW["Kruskal-Wallis"]
+    KW -->|"Identificar grupos<br/>diferentes?"| Dunn["Dunn Test"]
+
+    Prop --> Z["Teste Z"]
+    Prop --> Chi["Qui-Quadrado"]
+    Chi -->|"Há tendência?"| ChiTrend["Qui-Quadrado<br/>para tendências"]
+
+    style T1P fill:#ffeb3b,stroke:#fbc02d
+    style T2P fill:#ffeb3b,stroke:#fbc02d
+    style ANOVA fill:#ffeb3b,stroke:#fbc02d
+    style Z fill:#ffeb3b,stroke:#fbc02d
+
+    style W1 fill:#e0e0e0,stroke:#9e9e9e
+    style W2 fill:#e0e0e0,stroke:#9e9e9e
+    style KW fill:#e0e0e0,stroke:#9e9e9e
+    style Chi fill:#e0e0e0,stroke:#9e9e9e
+    style ChiTrend fill:#e0e0e0,stroke:#9e9e9e
+    style Dunn fill:#e0e0e0,stroke:#9e9e9e
+```
+
+**Legenda:** Amarelo = Paramétrico | Cinza = Não paramétrico
 
 
 Por fim, a tabela a seguir sintetiza o que foi abordado neste documento acerca de testes de hipóteses. Existem diversos outros testes, porém, os que são apresentados na sequência viabilizam a verificação estatística da maior parte das hipóteses de negócio levantas em projetos de análise de dados.
 
 
+::: {.tabela-hipoteses}
 | Teste | Testa diferenças entre: | Paramétrico ou não? | Qtde de amostras que compara | Função no R / pacote | Observações |
 |-----------------|---------------------|----------------|---------------|-----------------|----------------------------|
-| Z | Proporções | Paramétrico | 2 | Necessário criar |  | 
-| [Chi-Squared](https://www.r-bloggers.com/comparison-of-two-proportions-parametric-z-test-and-non-parametric-chi-squared-methods/) | Proporções | Não paramétrico | 2 | prop.test() / Default |  | 
-| T one sample | Médias | Paramétrico | 2 | t.test() / Default | Pareado | 
-| T two sample | Médias | Paramétrico | 2 | t.test() / Default | Não pareado | 
-| [Wilcoxon one sample](http://www.sthda.com/english/wiki/one-sample-wilcoxon-signed-rank-test-in-r) | Distribuições | Não paramétrico |  | wilcox.test() / Default | Pareado, análogo ao teste T one sample. | 
-| [Wilcoxon rank sum test (ou Mann Whitney U Test)](http://www.sthda.com/english/wiki/unpaired-two-samples-wilcoxon-test-in-r) | Distribuições | Não paramétrico | 2 | wilcox.test() / Default | Não pareado, análogo ao teste T two sample. | 
-| [Kruskal-Wallis](https://www.inf.ufsc.br/~vera.carmo/Testes_de_Hipoteses/Teste_Nao_parametrico_Kruskal-Wallis.pdf) | Distribuições | Não paramétrico | 3 ou mais | kruskal.test / Default | Não pareado. Extensão do Wilcoxon rank sum. Se pelo menos dois grupos apresentarem diferença, então o p-valor é significativo. | 
-| [Dunn's Kruskal-Wallis](http://derekogle.com/FSA/reference/dunnTest.html) | Distribuições | Não paramétrico | Testa todas as combinações em pares | dunnTest() / FSA | Quando o Kruskal-Wallis é significativo, o Dunn's test verifica em quais combinações há diferença. | 
+| Z | Proporções | Paramétrico | 2 | Necessário criar |  |
+| [Chi-Squared](https://www.r-bloggers.com/comparison-of-two-proportions-parametric-z-test-and-non-parametric-chi-squared-methods/) | Proporções | Não paramétrico | 2 | prop.test() / Default |  |
+| T one sample | Médias | Paramétrico | 2 | t.test() / Default | Pareado |
+| T two sample | Médias | Paramétrico | 2 | t.test() / Default | Não pareado |
+| [Wilcoxon one sample](http://www.sthda.com/english/wiki/one-sample-wilcoxon-signed-rank-test-in-r) | Distribuições | Não paramétrico |  | wilcox.test() / Default | Pareado, análogo ao teste T one sample. |
+| [Wilcoxon rank sum test (ou Mann Whitney U Test)](http://www.sthda.com/english/wiki/unpaired-two-samples-wilcoxon-test-in-r) | Distribuições | Não paramétrico | 2 | wilcox.test() / Default | Não pareado, análogo ao teste T two sample. |
+| [Kruskal-Wallis](https://www.inf.ufsc.br/~vera.carmo/Testes_de_Hipoteses/Teste_Nao_parametrico_Kruskal-Wallis.pdf) | Distribuições | Não paramétrico | 3 ou mais | kruskal.test / Default | Não pareado. Extensão do Wilcoxon rank sum. Se pelo menos dois grupos apresentarem diferença, então o p-valor é significativo. |
+| [Dunn's Kruskal-Wallis](http://derekogle.com/FSA/reference/dunnTest.html) | Distribuições | Não paramétrico | Testa todas as combinações em pares | dunnTest() / FSA | Quando o Kruskal-Wallis é significativo, o Dunn's test verifica em quais combinações há diferença. |
+::: 
