@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.40">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -37,10 +71,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-626149efe8f5d16e1d391ba177679bf0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -68,6 +102,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -194,6 +231,14 @@ window.Quarto = {
   <li><a href="#testes-paramétricos-e-não-paramétricos" id="toc-testes-paramétricos-e-não-paramétricos" class="nav-link" data-scroll-target="#testes-paramétricos-e-não-paramétricos">Testes Paramétricos e não Paramétricos?</a></li>
   <li><a href="#testes-pareados-e-não-pareados" id="toc-testes-pareados-e-não-pareados" class="nav-link" data-scroll-target="#testes-pareados-e-não-pareados">Testes Pareados e não Pareados</a></li>
   </ul></li>
+  <li><a href="#tipos-de-testes" id="toc-tipos-de-testes" class="nav-link" data-scroll-target="#tipos-de-testes"><span class="header-section-number">4.2</span> Tipos de Testes</a>
+  <ul class="collapse">
+  <li><a href="#testes-de-proporções" id="toc-testes-de-proporções" class="nav-link" data-scroll-target="#testes-de-proporções"><span class="header-section-number">4.2.1</span> Testes de Proporções</a></li>
+  <li><a href="#testes-para-diferenças-com-uma-amostra-one-sample" id="toc-testes-para-diferenças-com-uma-amostra-one-sample" class="nav-link" data-scroll-target="#testes-para-diferenças-com-uma-amostra-one-sample"><span class="header-section-number">4.2.2</span> Testes para Diferenças com uma Amostra (<em>one sample</em>)</a></li>
+  <li><a href="#testes-para-diferenças-entre-dois-grupos-two-sample" id="toc-testes-para-diferenças-entre-dois-grupos-two-sample" class="nav-link" data-scroll-target="#testes-para-diferenças-entre-dois-grupos-two-sample"><span class="header-section-number">4.2.3</span> Testes para Diferenças entre Dois Grupos (<em>two sample</em>)</a></li>
+  <li><a href="#testes-para-diferenças-entre-mais-de-dois-grupos" id="toc-testes-para-diferenças-entre-mais-de-dois-grupos" class="nav-link" data-scroll-target="#testes-para-diferenças-entre-mais-de-dois-grupos"><span class="header-section-number">4.2.4</span> Testes para Diferenças entre mais de Dois Grupos</a></li>
+  </ul></li>
+  <li><a href="#qual-teste-utilizar-em-cada-caso" id="toc-qual-teste-utilizar-em-cada-caso" class="nav-link" data-scroll-target="#qual-teste-utilizar-em-cada-caso"><span class="header-section-number">4.3</span> Qual teste utilizar em cada caso?</a></li>
   </ul>
 </nav>
     </div>
@@ -231,13 +276,22 @@ window.Quarto = {
 <li><strong>Transformar os dados</strong> para que estejam de acordo com o <em>input</em> exigido pelo teste escolhido;</li>
 <li><strong>Aplicar</strong> o teste de hipótese.</li>
 </ol>
-<section id="por-que-utilizar-um-teste-de-hipótese" class="level4 unnumbered" style="background:#f5f5f5; padding:20px; margin: 10px;">
-<h4 class="unnumbered anchored" data-anchor-id="por-que-utilizar-um-teste-de-hipótese">Por que Utilizar um Teste de Hipótese?</h4>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Por que Utilizar um Teste de Hipótese?
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Quando as tabelas dinâmicas do Excel já não são suficientes para que os resultados das análises sejam conclusivas é um bom indicativo de que já passou da hora de utilizar testes de hipóteses.</p>
 <p>Um teste de hipótese auxilia a eliminar a incerteza que permanece mesmo após procedimentos de sumarização dos dados, como ocorre nas tabelas dinâmicas dos <em>softwares</em> de planilha eletrônica.</p>
 <p>Por exemplo, uma organização quer saber se os homens possuem salário superior às mulheres em um determinado cargo. A tabela dinâmica vai trazer o resultado, que pode ser expresso através da média dos salários daquele cargo em cada gênero (masculino ou feminino). Porém, o resultado da média pode mostrar apenas uma diferença pequena entre os salários de homens e mulheres, o que acaba deixando no ar a dúvida inicial e nenhuma conclusão pode ser tomada.</p>
 <p>Um teste de hipótese estatística é capaz de dizer (quando bem aplicado) que o salário das mulheres é de fato menor ou maior naquele caso, e que o resultado mostrado na média não é uma simples obra do acaso.</p>
-</section>
+</div>
+</div>
 <section id="conceitos-importantes-sobre-os-testes-de-hipóteses" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="conceitos-importantes-sobre-os-testes-de-hipóteses"><span class="header-section-number">4.1</span> Conceitos Importantes sobre os Testes de Hipóteses</h2>
 <p>Uma hipótese estatística, formalmente, é uma afirmação sobre alguma característica da população. Um teste de hipótese, por sua vez, <strong>é um procedimento estatístico para dizer se uma afirmação sobre a população é verdadeira</strong>.</p>
@@ -268,29 +322,55 @@ window.Quarto = {
 <p>A questão que permanece é <strong>como saber se o teste a ser escolhido é paramétrico ou não paramétrico</strong>?</p>
 <p>A resposta é simples: se o dado a ser testado segue uma distribuição normal, então recomenda-se utilizar testes paramétricos; caso o dado não possua distribuição normal então utiliza-se testes não paramétricos.</p>
 <p>Quando o dado é normalmente distribuído então alguns testes podem trazer inferências sobre intervalos, pois já se conhece a distribuição. Já os testes não paramétricos não se baseiam na distribuição dos dados.</p>
-<p>Testar a normalidade de uma série de dado é bastante simples pela linguagem R. Uma das possibilidades é utilizar o teste <a href="https://en.wikipedia.org/wiki/Shapiro%E2%80%93Wilk_test">Shapiro-Wilk</a> por meio da função <code>shapiro.test()</code>. O teste possui hipótese nula (<span class="math inline">\(H_0\)</span>) de que o dado é normalmente distribuído, a qual recomenda-se ser rejeitada a um p-valor menor que 0,05. Em outras palavras, se o p-valor for maior que 0,05 então assumimos que o dado é normalmente distribuído e seguimos com testes paramétricos; caso contrário procuramos um teste adequado entre os não paramétricos.</p>
+<p>Testar a normalidade de uma série de dado é bastante simples. Uma das possibilidades é utilizar o teste <a href="https://en.wikipedia.org/wiki/Shapiro%E2%80%93Wilk_test">Shapiro-Wilk</a>. O teste possui hipótese nula (<span class="math inline">\(H_0\)</span>) de que o dado é normalmente distribuído, a qual recomenda-se ser rejeitada a um p-valor menor que 0,05. Em outras palavras, se o p-valor for maior que 0,05 então assumimos que o dado é normalmente distribuído e seguimos com testes paramétricos; caso contrário procuramos um teste adequado entre os não paramétricos.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(dados)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> shapiro</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>stat, p_valor <span class="op">=</span> shapiro(dados)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="testes-pareados-e-não-pareados" class="level3 unnumbered">
-<h3 class="unnumbered anchored">Testes Pareados e não Pareados</h3>
+<h3 class="unnumbered anchored" data-anchor-id="testes-pareados-e-não-pareados">Testes Pareados e não Pareados</h3>
 <p>Em testes para <strong>dados pareados</strong> as amostras são <strong>dependentes</strong>. Aplicam-se, por exemplo, no caso das duas métricas que serão comparadas serem obtidas a partir do <strong>mesmo indivíduo</strong>, antes e após um tratamento.</p>
-<div style="background:#f5f5f5; padding:20px; margin: 10px;">
-<h5 class="anchored">
-<strong>Exemplo</strong> de teste pareado
-</h5>
-<p>Após um colaborador receber movimentação salarial por mérito, sua produtividade melhora.</p>
-<hr>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exemplo de teste pareado
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Hipótese:</strong> Após um colaborador receber movimentação salarial por mérito, sua produtividade melhora.</p>
 <p>Para validar esta hipótese um teste pareado sobre as observações de produtividade deveria ser executado com duas amostras do mesmo colaborador: uma antes e outra depois da movimentação salarial por mérito.</p>
 </div>
+</div>
 <p>Em testes para <strong>dados não pareados</strong> os dados são coletados de <strong>indivíduos distintos</strong> e que pertencem a grupos também distintos. As amostras a serem testadas são <strong>independentes</strong>.</p>
-<div style="background:#f5f5f5; padding:20px; margin: 10px;">
-<h5 class="anchored">
-<strong>Exemplo</strong> de teste não pareado
-</h5>
-<p>As avaliações de lideranças na área de TI são inferiores às avaliações na área de Recursos Humanos .</p>
-<hr>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exemplo de teste não pareado
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Hipótese:</strong> As avaliações de lideranças na área de TI são inferiores às avaliações na área de Recursos Humanos.</p>
 <p>Para validar esta hipótese é necessário um teste não pareado sobre as notas dos líderes em cada área.</p>
 </div>
+</div>
 <p>Vale ainda ressaltar que, em testes para dados pareados, obrigatoriamente o tamanho das amostras deve ser igual (afinal, as amostras devem ser “pares”). Já em testes não pareados os tamanhos das amostras podem ser diferentes.</p>
+</section>
+</section>
 <section id="tipos-de-testes" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="tipos-de-testes"><span class="header-section-number">4.2</span> Tipos de Testes</h2>
 <p>Existem diversos testes de hipóteses, sendo que cada um é mais adequado para uma situação específica. A seguir são apresentados alguns testes (não todos, pois existem diversos) que servem para a maior parte das situações que envolvem testes de hipóteses.</p>
@@ -311,13 +391,50 @@ window.Quarto = {
 <h4 class="unnumbered anchored" data-anchor-id="teste-qui-quadrado-x2">Teste Qui-Quadrado (<span class="math inline">\(X^2\)</span>)</h4>
 <p>É uma alternativa <strong>não paramétrica</strong> ao teste Z. O teste <em>Chi-Squared</em> para proporções é um dos testes estatísticos mais utilizados. É mais adequado para amostras pequenas que o teste Z. Um dos seus principais usos incorretos está atrelado também a não independência entre as amostras.</p>
 <p><a href="https://influentialpoints.com/Training/Pearsons_chi_square_test_of_independence_use_and_misuse.htm">Usos e mau usos do Person’s Chi-Squared Test</a></p>
-<p>Na linguagem R há uma função nativa para este teste, <code>prop.test()</code>, que necessita como input (i) a quantidade de ocorrências para cada evento e (ii) o total de casos. Assim, o próprio teste calcula as proporções. Além disso, é possível aplicar o teste também para verificar se há diferença entre <strong>mais de duas amostras</strong>, e também verificar se há <strong>tendência nas proporções</strong> entre os grupos, por meio da função <code>prop.trend.test()</code>.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Teste de proporções</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.test</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">30</span>, <span class="dv">45</span>), <span class="at">n =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">100</span>))  <span class="co"># 30% vs 45%</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Teste de tendência</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.trend.test</span>(x, n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> chi2_contingency</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Tabela de contingência</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>tabela <span class="op">=</span> np.array([[<span class="dv">30</span>, <span class="dv">70</span>], [<span class="dv">45</span>, <span class="dv">55</span>]])</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>stat, p_valor, dof, expected <span class="op">=</span> chi2_contingency(tabela)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="teste-de-fisher" class="level4 unnumbered">
 <h4 class="unnumbered anchored" data-anchor-id="teste-de-fisher">Teste de Fisher</h4>
 <p>O teste exato de Fisher é um teste não paramétrico que tem o objetivo de testar a independência de duas ou mais variáveis categóricas. Ele é uma alternativa ao teste Qui-Quadrado e normalmente é utilizado para a tabela de contingência 2×2, ou quando as frequências esperadas de uma das células da tabela de contingência são menores do que 5.</p>
-<p>A lógica do teste de Fisher é a mesma apresentada no teste Qui-Quadrado: identificar se as variáveis categóricas são independentes (o <code>H0</code>, hipótese nula do teste) ou se exsite alguma relação entre elas (o <code>H1</code>, hipótese alternativa do teste).</p>
-<p>Na linguagem R, o teste de Fisher pode ser facilmente implementado utilizando a função <code>fisher.test</code>, que necessita como input uma tabela de continguência ou a especificação de duas variáveis categorias de uma base de dados, que serão então utilizadas pelo teste para identificar a existência ou não de associações entre elas.</p>
+<p>A lógica do teste de Fisher é a mesma apresentada no teste Qui-Quadrado: identificar se as variáveis categóricas são independentes (o <code>H0</code>, hipótese nula do teste) ou se existe alguma relação entre elas (o <code>H1</code>, hipótese alternativa do teste).</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Com tabela de contingência</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fisher.test</span>(tabela)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Com duas variáveis categóricas</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">fisher.test</span>(var1, var2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> fisher_exact</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>tabela <span class="op">=</span> np.array([[<span class="dv">10</span>, <span class="dv">5</span>], [<span class="dv">3</span>, <span class="dv">12</span>]])</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>odds_ratio, p_valor <span class="op">=</span> fisher_exact(tabela)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="testes-para-diferenças-com-uma-amostra-one-sample" class="level3" data-number="4.2.2">
@@ -328,11 +445,36 @@ window.Quarto = {
 <p>Neste caso, não se compara duas ou mais amostras, mas realiza-se o teste com base em um valor que seria esperado por alguma razão, por exemplo, por uma política de recursos humanos da organização.</p>
 <section id="teste-t-one-sample" class="level4 unnumbered">
 <h4 class="unnumbered anchored" data-anchor-id="teste-t-one-sample">Teste T One Sample</h4>
-<p>O teste T para uma amostra é um teste <strong>paramétrico</strong> que permite verificar se a média de uma série de dados é diferente de uma média hipotética que se deseja testar. Para implementar o teste em R, utiliza-se <code>t.test(x, mu = 0)</code>, em que <code>x</code> representa o vetor com a amostra a ser testada, e <code>mu</code> é o parâmetro para definir a média esperada.</p>
+<p>O teste T para uma amostra é um teste <strong>paramétrico</strong> que permite verificar se a média de uma série de dados é diferente de uma média hipotética que se deseja testar.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(x, <span class="at">mu =</span> <span class="dv">100</span>)  <span class="co"># testa se média de x é diferente de 100</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> ttest_1samp</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>stat, p_valor <span class="op">=</span> ttest_1samp(x, popmean<span class="op">=</span><span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="wilcoxon-signed-rank" class="level4 unnumbered">
 <h4 class="unnumbered anchored" data-anchor-id="wilcoxon-signed-rank">Wilcoxon Signed Rank</h4>
-<p>É um teste <strong>não paramétrico</strong> para uma amostra contra uma mediana hipotética. Foi proposto no mesmo artigo que o teste Wilcoxon Rank Sum, aplicável para duas amostras. Na linguagem R, utiliza-se a função <code>wilcox.test()</code>.</p>
+<p>É um teste <strong>não paramétrico</strong> para uma amostra contra uma mediana hipotética. Foi proposto no mesmo artigo que o teste Wilcoxon Rank Sum, aplicável para duas amostras.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
+<div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(x, <span class="at">mu =</span> <span class="dv">100</span>)  <span class="co"># testa se mediana de x é diferente de 100</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="tabset-5-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-2-tab">
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> wilcoxon</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Para one-sample, subtrai o valor hipotético e testa se a mediana é 0</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>stat, p_valor <span class="op">=</span> wilcoxon(x <span class="op">-</span> <span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="testes-para-diferenças-entre-dois-grupos-two-sample" class="level3" data-number="4.2.3">
@@ -361,14 +503,40 @@ window.Quarto = {
 </div>
 </div>
 <p><br></p>
-<p>Para implementar o teste em R, utiliza-se <code>t.test(x,y)</code>, em que <code>x</code> e <code>y</code> representam vetores com as duas amostras a serem testadas. Para teste pareado, basta utilizar o parâmetro <code>paired = TRUE</code> dentro da função.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-6-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-1" role="tab" aria-controls="tabset-6-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-6-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-2" role="tab" aria-controls="tabset-6-2" aria-selected="false">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-6-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-6-1-tab">
+<div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(x, y)                <span class="co"># não pareado</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(x, y, <span class="at">paired =</span> <span class="cn">TRUE</span>) <span class="co"># pareado</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="tabset-6-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-6-2-tab">
+<div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> ttest_ind, ttest_rel</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>stat, p_valor <span class="op">=</span> ttest_ind(x, y)   <span class="co"># não pareado</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>stat, p_valor <span class="op">=</span> ttest_rel(x, y)   <span class="co"># pareado</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="wilcoxon-rank-sum" class="level4 unnumbered">
 <h4 class="unnumbered anchored" data-anchor-id="wilcoxon-rank-sum">Wilcoxon Rank Sum</h4>
 <p>Este é um teste que serve como alternativa <strong>não paramétrica</strong> ao teste T para duas amostras, sendo também chamado de <strong>Teste U de Mann-Whitney</strong>. Muito utilizado para testar diferenças entre duas amostras, pois não é preciso cumprir a premissa de normalidade. Essa característica faz com que este seja um teste mais abrangente que o teste T, servindo para variadas situações do dia a dia.</p>
 <p>É um teste baseado apenas na ordem em que as observações das duas amostras aparecem. Um caso de uso interessante ocorre <strong>quando a amostra é pequena</strong> demais a ponto de não ser possível dizer se a distribuição é normal ou não.</p>
 <p>O teste Rank Sum de Wilcoxon baseia-se na classificação das observações das duas amostras sendo testadas. À cada observação é atribuída uma classificação, sendo que a menor tem classificação 1, a segunda menor classificação 2, e assim por diante. A estatística de teste é calculada com base na soma das classificações de cada uma das amostras. Dessa forma o teste consegue dizer se a soma dos <em>rankings</em> associados a uma amostra é menor, igual ou maior que da outra, apontando se há diferenças nas amostras e também o sentido desta diferença. O resultado é similar ao do teste T, mas por utilizar um sistema de <em>ranking</em> não se presume nada acerca de como o dado é distribuído.</p>
-<p>Para aplicar o teste na linguagem R utiliza-se a função <code>wilcox.test(x, y)</code>, em que <code>x</code> e <code>y</code> representam vetores com as duas amostras a serem testadas. Para teste pareado basta utilizar o parâmetro <code>paired = TRUE</code>.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-7-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-1" role="tab" aria-controls="tabset-7-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-2" role="tab" aria-controls="tabset-7-2" aria-selected="false">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-7-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-7-1-tab">
+<div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(x, y)                <span class="co"># não pareado (Rank Sum / Mann-Whitney)</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(x, y, <span class="at">paired =</span> <span class="cn">TRUE</span>) <span class="co"># pareado (Signed Rank)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="tabset-7-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-7-2-tab">
+<div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> mannwhitneyu, wilcoxon</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>stat, p_valor <span class="op">=</span> mannwhitneyu(x, y)   <span class="co"># não pareado</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>stat, p_valor <span class="op">=</span> wilcoxon(x, y)       <span class="co"># pareado</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
 <div style="float: left; width: 100%; background:#f5f5f5; padding:20px; margin: 10px;">
 <div style="float: left; width: 50%;">
 <p>O gráfico ao lado é um exemplo em que pode se aplicar o seguinte teste:</p>
@@ -401,22 +569,117 @@ window.Quarto = {
 <h4 class="unnumbered anchored" data-anchor-id="anova">ANOVA</h4>
 <p>Análise de Variância (ANOVA, do inglês <em>Analisys of Variance</em>), compreende uma família de testes que permitem verificar diferenças entre séries de dados. A ideia central da ANOVA é testar se há <strong>diferença entre as médias</strong> (a ANOVA pertence aos <strong>testes paramétricos</strong>) das amostras analisadas, permitindo trabalhar com <strong>3 ou mais amostras</strong>. A Análise de Variância é muito utilizada em ambientes experimentais, para verificar a existência de diferenças entre variados tratamentos aplicados em grupos distintos.</p>
 <p>É, portanto, uma alternativa paramétrica ao teste T, para os casos com mais de duas amostras. Porém, por ser paramétrico possui seu uso restrito.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-8-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-1" role="tab" aria-controls="tabset-8-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-8-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-2" role="tab" aria-controls="tabset-8-2" aria-selected="false">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-8-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-8-1-tab">
+<div class="sourceCode" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ANOVA one-way</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">aov</span>(valor <span class="sc">~</span> grupo, <span class="at">data =</span> dados)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Pós-teste de Tukey</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="fu">TukeyHSD</span>(modelo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="tabset-8-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-8-2-tab">
+<div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> f_oneway</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.stats.multicomp <span class="im">import</span> pairwise_tukeyhsd</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ANOVA</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>stat, p_valor <span class="op">=</span> f_oneway(grupo1, grupo2, grupo3)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Pós-teste de Tukey</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>tukey <span class="op">=</span> pairwise_tukeyhsd(dados[<span class="st">'valor'</span>], dados[<span class="st">'grupo'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="kruskal-wallis" class="level4 unnumbered">
 <h4 class="unnumbered anchored" data-anchor-id="kruskal-wallis">Kruskal-Wallis</h4>
 <p>Este é um teste <strong>não paramétrico</strong> que serve como alternativa à ANOVA, caso os critérios de normalidade e homoscedasticidade (igual variância entre as amostras) não sejam cumpridos. Kruskal-Wallis é uma extensão do teste Wilcoxon Rank Sum, sendo aplicável para casos com mais de duas amostras a serem comparadas. O resultado do teste indica se há diferença entre pelo menos duas das amostras testadas.</p>
 <p>O teste pode ser executado com amostras extremamente pequenas (a partir de 6 observações, sendo pelo menos duas para cada grupo). Também é um teste aplicável para amostras não balanceadas (tamanhos diferentes).</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-9-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-1" role="tab" aria-controls="tabset-9-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-9-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-2" role="tab" aria-controls="tabset-9-2" aria-selected="false">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-9-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-9-1-tab">
+<div class="sourceCode" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kruskal.test</span>(valor <span class="sc">~</span> grupo, <span class="at">data =</span> dados)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="tabset-9-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-9-2-tab">
+<div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> kruskal</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>stat, p_valor <span class="op">=</span> kruskal(grupo1, grupo2, grupo3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="kruskal-wallis-dunn-test" class="level4 unnumbered">
 <h4 class="unnumbered anchored" data-anchor-id="kruskal-wallis-dunn-test">Kruskal-Wallis Dunn Test</h4>
 <p>Quando a hipótese nula do teste Kruskal-Wallis é rejeitada, então sabe-se que pelo menos duas amostras são distintas (das 3 ou mais que foram testadas). Porém, na maioria dos casos ainda se deseja saber mais. A conclusão que de fato vai agregar valor é quais as combinações de grupos que diferem, e quais são os sinais destas diferenças. É para esta situação que utiliza-se o Dunn Test.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-10-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-1" role="tab" aria-controls="tabset-10-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-10-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-2" role="tab" aria-controls="tabset-10-2" aria-selected="false">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-10-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-10-1-tab">
+<div class="sourceCode" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pacote FSA</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(FSA)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dunnTest</span>(valor <span class="sc">~</span> grupo, <span class="at">data =</span> dados, <span class="at">method =</span> <span class="st">"bonferroni"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="tabset-10-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-10-2-tab">
+<div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pacote scikit-posthocs</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scikit_posthocs <span class="im">as</span> sp</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>resultado <span class="op">=</span> sp.posthoc_dunn(dados, val_col<span class="op">=</span><span class="st">'valor'</span>, group_col<span class="op">=</span><span class="st">'grupo'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 </section>
 <section id="qual-teste-utilizar-em-cada-caso" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="qual-teste-utilizar-em-cada-caso"><span class="header-section-number">4.3</span> Qual teste utilizar em cada caso?</h2>
 <p>Dado que existem diversos testes de hipótese e que cada um é mais adequado para um determinado tipo de situação, a seguir é apresentado um fluxograma que auxilia na escolha do teste.</p>
-<p><img src="images/teste_hipoteses_fluxo.png" class="img-fluid"></p>
+<div class="cell" data-fig-width="10" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+    Start{{"Qual tipo de dado?"}}
+    Start --&gt;|CONTÍNUO| Grupos{{"Quantos grupos?"}}
+    Start --&gt;|CATEGÓRICO| Prop["Testar diferenças&lt;br/&gt;de proporções"]
+
+    Grupos --&gt;|1| G1["One Sample"]
+    Grupos --&gt;|2| G2["Two Sample"]
+    Grupos --&gt;|3+| G3["3 ou mais"]
+
+    G1 --&gt; T1P["Teste T&lt;br/&gt;One Sample"]
+    G1 --&gt; W1["Wilcoxon&lt;br/&gt;Signed Rank"]
+
+    G2 --&gt; T2P["Teste T&lt;br/&gt;Two Sample"]
+    G2 --&gt; W2["Wilcoxon&lt;br/&gt;Rank Sum"]
+
+    G3 --&gt; ANOVA["ANOVA"]
+    G3 --&gt; KW["Kruskal-Wallis"]
+    KW --&gt;|"Identificar grupos&lt;br/&gt;diferentes?"| Dunn["Dunn Test"]
+
+    Prop --&gt; Z["Teste Z"]
+    Prop --&gt; Chi["Qui-Quadrado"]
+    Chi --&gt;|"Há tendência?"| ChiTrend["Qui-Quadrado&lt;br/&gt;para tendências"]
+
+    style T1P fill:#ffeb3b,stroke:#fbc02d
+    style T2P fill:#ffeb3b,stroke:#fbc02d
+    style ANOVA fill:#ffeb3b,stroke:#fbc02d
+    style Z fill:#ffeb3b,stroke:#fbc02d
+
+    style W1 fill:#e0e0e0,stroke:#9e9e9e
+    style W2 fill:#e0e0e0,stroke:#9e9e9e
+    style KW fill:#e0e0e0,stroke:#9e9e9e
+    style Chi fill:#e0e0e0,stroke:#9e9e9e
+    style ChiTrend fill:#e0e0e0,stroke:#9e9e9e
+    style Dunn fill:#e0e0e0,stroke:#9e9e9e
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p><strong>Legenda:</strong> Amarelo = Paramétrico | Cinza = Não paramétrico</p>
 <p>Por fim, a tabela a seguir sintetiza o que foi abordado neste documento acerca de testes de hipóteses. Existem diversos outros testes, porém, os que são apresentados na sequência viabilizam a verificação estatística da maior parte das hipóteses de negócio levantas em projetos de análise de dados.</p>
 <table class="caption-top table">
 <thead>
@@ -499,12 +762,8 @@ window.Quarto = {
 
 
 </section>
-</section></section></main></div>
 
-
-
-
- <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -587,8 +846,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -699,7 +956,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
@@ -937,7 +1193,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>
   </div>
 </nav>
- <!-- /content -->
+</div> <!-- /content -->
 
 
 
