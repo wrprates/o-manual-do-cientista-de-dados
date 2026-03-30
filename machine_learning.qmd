@@ -409,6 +409,34 @@ Os resultados foram:
 - Cluster 2 corresponde à espécie "Virgínica".
 - Cluster 3 corresponde à espécie "Setosa".
 
+### Escolhendo o número de clusters: Método do Cotovelo
+
+Um dos desafios ao aplicar K-Means é definir o número ideal de clusters ($k$). O **Método do Cotovelo** (*Elbow Method*) é uma técnica visual que auxilia nesta escolha.
+
+A ideia é calcular a **soma dos quadrados das distâncias intra-cluster** (WSS - *Within-cluster Sum of Squares*) para diferentes valores de $k$ e plotar um gráfico. O ponto onde a curva "dobra" (como um cotovelo) indica um bom número de clusters — adicionar mais clusters após esse ponto traz ganhos marginais decrescentes.
+
+```{r}
+# Calculando WSS para diferentes valores de k
+wss <- sapply(1:10, function(k) {
+  kmeans(iris.new, centers = k, nstart = 10)$tot.withinss
+})
+
+# Criando o gráfico do cotovelo
+data.frame(k = 1:10, wss = wss) |>
+  ggplot(aes(x = k, y = wss)) +
+  geom_line() +
+  geom_point() +
+  scale_x_continuous(breaks = 1:10) +
+  labs(
+    title = "Método do Cotovelo",
+    x = "Número de Clusters (k)",
+    y = "Soma dos Quadrados Intra-cluster (WSS)"
+  ) +
+  theme_minimal()
+```
+
+No gráfico acima, observe que a partir de $k = 3$ a redução do WSS se torna menos acentuada, sugerindo que 3 clusters é uma boa escolha para este conjunto de dados — o que faz sentido, já que sabemos que existem 3 espécies de Iris.
+
 ### Fontes
 
 1. http://rpubs.com/Nitika/kmeans_Iris
@@ -441,7 +469,7 @@ Dessa forma, um procedimento que costuma-se fazer para visualizar melhor o impac
 
 **Como funciona o PCA?**
 
-Partimos de um dataset com as variáveis originais e chegamos a um dataset reduzido a "**compontes principais**".
+Partimos de um dataset com as variáveis originais e chegamos a um dataset reduzido a "**componentes principais**".
 
 - A grosso modo, procura encontrar "linhas retas" que melhor expressam as direções dos dados em multi-dimensões.
 - Não é recomendado para variáveis categóricas (apenas numéricas).
@@ -479,7 +507,7 @@ A seguir, é apresentado resumo da importância de cada um dos componentes princ
 summary(mtcars.pca)$importance 
 ```
 
-Veja que os 4 primeiros componentes principais já são responsáveis por 95% da porporção da variância dos dados.
+Veja que os 4 primeiros componentes principais já são responsáveis por 95% da proporção da variância dos dados.
 
 Segue o `head` dos 4 primeiros componentes principais, em que cada linha é uma linha de dado (um carro) e cada coluna é substituída por um componente principal (que não mais representa nenhuma coluna especificamente, mas contém variância "misturada" das variáveis originais):
 
@@ -607,7 +635,7 @@ Para concluir, veja que o gráfico de dispersão acima só é possível de ser r
 
 A regressão logística é um tipo de regressão que tem como variável resposta (dependente) uma **variável binária**, ou seja, os valores possíveis são **0 ou 1**, ocorrência ou não de um evento. O resultado do modelo é uma probabilidade, que pode ser transformado em *labels* de 0 e 1 ao levar em conta um ponto de corte na probabilidade estimada.
 
-> "O modelo de regressão logística é adequado para trabalhar com **dados qualitativos**. Serve para as situações nas quais a **variável dependente (Y) é binária** (assume os valores de 0 e 1) e o valor que **se busca é a probabilidade** ($\pi$) de que a Y seja 1 dado o valor de determinada variiável x, que poderá tanto ser binária, numérica ou dividida em categorias." (CHATTERJEE; HADI, 2006; RYAN, 2009). 
+> "O modelo de regressão logística é adequado para trabalhar com **dados qualitativos**. Serve para as situações nas quais a **variável dependente (Y) é binária** (assume os valores de 0 e 1) e o valor que **se busca é a probabilidade** ($\pi$) de que a Y seja 1 dado o valor de determinada variável x, que poderá tanto ser binária, numérica ou dividida em categorias." (CHATTERJEE; HADI, 2006; RYAN, 2009). 
 
 
 ### Exemplo: regressão logística com dados do naufrágio do Titanic
@@ -750,7 +778,7 @@ caret::confusionMatrix(pred_tbl$pred, pred_tbl$survived )
 
 **Exercício:**:
 
-1. Altere a variávei `threshold` para outros valores entre 0 e 1 e rode o código novamente até as métricas pela função `confusionMatrix` do pacote `caret`. Veja como as me'tricas se comportam. 
+1. Altere a variável `threshold` para outros valores entre 0 e 1 e rode o código novamente até as métricas pela função `confusionMatrix` do pacote `caret`. Veja como as métricas se comportam. 
 
 ### ROC Curve
 
@@ -807,7 +835,7 @@ pROC::auc(roc)
 
 Entre os modelos de aprendizado de máquina mais comuns e mais úteis estão as árvores de decisão. Elas são tão utilizadas porque fornecem ao usuário final uma **fácil interpretação** e desenham uma espécie de **caminho a ser percorrido** para alcançar um determinado objetivo.
 
-> Árvores de decisão são fáceis de interpertar, pois fornecem as **regras de negócio** necessárias para classificar os dados e fornecer uma predição.
+> Árvores de decisão são fáceis de interpretar, pois fornecem as **regras de negócio** necessárias para classificar os dados e fornecer uma predição.
 
 
 Algumas das características são:
@@ -846,7 +874,7 @@ Alguns algoritmos de árvores de decisão utilizam entropia, outros o índice de
 
 Problemas de *overfitting* ocorrem quando um modelo explica situações extremamente específicas, que constam no *dataset* de treino, mas não ocorrerão na prática novamente.
 
-Árvores de decisão podem ficar muito copmlexas e extensas, caindo no problema de *overfitting*.
+Árvores de decisão podem ficar muito complexas e extensas, caindo no problema de *overfitting*.
 
 Nestes casos, uma saída é aplicar técnicas de *poda* da árvore. No `R` é possível utilizar a função `prune()` do pacote `rpart`.
 
@@ -882,10 +910,10 @@ Na sequência segue o dicionário dos dados:
 
 Primeiro, apenas para fins didáticos, vamos contruir uma árvore de decisão para todo o *dataset*, ou seja, não iremos considerar o processo de *machine learning* de treinar e testar o modelo.
 
-Na árvore a seguir, cada nós mostra:
+Na árvore a seguir, cada nó mostra:
 - a predição binária da classe (não sobreviveu = 0; sobreviveu = 1);
 - a probabilidade predita de sobrevivência (de 0 a 1);
-- a porcentagem de observações no nós.
+- a porcentagem de observações no nó.
 
 ```{r}
 rtree_fit <-
@@ -898,7 +926,7 @@ rpart.plot(rtree_fit)
 ```
 
 
-### Divindo em treino e teste
+### Dividindo em treino e teste
 
 Agora sim, iremos dividir o conjunto de dados em treino e teste.
 
@@ -929,7 +957,7 @@ rpart.plot(rtree_fit)
 
 ### Fazendo as predições
 
-Aplicando a função `preditc()`.
+Aplicando a função `predict()`.
 
 ```{r}
 pred_num <- predict(rtree_fit,  newdata = data$test)[,2] # segunda coluna para pegar apenas survived = 1
@@ -1059,7 +1087,7 @@ test  <- dplyr::anti_join(df_hr_turnover, train)
 
 ### Modelando as *random forests*
 
-Iremos utilizar o pacote `ranger`, da linguagem `R `. Este pacote é amplamente utilizado e muito bem implementado. A [documentação](https://www.rdocumentation.org/packages/ranger/versions/0.12.1/topics/ranger) é toda embasada em artigos científicos, o que dá maior credbilidade às funções utilizadas.
+Iremos utilizar o pacote `ranger`, da linguagem `R `. Este pacote é amplamente utilizado e muito bem implementado. A [documentação](https://www.rdocumentation.org/packages/ranger/versions/0.12.1/topics/ranger) é toda embasada em artigos científicos, o que dá maior credibilidade às funções utilizadas.
 
 Os parâmetros que iremos utilizar são:
 
@@ -1169,10 +1197,10 @@ ranger::importance_pvalues(fit_turnover_rf_prob) %>%
 
 </div>
 
-### Avaliando a floresta alatória
+### Avaliando a floresta aleatória
 
 
-Aplicando a função `preditc()`.
+Aplicando a função `predict()`.
 
 ```{r}
 # Para confusion matrix
@@ -1479,7 +1507,7 @@ $$
     f(z)= max(0,z)
 $$
 
-Um dos problemas da função ReLu pode ocorrer quando, por exemplo, um *bias* (uma constante) é inicializada na rede com um valor negativo muito grande, de tal forma que a soma dos *inputs* fica menor ou muito próxima a zero. Neste caso o neurônio é desabilitado logo na ativação. Porém, a solução pode ser simplesmente começar a inicialização dos *bias* sempre com valores positivos (critério que já é *default* no H2O, *framework* de *machine leanring* utilizado neste projeto).
+Um dos problemas da função ReLu pode ocorrer quando, por exemplo, um *bias* (uma constante) é inicializada na rede com um valor negativo muito grande, de tal forma que a soma dos *inputs* fica menor ou muito próxima a zero. Neste caso o neurônio é desabilitado logo na ativação. Porém, a solução pode ser simplesmente começar a inicialização dos *bias* sempre com valores positivos (critério que já é *default* no H2O, *framework* de *machine learning* utilizado neste projeto).
 
 Outro problema que ocorre tanto na função logística quando na *tanh* é que a derivada (usada na otimização no processo de *backpropagation*) pode ser ou muito grande ou muito pequena, dependendo da característica do dado. Já na função ReLU este ponto também é resolvido, uma vez que a derivada da função será 1 para $z > 0$ e 0 para $z \leq 0$.
 
@@ -1538,7 +1566,7 @@ Na sequência segue o dicionário dos dados:
 
 #### Criando `dummies` (binarização) para fatores (variáveis categóricas) 
 
-Os algortimos de redes neurais não trabalham com fatores (variáveis categóricas) diretamente. O passo que é realizado para que o algoritmo consiga trabalhar é criar `n` variáveis binárias (chamadas de `dummies`). Teremos então que cada `dummy` representará um nível de uma variável categórica. 
+Os algoritmos de redes neurais não trabalham com fatores (variáveis categóricas) diretamente. O passo que é realizado para que o algoritmo consiga trabalhar é criar `n` variáveis binárias (chamadas de `dummies`). Teremos então que cada `dummy` representará um nível de uma variável categórica. 
 
 Por exemplo, ao utilizarmos a variável `sex` dos dados do titanic, obteremos duas `dummies`: `sex.male` e `sex.female`. 
 
@@ -1554,7 +1582,7 @@ df_titanic <-
 ```
 
 
-#### Divindo em treino e teste 
+#### Dividindo em treino e teste 
  
 Agora sim, iremos dividir o conjunto de dados em treino e teste.
 
@@ -1636,7 +1664,7 @@ t4-t3
 
 #### Modelo 1 - Rede neural com apenas um neurônio na _hidden layer_ {.unnumbered}
 
-Aplicando a função `preditc()`.
+Aplicando a função `predict()`.
 
 ```{r}
 pred1 <- predict(net,
@@ -1674,7 +1702,7 @@ plot.roc(
 
 ### Modelo 2 - Rede neural com diversos neurônios e 2 _hidden layers_
 
-Aplicando a função `preditc()`.
+Aplicando a função `predict()`.
 
 ```{r}
 pred2 <- predict(net2,
@@ -1729,19 +1757,12 @@ roc.test(roc1, roc2, method = "delong")
 
 ### Considerações
 
-Entre os modelos treinados, nem sempre é nítida a diferença entre o melhor apenas observando a curva ROC. Sendo assim, o teste de DeLong permite terum parâmetro objetivo para ajudar na escolha do melhor modelo. O teste possui a hipótese nula ($H_0$) de que a AUC dos testes são iguais.
+Entre os modelos treinados, nem sempre é nítida a diferença entre o melhor apenas observando a curva ROC. Sendo assim, o teste de DeLong permite ter um parâmetro objetivo para ajudar na escolha do melhor modelo. O teste possui a hipótese nula ($H_0$) de que a AUC dos testes são iguais.
 
-Veja também que **nem sempre o aumento do porder computacional exigido traz resultados proporcionalmente melhores!**
+Veja também que **nem sempre o aumento do poder computacional exigido traz resultados proporcionalmente melhores!**
 
 O grande *trade-off* das redes neurais (e principalmente das *deep learnings*, que usam diversas *hidden layers*) é justamente este: **até que ponto a necessidade exponencial de maior poder computacional gera de fato um ganho preditivo no modelo que está sendo treinado?**
 
-
-
-<!-- Modelos com o H2O -->
-
-<!-- # *Gradient Boosting Model* (GBM) -->
-
-<!--# *Deep Learning* -->
 
 
 ## Avaliação de modelos supervisionados
@@ -1765,7 +1786,7 @@ Algumas principais destas métricas serão abordadas a seguir. Veremos:
   - Tabela (ou matriz) confusão;
   - Taxas criadas com a matriz confusão;
   - Curva ROC;
-  - Área soba curva ROC
+  - Área sob a curva ROC
 
 **Nota**: Apesar de parecer básico, a Wikipedia possui uma rede de conteúdos de alta qualidade sobre os temas que cercam a matriz confusão. [Veja](https://en.wikipedia.org/wiki/Confusion_matrix).
 
@@ -1924,3 +1945,56 @@ Mesmo conceito do R-quadrado, mas faz ajustes em relação ao número de variáv
 O R-quadrado Ajustado leva em conta a **melhoria marginal** de adicionar uma nova variável ao modelo. 
 
 **Sempre será igual ou menor que o R-quadrado**, e destas duas é a **métrica preferível**.
+
+
+### Validação Cruzada (*Cross-Validation*) {.unnumbered}
+
+Nos exemplos anteriores, dividimos os dados em treino e teste com uma única partição (por exemplo, 70% treino e 30% teste). Porém, essa abordagem possui uma limitação: os resultados podem variar significativamente dependendo de como a divisão foi feita.
+
+A **Validação Cruzada** (*Cross-Validation*) é uma técnica que resolve esse problema ao realizar múltiplas divisões dos dados, treinando e avaliando o modelo em cada uma delas.
+
+**K-Fold Cross-Validation**
+
+A forma mais comum é a **K-Fold Cross-Validation**, que funciona assim:
+
+1. Divide os dados em $k$ partes (*folds*) de tamanho igual
+2. Para cada iteração, usa uma parte como teste e as outras $k-1$ como treino
+3. Repete o processo $k$ vezes, alternando a parte de teste
+4. Calcula a média das métricas de todas as iterações
+
+```{r}
+# Exemplo de 5-Fold Cross-Validation com caret
+library(caret)
+
+# Definindo o controle de treino com 5-fold CV
+ctrl <- trainControl(
+  method = "cv",
+  number = 5
+)
+
+# Treinando modelo de regressão linear com CV no dataset mtcars
+set.seed(123)
+model_cv <- train(
+  mpg ~ .,
+  data = mtcars,
+  method = "lm",
+  trControl = ctrl
+)
+
+# Resultados da validação cruzada
+print(model_cv)
+```
+
+O resultado mostra as métricas médias (RMSE, R², MAE) calculadas nas 5 iterações de validação cruzada.
+
+**Vantagens da Validação Cruzada:**
+
+- **Estimativa mais robusta**: A média de $k$ avaliações é mais confiável que uma única divisão
+- **Uso eficiente dos dados**: Todos os dados são usados tanto para treino quanto para teste
+- **Reduz overfitting**: Detecta quando o modelo está se ajustando demais aos dados de treino
+
+**Quando usar:**
+
+- Em conjuntos de dados pequenos ou médios
+- Para comparar diferentes modelos ou configurações de hiperparâmetros
+- Quando se deseja uma estimativa mais confiável da performance do modelo
